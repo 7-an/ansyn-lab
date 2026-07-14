@@ -1,0 +1,115 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { externalWriting, platformLabels } from "../../data/external-writing";
+
+const internalEntries = (await getCollection("writing", ({ data, id }) => !data.draft && id !== "_template"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const categories = Array.from(new Set([
+  ...externalWriting.map((article) => article.category),
+  ...internalEntries.map((entry) => entry.data.category)
+])).sort();
+---
+
+<BaseLayout
+  title="Writing｜安寻 Ansyn"
+  description="安寻关于 AI、个人系统、学习、全球互联网与真实世界探索的文章和公开笔记。"
+>
+  <section class="page-hero shell">
+    <p class="eyebrow">Writing / 公开笔记</p>
+    <h1>把判断交给现实，<br /><mark>把过程留在这里。</mark></h1>
+    <p>站内文章保留长期思考，外部文章连接正在发生的讨论。两种内容会清楚区分。</p>
+  </section>
+
+  <section class="writing-browser shell" aria-labelledby="writing-list-title">
+    <div class="filter-bar">
+      <div class="platform-filters" role="group" aria-label="按平台筛选">
+        <button class="filter-button is-active" type="button" data-platform="all" aria-pressed="true">全部</button>
+        <button class="filter-button" type="button" data-platform="X" aria-pressed="false">X</button>
+        <button class="filter-button" type="button" data-platform="Douyin" aria-pressed="false">抖音</button>
+        <button class="filter-button" type="button" data-platform="Internal" aria-pressed="false">站内文章</button>
+      </div>
+      <label class="category-filter">
+        <span>分类</span>
+        <select id="category-filter">
+          <option value="all">全部分类</option>
+          {categories.map((category) => <option value={category}>{category}</option>)}
+        </select>
+      </label>
+    </div>
+
+    <div class="list-heading">
+      <h2 id="writing-list-title">全部内容</h2>
+      <span><b id="visible-count">{externalWriting.length + internalEntries.length}</b> ENTRIES</span>
+    </div>
+
+    <div class="article-grid writing-grid" id="writing-grid">
+      {externalWriting.map((article) => (
+        <div class="filter-item" data-platform={article.platform} data-category={article.category}>
+          <ArticleCard
+            title={article.title}
+            description={article.description}
+            platform={platformLabels[article.platform]}
+            category={article.category}
+            href={article.externalUrl || undefined}
+            external={true}
+            publishDate={article.publishDate}
+            tags={article.tags}
+          />
+        </div>
+      ))}
+      {internalEntries.map((entry) => (
+        <div class="filter-item" data-platform="Internal" data-category={entry.data.category}>
+          <ArticleCard
+            title={entry.data.title}
+            description={entry.data.description}
+            platform="站内文章"
+            category={entry.data.category}
+            href={`/writing/${entry.id}/`}
+            publishDate={entry.data.publishDate}
+            tags={entry.data.tags}
+          />
+        </div>
+      ))}
+    </div>
+    <p class="empty-state" id="empty-state" hidden>这个筛选条件下暂时没有内容。</p>
+  </section>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-platform]"));
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".filter-item"));
+    const categorySelect = document.querySelector<HTMLSelectElement>("#category-filter");
+    const count = document.querySelector<HTMLElement>("#visible-count");
+    const emptyState = document.querySelector<HTMLElement>("#empty-state");
+    let activePlatform = "all";
+
+    const update = () => {
+      const category = categorySelect?.value ?? "all";
+      let visible = 0;
+      items.forEach((item) => {
+        const platformMatch = activePlatform === "all" || item.dataset.platform === activePlatform;
+        const categoryMatch = category === "all" || item.dataset.category === category;
+        const show = platformMatch && categoryMatch;
+        item.hidden = !show;
+        if (show) visible += 1;
+      });
+      if (count) count.textContent = String(visible);
+      if (emptyState) emptyState.hidden = visible !== 0;
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activePlatform = button.dataset.platform ?? "all";
+        buttons.forEach((candidate) => {
+          const active = candidate === button;
+          candidate.classList.toggle("is-active", active);
+          candidate.setAttribute("aria-pressed", String(active));
+        });
+        update();
+      });
+    });
+    categorySelect?.addEventListener("change", update);
+  </script>
+</BaseLayout>

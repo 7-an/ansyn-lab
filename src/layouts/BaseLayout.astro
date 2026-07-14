@@ -1,0 +1,79 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../config/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  publishDate?: Date;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = "/og.png",
+  type = "website",
+  publishDate
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
+const imageUrl = new URL(image, Astro.site ?? siteConfig.siteUrl);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "BlogPosting" : "WebSite",
+  name: title,
+  headline: title,
+  description,
+  url: canonical.href,
+  inLanguage: siteConfig.language,
+  ...(type === "article" && publishDate
+    ? { datePublished: publishDate.toISOString() }
+    : {}),
+  author: {
+    "@type": "Person",
+    name: siteConfig.displayName,
+    url: siteConfig.siteUrl,
+    sameAs: [siteConfig.social.x]
+  }
+};
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={siteConfig.keywords.join(", ")} />
+    <meta name="theme-color" content="#f2f0e8" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Ansyn Lab RSS" href="/rss.xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content={siteConfig.locale} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳至主要内容</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

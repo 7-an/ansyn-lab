@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { siteConfig } from "../config/site";
+---
+
+<BaseLayout
+  title="关于安寻 Ansyn｜Ansyn Lab"
+  description="07后，18岁，刚高中毕业。安寻正在公开记录自己如何利用 AI、互联网和个人系统进入真实世界。"
+>
+  <section class="page-hero about-hero shell">
+    <p class="eyebrow">About / 关于安寻</p>
+    <h1>没有完成的人设，<br />只有<mark>正在形成的答案。</mark></h1>
+    <p>07后，18岁，刚高中毕业。年轻、理性、诚实，有行动欲，也愿意公开试错。</p>
+  </section>
+
+  <section class="section shell about-story">
+    <SectionHeading eyebrow="Origin" title="从高中系统脱机" index="01" />
+    <div class="intro-grid">
+      <p class="pull-quote">“安寻”：在喧嚣中保持理智，在数字世界中探索同步。</p>
+      <div class="reading-copy">
+        <p>我不是 AI 专家，不是创业导师，也没有成熟的商业成绩。</p>
+        <p>高三期间，我曾通过自学、AI 和复盘搭建自己的学习系统。那段经历让我意识到：比获得一个正确答案更重要的，也许是建立一套能够持续发现问题、采取行动和接收反馈的系统。</p>
+        <p>高考结束后，我开始面对学校很少回答的问题：离开标准路径之后，怎样认识真实用户、理解价值交换、连接更大的世界，并对自己的选择负责？</p>
+        <p>Ansyn Lab 就是我对这个问题的长期公开实验。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell values-section">
+    <SectionHeading eyebrow="Working principles" title="我想怎样记录" index="02" />
+    <div class="value-grid">
+      <article><span>01</span><h3>诚实</h3><p>不把正在学习包装成已经掌握，不用未经验证的结论维护聪明人设。</p></article>
+      <article><span>02</span><h3>具体</h3><p>优先记录做了什么、结果如何、判断错在哪里，以及下一步怎样修正。</p></article>
+      <article><span>03</span><h3>长期</h3><p>允许答案缓慢形成，让文章、实验和复盘在时间里互相校正。</p></article>
+    </div>
+  </section>
+
+  <section class="section shell contact-panel">
+    <div>
+      <p class="eyebrow">Connect / 联系</p>
+      <h2>如果你也在进入<br />真实世界的路上。</h2>
+    </div>
+    <div>
+      <p>X 是目前最主要的公开交流入口。我会在那里发布新文章、实验进展和阶段性复盘。</p>
+      <a class="button button-primary" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 与我交流 ↗</a>
+    </div>
+  </section>
+</BaseLayout>

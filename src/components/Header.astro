@@ -1,0 +1,40 @@
+---
+import { siteConfig } from "../config/site";
+
+const pathname = Astro.url.pathname;
+const nav = [
+  { href: "/", label: "首页" },
+  { href: "/writing/", label: "文章" },
+  { href: "/#experiments", label: "实验" },
+  { href: "/about/", label: "关于" }
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="/" aria-label="Ansyn Lab 首页">
+      <span class="wordmark-mark" aria-hidden="true">A/</span>
+      <span>{siteConfig.name}</span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要导航">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={item.href !== "/" && pathname.startsWith(item.href) ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a class="nav-social" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">
+        X <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+    <details class="mobile-menu">
+      <summary aria-label="打开导航菜单">菜单 <span aria-hidden="true">＋</span></summary>
+      <nav aria-label="移动端导航">
+        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">X ↗</a>
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  index?: string;
+  description?: string;
+}
+
+const { eyebrow, title, index, description } = Astro.props;
+---
+
+<header class="section-heading">
+  <div class="section-kicker">
+    {index && <span>{index}</span>}
+    <span>{eyebrow}</span>
+  </div>
+  <div>
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+</header>

@@ -1,0 +1,25 @@
+---
+import { siteConfig } from "../config/site";
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <a class="wordmark" href="/"><span class="wordmark-mark" aria-hidden="true">A/</span>{siteConfig.name}</a>
+      <p>{siteConfig.tagline}</p>
+    </div>
+    <div class="footer-meta">
+      <p>Building in public since 18.</p>
+      <nav aria-label="页脚导航">
+        <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">X ↗</a>
+        {siteConfig.social.email && <a href={siteConfig.social.email}>Email</a>}
+        {siteConfig.social.github && <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+        <a href="/rss.xml">RSS</a>
+      </nav>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {new Date().getFullYear()} 安寻 Ansyn</span>
+    <span>从高中系统脱机，接入真实世界。</span>
+  </div>
+</footer>

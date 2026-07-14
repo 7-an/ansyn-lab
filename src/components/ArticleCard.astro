@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  platform: string;
+  category: string;
+  href?: string;
+  external?: boolean;
+  publishDate?: Date | string;
+  tags?: string[];
+  featured?: boolean;
+}
+
+const {
+  title,
+  description,
+  platform,
+  category,
+  href,
+  external = false,
+  publishDate,
+  tags = [],
+  featured = false
+} = Astro.props;
+
+const date = publishDate
+  ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(
+      new Date(publishDate)
+    )
+  : "日期待补充";
+const actionLabel = external
+  ? href
+    ? `前往${platform}阅读`
+    : "链接待补充"
+  : "站内阅读全文";
+---
+
+<article class:list={["article-card", { featured }]}>
+  <div class="article-meta">
+    <span class="platform-badge">{platform}</span>
+    <span>{category}</span>
+    <span>{date}</span>
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {tags.length > 0 && (
+    <ul class="tag-list" aria-label="标签">
+      {tags.slice(0, 3).map((tag) => <li>#{tag}</li>)}
+    </ul>
+  )}
+  <div class="article-action">
+    {href ? (
+      <a
+        class="text-link"
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        aria-label={`${actionLabel}：${title}`}
+      >
+        {actionLabel} <span aria-hidden="true">{external ? "↗" : "→"}</span>
+      </a>
+    ) : (
+      <span class="text-link is-disabled" aria-disabled="true">{actionLabel}</span>
+    )}
+  </div>
+</article>
