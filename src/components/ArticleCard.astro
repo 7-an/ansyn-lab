@@ -27,19 +27,15 @@ const date = publishDate
   ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(
       new Date(publishDate)
     )
-  : "日期待补充";
-const actionLabel = external
-  ? href
-    ? `前往${platform}阅读`
-    : "链接待补充"
-  : "站内阅读全文";
+  : undefined;
+const actionLabel = external ? `前往${platform}阅读` : "站内阅读全文";
 ---
 
 <article class:list={["article-card", { featured }]}>
   <div class="article-meta">
     <span class="platform-badge">{platform}</span>
     <span>{category}</span>
-    <span>{date}</span>
+    {date && <span>{date}</span>}
   </div>
   <h3>{title}</h3>
   <p>{description}</p>
@@ -48,8 +44,8 @@ const actionLabel = external
       {tags.slice(0, 3).map((tag) => <li>#{tag}</li>)}
     </ul>
   )}
-  <div class="article-action">
-    {href ? (
+  {href && (
+    <div class="article-action">
       <a
         class="text-link"
         href={href}
@@ -59,8 +55,6 @@ const actionLabel = external
       >
         {actionLabel} <span aria-hidden="true">{external ? "↗" : "→"}</span>
       </a>
-    ) : (
-      <span class="text-link is-disabled" aria-disabled="true">{actionLabel}</span>
-    )}
-  </div>
+    </div>
+  )}
 </article>
