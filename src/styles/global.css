@@ -139,7 +139,10 @@ mark { background: linear-gradient(transparent 55%, var(--accent) 55%); color: i
 .experiment-index { color: var(--muted); font: .75rem var(--mono); }
 .experiment-row h3 { margin: 0 0 5px; font-size: 1.35rem; }
 .experiment-row p { max-width: 700px; margin: 0; color: var(--muted); }
+.experiment-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; color: var(--accent-strong); border-bottom: 1px solid currentColor; font: 750 .78rem var(--mono); }
+.experiment-link:hover { color: var(--ink); }
 .status-pill { padding: 7px 11px; border: 1px solid var(--ink); white-space: nowrap; }
+.status-pill.completed { background: var(--ink); color: var(--paper); }
 .status-pill.active { background: var(--accent); }
 .status-pill.ready { background: var(--ink); color: var(--paper); }
 .status-pill.learning { background: var(--accent-soft); }

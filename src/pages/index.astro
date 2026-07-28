@@ -33,7 +33,24 @@ const directions = [
   }
 ];
 
-const experiments = [
+type Experiment = {
+  title: string;
+  status: string;
+  tone: "active" | "ready" | "learning" | "idle" | "completed";
+  copy: string;
+  href?: string;
+  linkLabel?: string;
+};
+
+const experiments: Experiment[] = [
+  {
+    title: "AI Study Path Triage V0.1",
+    status: "已完成",
+    tone: "completed",
+    copy: "基于 6 名高中生的 7 天小规模实验，整理出学习路径初筛、每日反馈与动态纠偏框架，并将 Prompt、规则、模板和匿名案例开源。",
+    href: "https://github.com/7-an/ai-study-path-triage",
+    linkLabel: "查看 GitHub 开源仓库"
+  },
   { title: "学会真正使用AI", status: "进行中", tone: "active", copy: "不是收藏更多工具，而是提高定义问题、验证答案和回到现实行动的能力。" },
   { title: "建立低摩擦记录系统", status: "准备中", tone: "ready", copy: "探索如何通过语音输入、Obsidian 和 AI，降低记录和复盘的启动成本。" },
   { title: "从零理解Web3", status: "学习中", tone: "learning", copy: "先理解基础逻辑、安全边界、真实需求和行业结构，不急着包装成专家。" },
@@ -55,7 +72,7 @@ const experiments = [
         <p class="hero-statement">记录一个年轻人如何利用 <mark>AI</mark>、互联网和个人系统，从高中环境进入真实世界。</p>
         <div class="button-row">
           <a class="button button-primary" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
-          <a class="button" href="#experiments">查看正在进行的实验</a>
+          <a class="button" href="#experiments">查看实验记录</a>
           <a class="text-link hero-x" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 联系我 ↗</a>
         </div>
       </div>
@@ -164,7 +181,7 @@ const experiments = [
   </section>
 
   <section class="section experiments-section shell" id="experiments">
-    <SectionHeading eyebrow="Experiments" title="当前实验" index="05" description="不使用虚假进度，只记录真实状态。" />
+    <SectionHeading eyebrow="Experiments" title="实验记录" index="05" description="进行中、准备中与已完成，都留下可以核对的行动证据。" />
     <div class="experiment-list">
       {experiments.map((experiment, index) => (
         <article class="experiment-row">
@@ -172,6 +189,11 @@ const experiments = [
           <div>
             <h3>{experiment.title}</h3>
             <p>{experiment.copy}</p>
+            {experiment.href && (
+              <a class="experiment-link" href={experiment.href} target="_blank" rel="noopener noreferrer">
+                {experiment.linkLabel ?? "查看项目"} <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
           <span class:list={["status-pill", experiment.tone]}>{experiment.status}</span>
         </article>
