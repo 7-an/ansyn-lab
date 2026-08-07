@@ -1,234 +1,856 @@
 ---
-import { externalWriting, platformLabels } from "../data/external-writing";
 import { siteConfig } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ArticleCard from "../components/ArticleCard.astro";
-import SectionHeading from "../components/SectionHeading.astro";
 
-const featuredOrder = [
-  "参加AI创业交流会后，我学到的九件事",
-  "重新介绍一下自己：一个07后为什么开始探索AI、创业和Web3",
-  "我理解AI的第一堂课，来自一段失败的恋爱",
-  "高三提分不是靠鸡血，而是一套能跑起来的学习系统"
-];
-const featured = featuredOrder
-  .map((title) => externalWriting.find((article) => article.title === title))
-  .filter((article) => article !== undefined);
-
-const directions = [
-  {
-    index: "01",
-    title: "AI × 个人成长",
-    copy: "研究如何把 AI 从聊天工具，变成学习、思考、创作和解决现实问题的杠杆。"
-  },
-  {
-    index: "02",
-    title: "个人系统",
-    copy: "研究记录、复盘、判断、执行和反馈如何形成长期闭环。"
-  },
-  {
-    index: "03",
-    title: "全球互联网与商业",
-    copy: "探索全球信息、Web3、内容创作、个人 IP 和真实价值交换。"
-  }
-];
-
-type Experiment = {
-  title: string;
-  status: string;
-  tone: "active" | "ready" | "learning" | "idle" | "completed";
-  copy: string;
-  href?: string;
-  linkLabel?: string;
-};
-
-const experiments: Experiment[] = [
-  {
-    title: "AI Study Path Triage V0.1",
-    status: "已完成",
-    tone: "completed",
-    copy: "基于 6 名高中生的 7 天小规模实验，整理出学习路径初筛、每日反馈与动态纠偏框架，并将 Prompt、规则、模板和匿名案例开源。",
-    href: "https://github.com/7-an/ai-study-path-triage",
-    linkLabel: "查看 GitHub 开源仓库"
-  },
-  { title: "学会真正使用AI", status: "进行中", tone: "active", copy: "不是收藏更多工具，而是提高定义问题、验证答案和回到现实行动的能力。" },
-  { title: "建立低摩擦记录系统", status: "准备中", tone: "ready", copy: "探索如何通过语音输入、Obsidian 和 AI，降低记录和复盘的启动成本。" },
-  { title: "从零理解Web3", status: "学习中", tone: "learning", copy: "先理解基础逻辑、安全边界、真实需求和行业结构，不急着包装成专家。" },
-  { title: "第一个商业闭环", status: "尚未开始", tone: "idle", copy: "尝试从真实用户、真实问题和第一次价值交换开始，而不是先写宏大的商业计划。" }
+const coordinates = [
+  "用 AI 工作流，做真实项目与交付",
+  "建立公开记录与内容系统",
+  "探索全球互联网与 Web3"
 ];
 ---
 
 <BaseLayout>
-  <section class="hero shell">
-    <div class="hero-signal" aria-label="当前状态：正在构建">
-      <span class="signal-dot"></span>
-      LIVE EXPERIMENT / 2026—NOW
-    </div>
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Building in public.</p>
-        <h1>安寻 <span>Ansyn</span></h1>
-        <p class="hero-age">07后，18岁，刚高中毕业。</p>
-        <p class="hero-statement">记录一个年轻人如何利用 <mark>AI</mark>、互联网和个人系统，从高中环境进入真实世界。</p>
-        <div class="button-row">
-          <a class="button button-primary" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
-          <a class="button" href="#experiments">查看实验记录</a>
-          <a class="text-link hero-x" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 联系我 ↗</a>
-        </div>
+  <section class="lab-hero shell" aria-labelledby="home-title">
+    <div class="lab-hero-copy" data-reveal data-reveal-delay="1">
+      <p class="lab-kicker">BUILDING IN PUBLIC / SINCE 18</p>
+      <h1 id="home-title" data-proximity><span class="lm"><span class="lm-in">安寻 <span class="latin">Ansyn</span></span></span></h1>
+      <p class="lab-question"><span class="lm"><span class="lm-in">一个年轻人，如何在 AI 时代建立自己的能力系统？</span></span></p>
+      <p class="lab-note">AI Workflow Builder · 现于 KOSX.ai 实习</p>
+      <div class="lab-actions">
+        <a class="button button-primary" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
+        <a class="button" href="#guide">查看精选内容</a>
       </div>
-      <aside class="hero-terminal" aria-label="安寻的个人形象与 Ansyn Lab 终端状态">
-        <div class="terminal-top"><span>ANSYN_OS</span><span>v0.1</span></div>
-        <figure class="terminal-portrait">
-          <img
-            src="/ansyn-avatar.jpg"
-            alt="安寻的个人形象：戴草帽的黑白漫画头像"
-            width="400"
-            height="400"
-            loading="eager"
-            fetchpriority="high"
-          />
-          <figcaption><span>IDENTITY VISUAL / 001</span><strong>ANSYN</strong></figcaption>
-        </figure>
-        <div class="terminal-body">
-          <p><span>identity</span><strong>07 / CREATOR</strong></p>
-          <p><span>mode</span><strong>BUILDING</strong></p>
-          <p><span>location</span><strong>REAL WORLD ENTRY</strong></p>
-          <p><span>certainty</span><strong>LOW, TESTING</strong></p>
-        </div>
-        <div class="terminal-line"><span></span> SYSTEM IS FORMING_</div>
-      </aside>
+      <div class="lab-contact-links">
+        <a class="lab-text-link" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 联系我 ↗</a>
+        <a class="lab-text-link" href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer">Telegram ↗</a>
+      </div>
     </div>
-    <div class="hero-footnote">
-      <span>SCROLL TO TRACE THE PROCESS</span>
-      <span aria-hidden="true">↓</span>
-    </div>
-  </section>
 
-  <section class="section intro-section shell">
-    <SectionHeading eyebrow="Who am I" title="我是谁" index="01" />
-    <div class="intro-grid">
-      <p class="pull-quote">我不是 AI 专家，<br />也没有成熟的商业成绩。</p>
-      <div class="reading-copy">
-        <p>我只是比过去的自己更早开始记录、试错，并主动接触真实世界。</p>
-        <p>高三期间，我通过自学、AI 和复盘搭建过自己的学习系统。高考结束后，我开始研究一个更大的问题：</p>
-        <p class="question-line">一个年轻人，如何在 AI 时代建立自己的能力系统？</p>
-        <p>学校更多教会我们如何考试，却很少告诉我们，毕业之后如何进入真实世界。所以我决定公开记录自己的学习、选择、错误、行动和修正。</p>
-        <a class="text-link" href="/about/">继续了解我 →</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section status-section shell" aria-labelledby="status-title">
-    <SectionHeading eyebrow="Current status" title="当前状态" index="02" />
-    <div class="status-board">
-      <div class="status-primary">
-        <div class="status-label"><span class="signal-dot"></span> 状态</div>
-        <h3 id="status-title">正在构建</h3>
-        <p>高中系统之外，<br />真实世界入口。</p>
-      </div>
-      <div class="status-list">
-        <h3>当前重点 / FOCUS</h3>
-        <ol>
-          <li><span>01</span>学习如何真正使用 AI</li>
-          <li><span>02</span>建立自己的内容与记录系统</li>
-          <li><span>03</span>探索全球互联网和 Web3</li>
-          <li><span>04</span>形成第一个可验证的商业闭环</li>
-        </ol>
-      </div>
-      <div class="status-principles">
-        <h3>当前原则 / PRINCIPLES</h3>
-        <ul>
-          <li>先行动，再优化</li>
-          <li>不维护“认知很高”的人设</li>
-          <li>记录真实结果，而不是宏大想法</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section directions-section shell">
-    <SectionHeading eyebrow="Exploration fields" title="三个探索方向" index="03" description="不是成熟业务，是正在发生的探索。" />
-    <div class="direction-grid">
-      {directions.map((direction) => (
-        <article class="direction-card">
-          <span>{direction.index}</span>
-          <h3>{direction.title}</h3>
-          <p>{direction.copy}</p>
-          <small>EXPLORING / 未完成</small>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="section writing-section shell">
-    <SectionHeading eyebrow="Selected writing" title="精选内容" index="04" description="文章在原始发布平台保留完整上下文。" />
-    <div class="article-grid featured-grid">
-      {featured.map((article) => (
-        <ArticleCard
-          title={article.title}
-          description={article.description}
-          platform={platformLabels[article.platform]}
-          category={article.category}
-          href={article.externalUrl || undefined}
-          external={true}
-          publishDate={article.publishDate}
-          tags={article.tags}
-          featured={article.featured}
+    <figure class="lab-portrait" data-reveal data-reveal-delay="2" data-particle-portrait>
+      <div class="particle-stage">
+        <canvas class="particle-canvas" aria-hidden="true"></canvas>
+        <img
+          src="/ansyn-avatar-transparent.png"
+          alt="安寻的个人形象：戴草帽的黑白漫画头像"
+          width="400"
+          height="400"
+          loading="eager"
+          fetchpriority="high"
         />
-      ))}
-    </div>
-    <div class="section-action"><a class="button" href="/writing/">查看全部文章 <span aria-hidden="true">→</span></a></div>
+      </div>
+    </figure>
   </section>
 
-  <section class="section experiments-section shell" id="experiments">
-    <SectionHeading eyebrow="Experiments" title="实验记录" index="05" description="进行中、准备中与已完成，都留下可以核对的行动证据。" />
-    <div class="experiment-list">
-      {experiments.map((experiment, index) => (
-        <article class="experiment-row">
-          <span class="experiment-index">0{index + 1}</span>
-          <div>
-            <h3>{experiment.title}</h3>
-            <p>{experiment.copy}</p>
-            {experiment.href && (
-              <a class="experiment-link" href={experiment.href} target="_blank" rel="noopener noreferrer">
-                {experiment.linkLabel ?? "查看项目"} <span aria-hidden="true">↗</span>
-              </a>
-            )}
-          </div>
-          <span class:list={["status-pill", experiment.tone]}>{experiment.status}</span>
-        </article>
-      ))}
-    </div>
-  </section>
+  <section class="home-section affiliation shell" aria-labelledby="affiliation-title">
+    <header class="home-heading" data-reveal>
+      <div>
+        <p class="lab-kicker">CURRENT AFFILIATION / 当前组织</p>
+        <h2 id="affiliation-title"><img class="affiliation-logo" src="/kosx-logo-black.png" alt="KOSX.ai" width="2350" height="397" /></h2>
+      </div>
+      <span class="home-status">INTERNSHIP / BUILDING</span>
+    </header>
 
-  <section class="section manifesto-section shell">
-    <div class="manifesto-label"><span>PUBLIC NOTE / 001</span><span>诚实比人设重要</span></div>
-    <div class="manifesto-grid">
-      <h2>我不想维护一个<br /><mark>“18岁认知很高”</mark><br />的人设</h2>
-      <div class="reading-copy">
-        <p>最近有人说，我18岁就有这样的认知，以后一定会成功。但我没有答案，也没有足够的现实成绩。</p>
-        <p>表达得像明白了，和现实中真正做到，是两回事。我不想为了维护一个早熟、正确或者聪明的人设，开始输出自己还没有验证过的结论。</p>
-        <p>接下来，我更想记录：我具体做了什么；结果如何；哪里判断错了；下一次怎样修正。</p>
-        <p class="question-line">18岁真正的优势，是可以用更低的成本行动、失败、复盘，再重新开始。</p>
-        <p>比起成为一个看起来很早熟的人，我更希望成为一个不断产生行动证据的人。</p>
+    <div class="affiliation-card" data-reveal data-reveal-delay="1">
+      <div class="affiliation-main">
+        <p class="affiliation-tagline">将 AI 时代的创造者，组织成真正能够把事情做成的网络。</p>
+        <p class="affiliation-intro">我目前作为实习成员参与 KOSX 的早期建设：把群聊中的信息、人才与机会，转化为可以被追踪和交付的真实项目。这里是我现在接受真实项目检验的地方。</p>
+        <p class="affiliation-slogan">CONNECT. CREATE. COLLABORATE.</p>
+      </div>
+      <div class="affiliation-side">
+        <p class="affiliation-side-label">当前参与方向</p>
+        <ul>
+          <li>社群活动与项目管理工作台</li>
+          <li>AI 工作流与自动化节点</li>
+          <li>群内日报的内容二创与外部传播</li>
+          <li>AI 辅助网站与基础产品交付</li>
+        </ul>
+        <a class="affiliation-link" href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">了解 KOSX ↗</a>
       </div>
     </div>
   </section>
 
-  <section class="section future-section shell">
-    <div class="future-copy">
-      <p class="eyebrow">Next few years / 接下来几年</p>
-      <h2>学习。创造。<br /><mark>连接更大的世界。</mark></h2>
-      <p>我的目标，是成为一个能够利用 AI 和互联网解决真实问题、创造真实价值的人。</p>
-      <p>我现在没有确定答案。这个网站就是寻找答案的过程。</p>
-      <a class="button button-primary" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 关注我的公开实验 ↗</a>
+  <section class="home-section home-now shell" id="now" aria-labelledby="now-title">
+    <header class="home-heading" data-reveal>
+      <div>
+        <p class="lab-kicker">NOW / CURRENT COORDINATES</p>
+        <h2 id="now-title" data-proximity><span class="lm"><span class="lm-in">当前坐标</span></span></h2>
+      </div>
+      <span class="home-status">BUILDING / 2026—NOW</span>
+    </header>
+
+    <ol class="coordinate-list" data-reveal data-reveal-delay="1">
+      {coordinates.map((item, index) => (
+        <li>
+          <span>00{index + 1}</span>
+          <strong>{item}</strong>
+        </li>
+      ))}
+    </ol>
+
+    <div class="method-line" data-reveal data-reveal-delay="2">
+      <span>METHOD / 反复校正</span>
+      <strong>问题 <i>→</i> 行动 <i>→</i> 证据 <i>→</i> 修正</strong>
     </div>
-    <div class="future-code" aria-hidden="true">
-      <span>WHILE (NO_ANSWER) {'{'}</span>
-      <span>&nbsp;&nbsp;LEARN();</span>
-      <span>&nbsp;&nbsp;BUILD();</span>
-      <span>&nbsp;&nbsp;REFLECT();</span>
-      <span>{'}'}</span>
+
+    <div class="why-public-line" data-reveal data-reveal-delay="3">
+      <span>WHY PUBLIC / 为什么公开</span>
+      <p>在高中，问题是老师给的；进入真实世界后，问题和需求都要自己寻找。<br />公开记录，既是我寻找问题的方式，也是我留下的行动证据。</p>
+    </div>
+  </section>
+
+  <section class="home-section home-guide shell" id="guide" aria-label="前往项目与文章页面">
+    <div class="guide-grid">
+      <a class="guide-card" href="/work/" data-reveal>
+        <span>PROJECTS / 项目与交付</span>
+        <h3>项目</h3>
+        <p>独立项目与组织协作，每张卡写清角色、交付和下一步。</p>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a class="guide-card" href="/writing/" data-reveal data-reveal-delay="1">
+        <span>WRITING / 公开内容</span>
+        <h3>文章</h3>
+        <p>发布在 X 等外部平台的思考与复盘，点击前往原文。</p>
+        <i aria-hidden="true">→</i>
+      </a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .lab-kicker {
+    margin: 0;
+    color: var(--accent-strong);
+    font: 750 .74rem/1.4 var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .lab-hero {
+    min-height: calc(100svh - 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+    align-items: center;
+    gap: clamp(32px, 7vw, 110px);
+    padding-block: clamp(76px, 10vw, 132px);
+    border-inline: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .lab-hero-copy {
+    z-index: 1;
+    padding-left: clamp(22px, 5vw, 74px);
+  }
+
+  .lab-hero h1 {
+    display: flex;
+    align-items: baseline;
+    gap: .14em;
+    margin: 30px 0 0;
+    font-size: clamp(4.6rem, 8.4vw, 8.2rem);
+    font-weight: 900;
+    line-height: .9;
+    letter-spacing: -.08em;
+    white-space: nowrap;
+  }
+
+  .lab-hero h1 .latin {
+    font-size: .55em;
+    font-weight: 790;
+    letter-spacing: -.05em;
+  }
+
+  .lab-question {
+    max-width: 690px;
+    margin: 34px 0 0;
+    font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+    font-weight: 720;
+    line-height: 1.42;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+
+  .lab-note {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: .92rem;
+  }
+
+  .lab-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .lab-contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 26px;
+  }
+
+  .lab-text-link {
+    display: inline-flex;
+    color: var(--accent-strong);
+    font-weight: 800;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .lab-text-link:hover { color: var(--ink); }
+
+  .lab-portrait {
+    align-self: center;
+    margin: 0;
+    padding-right: clamp(18px, 4vw, 58px);
+  }
+
+  .particle-stage {
+    position: relative;
+    width: min(100%, 540px);
+    aspect-ratio: 1;
+    margin-inline: auto;
+    isolation: isolate;
+  }
+
+  .particle-stage img,
+  .particle-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .particle-stage img {
+    object-fit: contain;
+    filter: grayscale(1) contrast(1.08);
+    mix-blend-mode: multiply;
+    transition: opacity .38s ease, filter .38s ease;
+  }
+
+  .particle-canvas {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .58s ease;
+  }
+
+  :global([data-particle-portrait].particle-ready) .particle-stage img { opacity: 0; }
+  :global([data-particle-portrait].particle-ready) .particle-canvas { opacity: 1; }
+  :global([data-particle-portrait].particle-base-visible) .particle-stage img {
+    opacity: 1;
+    filter: grayscale(1) contrast(1.08);
+  }
+  :global([data-particle-portrait].particle-settled) .particle-canvas { opacity: .14; }
+
+  .lab-portrait img {
+    display: block;
+    width: min(100%, 540px);
+    height: auto;
+    margin-inline: auto;
+    filter: grayscale(1) contrast(1.08);
+    mix-blend-mode: multiply;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 4%, #000 84%, transparent 99%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 4%, #000 84%, transparent 99%);
+    mask-composite: intersect;
+  }
+
+  .home-section { padding-block: clamp(92px, 11vw, 148px); }
+
+  .home-heading {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 42px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .js .home-heading { border-bottom-color: transparent; }
+
+  .home-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(.22, 1, .36, 1) .18s;
+  }
+
+  .home-heading.is-revealed::after { transform: scaleX(1); }
+
+  .js .lm-in {
+    transform: translateY(112%);
+    transition: transform .9s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .is-revealed .lm-in { transform: none; }
+
+  .js .lab-question .lm-in { transition-delay: .15s; }
+
+  .lab-hero h1 .lm {
+    padding-bottom: .12em;
+    margin-bottom: -.12em;
+  }
+
+  .home-heading h2 {
+    margin: 22px 0 0;
+    font-size: clamp(3.4rem, 6.6vw, 6.4rem);
+    line-height: .92;
+    letter-spacing: -.07em;
+  }
+
+  .home-status {
+    color: var(--accent-strong);
+    font: 750 .75rem var(--mono);
+    letter-spacing: .06em;
+  }
+
+  .affiliation {
+    --kx: #ff6a00;
+    --kx-strong: #d9480f;
+    --kx-soft: #ff8347;
+  }
+
+  .affiliation .lab-kicker,
+  .affiliation .home-status { color: var(--kx-strong); }
+
+  .affiliation h2 { margin: 22px 0 0; }
+
+  .affiliation-logo {
+    display: block;
+    width: auto;
+    height: clamp(52px, 6.5vw, 88px);
+  }
+
+  .affiliation-card {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    margin-top: clamp(36px, 5vw, 56px);
+    padding: clamp(28px, 4vw, 52px);
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 10px 10px 0 var(--kx);
+  }
+
+  .affiliation-tagline {
+    max-width: 560px;
+    margin: 0;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -.02em;
+  }
+
+  .affiliation-intro {
+    max-width: 560px;
+    margin: 20px 0 0;
+    color: #b9bbb4;
+    font-size: .98rem;
+  }
+
+  .affiliation-slogan {
+    margin: 28px 0 0;
+    color: var(--kx);
+    font: 750 .74rem var(--mono);
+    letter-spacing: .14em;
+  }
+
+  .affiliation-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: clamp(24px, 3vw, 48px);
+    border-left: 1px solid #4d4f4a;
+  }
+
+  .affiliation-side-label {
+    margin: 0;
+    color: var(--kx-soft);
+    font: 750 .72rem var(--mono);
+    letter-spacing: .06em;
+  }
+
+  .affiliation-side ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #d3d4cf;
+    font-size: .95rem;
+  }
+
+  .affiliation-side li { padding-left: 16px; border-left: 1px solid var(--kx); }
+
+  .affiliation-link {
+    margin-top: auto;
+    color: var(--kx-soft);
+    font: 800 .85rem var(--mono);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .affiliation-link:hover { color: var(--paper); }
+
+  .affiliation-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .affiliation-card::before {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 42% 52% at 32% 38%, rgba(53, 107, 255, .16), transparent 62%),
+      radial-gradient(ellipse 38% 48% at 68% 62%, rgba(53, 107, 255, .1), transparent 60%);
+    animation: affiliation-mist 18s ease-in-out infinite alternate;
+  }
+
+  .affiliation-main,
+  .affiliation-side {
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes affiliation-mist {
+    from { transform: translate3d(-3.5%, -2.5%, 0) rotate(-1.6deg); }
+    to { transform: translate3d(3.5%, 2.5%, 0) rotate(1.6deg) scale(1.05); }
+  }
+
+  .js .affiliation-card[data-reveal] {
+    opacity: 0;
+    transform: translateY(14px) scale(.97);
+    filter: blur(14px);
+    box-shadow: 0 0 0 var(--kx);
+    transition:
+      opacity 1.05s ease,
+      transform 1.05s cubic-bezier(.22, 1, .36, 1),
+      filter 1.05s ease,
+      box-shadow .9s ease .15s;
+  }
+
+  .js .affiliation-card[data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    box-shadow: 10px 10px 0 var(--kx);
+  }
+
+  .coordinate-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .coordinate-list li {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    min-height: 112px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .coordinate-list li > span {
+    color: var(--accent-strong);
+    font: 750 .8rem var(--mono);
+  }
+
+  .coordinate-list strong {
+    position: relative;
+    padding-left: 70px;
+    font-size: clamp(1.4rem, 2.5vw, 2.25rem);
+    letter-spacing: -.035em;
+  }
+
+  .coordinate-list strong::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 48px;
+    background: var(--accent);
+    transform: translateY(-50%);
+  }
+
+  .method-line {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .method-line span {
+    color: var(--accent-strong);
+    font: 750 .74rem var(--mono);
+  }
+
+  .method-line strong { font: 650 1rem var(--mono); }
+  .method-line i { padding-inline: 10px; color: var(--muted); font-style: normal; }
+
+  .why-public-line {
+    display: flex;
+    align-items: baseline;
+    gap: 42px;
+    padding-top: 44px;
+  }
+
+  .why-public-line span {
+    flex: 0 0 auto;
+    color: var(--accent-strong);
+    font: 750 .74rem var(--mono);
+    letter-spacing: .06em;
+  }
+
+  .why-public-line p {
+    max-width: 780px;
+    margin: 0;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-weight: 650;
+    line-height: 1.6;
+    letter-spacing: -.02em;
+  }
+
+  .home-guide { padding-bottom: clamp(116px, 13vw, 180px); }
+
+  .guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--ink);
+  }
+
+  .guide-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    padding: clamp(26px, 3.5vw, 44px);
+    transition: background .18s ease, color .18s ease;
+  }
+
+  .guide-card + .guide-card { border-left: 1px solid var(--ink); }
+
+  .guide-card span {
+    color: var(--accent-strong);
+    font: 750 .74rem var(--mono);
+    letter-spacing: .08em;
+    transition: color .18s ease;
+  }
+
+  .guide-card h3 {
+    margin: 26px 0 14px;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    letter-spacing: -.05em;
+    transition: color .18s ease;
+  }
+
+  .guide-card p {
+    max-width: 420px;
+    margin: 0;
+    color: var(--muted);
+    transition: color .18s ease;
+  }
+
+  .guide-card i {
+    margin-top: auto;
+    padding-top: 30px;
+    font-style: normal;
+    font-size: 1.6rem;
+    transition: transform .18s ease;
+  }
+
+  .guide-card:hover { background: var(--ink); color: var(--paper); }
+  .guide-card:hover span { color: #7fa0ff; }
+  .guide-card:hover p { color: #b9bbb4; }
+  .guide-card:hover i { transform: translateX(8px); }
+
+  @media (max-width: 900px) {
+    .lab-hero {
+      min-height: auto;
+      grid-template-columns: 1fr .72fr;
+      gap: 20px;
+      padding-block: 84px;
+    }
+    .lab-hero h1 { font-size: clamp(4rem, 10vw, 6rem); }
+    .coordinate-list li { grid-template-columns: 110px 1fr; }
+    .coordinate-list strong { padding-left: 42px; }
+  }
+
+  @media (max-width: 700px) {
+    .lab-hero {
+      grid-template-columns: 1fr;
+      padding: 68px 18px 36px;
+      border-inline: 0;
+    }
+    .lab-hero-copy { padding: 0; }
+    .lab-hero h1 { flex-wrap: wrap; font-size: clamp(4.2rem, 20vw, 6.4rem); white-space: normal; }
+    .lab-hero h1 .latin { font-size: .43em; }
+    .lab-actions { align-items: stretch; flex-direction: column; }
+    .lab-actions .button { width: 100%; }
+    .lab-contact-links { flex-direction: column; gap: 10px; }
+    .lab-portrait { padding: 20px 10px 0; }
+    .lab-portrait img { width: 100%; }
+    .home-heading { align-items: flex-start; flex-direction: column; gap: 24px; }
+    .home-heading h2 { font-size: clamp(3.4rem, 17vw, 5rem); }
+    .affiliation-card { grid-template-columns: 1fr; box-shadow: 7px 7px 0 var(--kx); }
+    .js .affiliation-card[data-reveal].is-revealed { box-shadow: 7px 7px 0 var(--kx); }
+    .affiliation-side {
+      margin-top: 28px;
+      padding: 24px 0 0;
+      border-top: 1px solid #4d4f4a;
+      border-left: 0;
+    }
+    .coordinate-list li { grid-template-columns: 54px 1fr; min-height: 94px; }
+    .coordinate-list strong { padding-left: 22px; font-size: 1.25rem; }
+    .coordinate-list strong::before { height: 34px; }
+    .method-line { align-items: flex-start; flex-direction: column; gap: 16px; }
+    .method-line strong { font-size: .82rem; line-height: 2.2; }
+    .method-line i { padding-inline: 4px; }
+    .why-public-line { flex-direction: column; gap: 14px; }
+    .guide-grid { grid-template-columns: 1fr; }
+    .guide-card { min-height: 220px; }
+    .guide-card + .guide-card { border-top: 1px solid var(--ink); border-left: 0; }
+  }
+
+</style>
+
+<script>
+  const particlePortrait = document.querySelector<HTMLElement>("[data-particle-portrait]");
+  const particleStage = particlePortrait?.querySelector<HTMLElement>(".particle-stage");
+  const particleCanvas = particleStage?.querySelector<HTMLCanvasElement>(".particle-canvas");
+  const particleImage = particleStage?.querySelector<HTMLImageElement>("img");
+  const particleMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  type PortraitParticle = {
+    nx: number;
+    ny: number;
+    tx: number;
+    ty: number;
+    sx: number;
+    sy: number;
+    size: number;
+    delay: number;
+    duration: number;
+    phase: number;
+  };
+
+  if (particlePortrait && particleStage && particleCanvas && particleImage && !particleMotion.matches) {
+    const startParticleReveal = () => {
+      if (particlePortrait.dataset.particleStarted === "true") return;
+
+      const firstRect = particleStage.getBoundingClientRect();
+      if (firstRect.width < 2 || firstRect.height < 2) {
+        window.setTimeout(startParticleReveal, 80);
+        return;
+      }
+
+      const context = particleCanvas.getContext("2d");
+      if (!context) return;
+      particlePortrait.dataset.particleStarted = "true";
+
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.6);
+      const extensionRatio = firstRect.width < 420 ? .38 : .56;
+      let stageWidth = firstRect.width;
+      let stageHeight = firstRect.height;
+      let extension = stageWidth * extensionRatio;
+      let canvasWidth = stageWidth + extension;
+      let particles: PortraitParticle[] = [];
+      let startedAt = performance.now();
+      let frameId = 0;
+      let baseVisible = false;
+      let settled = false;
+      const pointer = { x: -9999, y: -9999, active: false };
+
+      const measure = () => {
+        const rect = particleStage.getBoundingClientRect();
+        stageWidth = rect.width;
+        stageHeight = rect.height;
+        extension = stageWidth * extensionRatio;
+        canvasWidth = stageWidth + extension;
+        particleCanvas.style.left = `${-extension}px`;
+        particleCanvas.style.width = `${canvasWidth}px`;
+        particleCanvas.style.height = `${stageHeight}px`;
+        particleCanvas.width = Math.round(canvasWidth * pixelRatio);
+        particleCanvas.height = Math.round(stageHeight * pixelRatio);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      };
+
+      const layoutParticles = (first = false) => {
+        particles.forEach((particle) => {
+          particle.tx = extension + particle.nx * stageWidth;
+          particle.ty = particle.ny * stageHeight;
+          if (!first) return;
+          particle.sx = extension * (.04 + Math.random() * .78);
+          particle.sy = particle.ty + (Math.random() - .5) * Math.min(170, stageHeight * .42);
+        });
+      };
+
+      const sampleImage = () => {
+        const sampleCanvas = document.createElement("canvas");
+        const sampleWidth = Math.min(window.innerWidth < 680 ? 280 : 400, particleImage.naturalWidth);
+        const sampleHeight = Math.max(1, Math.round(sampleWidth * particleImage.naturalHeight / particleImage.naturalWidth));
+        sampleCanvas.width = sampleWidth;
+        sampleCanvas.height = sampleHeight;
+        const sampleContext = sampleCanvas.getContext("2d", { willReadFrequently: true });
+        if (!sampleContext) return;
+        sampleContext.drawImage(particleImage, 0, 0, sampleWidth, sampleHeight);
+        const pixels = sampleContext.getImageData(0, 0, sampleWidth, sampleHeight).data;
+
+        let subjectPixels = 0;
+        for (let offset = 0; offset < pixels.length; offset += 4) {
+          const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+          const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+          const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
+          if (!isBackground) subjectPixels += 1;
+        }
+
+        const targetCount = window.innerWidth < 680 ? 8200 : 15000;
+        const step = Math.max(1, Math.round(Math.sqrt(subjectPixels / targetCount)));
+        const nextParticles: PortraitParticle[] = [];
+
+        for (let y = 0; y < sampleHeight; y += step) {
+          for (let x = 0; x < sampleWidth; x += step) {
+            const offset = (y * sampleWidth + x) * 4;
+            const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+            const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+            const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
+            if (isBackground) continue;
+            const nx = x / sampleWidth;
+            nextParticles.push({
+              nx,
+              ny: y / sampleHeight,
+              tx: 0,
+              ty: 0,
+              sx: 0,
+              sy: 0,
+              size: .82 + Math.random() * 1.02,
+              delay: nx * 620 + Math.random() * 230,
+              duration: 760 + Math.random() * 520,
+              phase: Math.random() * Math.PI * 2
+            });
+          }
+        }
+
+        particles = nextParticles;
+        layoutParticles(true);
+      };
+
+      const easeOut = (value: number) => 1 - Math.pow(1 - value, 3);
+      const settleAt = 1750;
+      const revealBaseAt = 1880;
+      const softenParticlesAt = 2280;
+
+      const draw = (now: number) => {
+        const elapsed = now - startedAt;
+        if (!baseVisible && elapsed >= revealBaseAt) {
+          particlePortrait.classList.add("particle-base-visible");
+          baseVisible = true;
+        }
+        if (!settled && elapsed >= softenParticlesAt) {
+          particlePortrait.classList.add("particle-settled");
+          settled = true;
+        }
+
+        context.clearRect(0, 0, canvasWidth, stageHeight);
+        const time = now * .001;
+
+        particles.forEach((particle) => {
+          let x = particle.tx;
+          let y = particle.ty;
+          let alpha = 1;
+          let hoverBoost = 0;
+
+          if (elapsed < settleAt) {
+            const local = (elapsed - particle.delay) / particle.duration;
+            const progress = local <= 0 ? 0 : local >= 1 ? 1 : easeOut(local);
+            x = particle.sx + (particle.tx - particle.sx) * progress;
+            y = particle.sy + (particle.ty - particle.sy) * progress;
+            alpha = Math.max(0, Math.min(1, local + .14));
+          } else {
+            x += Math.sin(time * .9 + particle.phase) * .34;
+            y += Math.cos(time * .72 + particle.phase) * .42;
+
+            if (pointer.active) {
+              const dx = x - pointer.x;
+              const dy = y - pointer.y;
+              const radius = Math.max(86, Math.min(132, stageWidth * .22));
+              const distanceSquared = dx * dx + dy * dy;
+              if (distanceSquared < radius * radius) {
+                const distance = Math.sqrt(distanceSquared) || 1;
+                hoverBoost = 1 - distance / radius;
+                const force = hoverBoost * 16;
+                x += dx / distance * force;
+                y += dy / distance * force;
+              }
+            }
+          }
+
+          if (alpha <= .01) return;
+          context.fillStyle = "#030405";
+          const size = particle.size * (1 + hoverBoost * .5);
+          context.globalAlpha = alpha * .16;
+          context.fillRect(x - .35, y - .35, size + .7, size + .7);
+          context.globalAlpha = alpha;
+          context.fillRect(x, y, size, size);
+        });
+
+        context.globalAlpha = 1;
+        frameId = window.requestAnimationFrame(draw);
+      };
+
+      let resizeTimer = 0;
+      window.addEventListener("resize", () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          measure();
+          layoutParticles(false);
+        }, 150);
+      });
+
+      particlePortrait.addEventListener("pointermove", (event) => {
+        const rect = particleCanvas.getBoundingClientRect();
+        pointer.x = event.clientX - rect.left;
+        pointer.y = event.clientY - rect.top;
+        pointer.active = true;
+      });
+      particlePortrait.addEventListener("pointerleave", () => { pointer.active = false; });
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) window.cancelAnimationFrame(frameId);
+        else {
+          startedAt = performance.now() - (settleAt + 100);
+          frameId = window.requestAnimationFrame(draw);
+        }
+      });
+
+      measure();
+      sampleImage();
+      particlePortrait.classList.add("particle-ready");
+      startedAt = performance.now();
+      frameId = window.requestAnimationFrame(draw);
+    };
+
+    const scheduleParticleReveal = async () => {
+      try { await particleImage.decode(); } catch { /* load event already confirms a usable image */ }
+      window.requestAnimationFrame(() => window.requestAnimationFrame(startParticleReveal));
+    };
+
+    if (particleImage.complete && particleImage.naturalWidth > 0) void scheduleParticleReveal();
+    else particleImage.addEventListener("load", () => { void scheduleParticleReveal(); }, { once: true });
+  }
+</script>

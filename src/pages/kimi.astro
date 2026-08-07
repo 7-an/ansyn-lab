@@ -1,0 +1,1420 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
+
+const metrics = [
+  { value: "12万+", label: "学习内容播放", note: "传播入口" },
+  { value: "100+", label: "学生咨询与需求样本", note: "问题来源" },
+  { value: "5名", label: "首批真实实验学生", note: "深度测试" },
+  { value: "1个", label: "开源 AI 学习项目", note: "公开交付" }
+];
+
+const workflow = [
+  "真实学生问题",
+  "结构化采集",
+  "AI 补充追问",
+  "路径初筛",
+  "四周地图",
+  "每日任务",
+  "执行证据",
+  "动态纠偏"
+];
+
+const systemModules = [
+  "学生信息采集协议",
+  "信息完整性检查",
+  "学习路径与优先级判断",
+  "四周路径与 7 天启动模板",
+  "数学 / 英语 / 物理 / 化学规则",
+  "每日反馈与动态纠偏",
+  "人工升级与风险边界",
+  "Prompt 手动版与开源仓库"
+];
+
+const capabilities = [
+  {
+    index: "01",
+    title: "真实场景内容",
+    copy: "围绕学生学习、深度研究、网站与开源项目，制作从第一次成功使用到失败边界的完整案例。"
+  },
+  {
+    index: "02",
+    title: "一线产品反馈",
+    copy: "记录用户为什么没用、第一次使用卡在哪里，以及什么表达能让年轻用户真正理解功能。"
+  },
+  {
+    index: "03",
+    title: "可复用推广案例",
+    copy: "把学习工作流迁移到 Kimi，沉淀为开源项目、教程、实验复盘和用户问题地图。"
+  }
+];
+
+const plan = [
+  { week: "W01", title: "迁移", copy: "用 Kimi 重跑现有 AI 学习工作流，记录能力、限制与迁移成本。" },
+  { week: "W02", title: "内容", copy: "完成入门、工作流案例、失败或边界复盘 2—3 条内容。" },
+  { week: "W03", title: "测试", copy: "邀请一小批学生或年轻用户真实使用，收集高频问题与功能反馈。" },
+  { week: "W04", title: "交付", copy: "提交内容复盘、用户问题地图、产品体验反馈和一个公开案例或 Demo。" }
+];
+---
+
+<BaseLayout
+  title="Kimi 推广大使申请作品集｜安寻 Ansyn"
+  description="安寻的 Kimi 推广大使申请作品集：真实年轻用户、AI 学习工作流、内容转化与一线产品反馈。"
+  image="/kimi/og-kimi.png"
+>
+  <article class="kimi-page">
+    <section class="kimi-hero shell" aria-labelledby="kimi-title">
+      <div class="dossier-bar">
+        <span>APPLICATION DOSSIER / 2026</span>
+        <span class="live-label"><i aria-hidden="true"></i> EVIDENCE-LED</span>
+      </div>
+      <div class="hero-layout">
+        <div class="hero-main">
+          <p class="kimi-kicker">Kimi 推广大使申请作品集</p>
+          <h1 id="kimi-title">安寻 <span>Ansyn</span></h1>
+          <p class="role-line">AI 产品推广 <b>×</b> 内容运营 <b>×</b> 用户研究</p>
+          <p class="hero-intro">
+            从真实年轻用户需求出发，把 AI 从一次内容传播，推进到
+            <mark>可执行工作流</mark> 和持续反馈。
+          </p>
+          <div class="button-row">
+            <a class="button kimi-primary" href="/downloads/安寻_Kimi推广大使作品集.pdf" download>
+              下载作品集 PDF <span aria-hidden="true">↓</span>
+            </a>
+            <a class="button" href="https://github.com/7-an/ai-study-path-triage" target="_blank" rel="noopener noreferrer">
+              查看开源项目 ↗
+            </a>
+          </div>
+        </div>
+        <aside class="hero-note" aria-label="个人介绍">
+          <div class="note-index">PROFILE / 001</div>
+          <p>
+            我是一名刚从高中系统走出的 18 岁 AI 实践者，持续探索如何借助 AI
+            理解真实用户、搭建工作流，并把复杂产品转化为年轻用户能够理解和使用的内容。
+          </p>
+          <dl>
+            <div><dt>状态</dt><dd>BUILDING IN PUBLIC</dd></div>
+            <div><dt>入口</dt><dd>真实问题</dd></div>
+            <div><dt>方法</dt><dd>行动 → 证据 → 修正</dd></div>
+          </dl>
+        </aside>
+      </div>
+      <div class="hero-index">
+        <span>REAL USERS</span><i aria-hidden="true">→</i>
+        <span>REAL WORKFLOWS</span><i aria-hidden="true">→</i>
+        <span>REAL FEEDBACK</span>
+      </div>
+    </section>
+
+    <section class="metric-section shell" aria-label="核心数据">
+      {metrics.map((metric, index) => (
+        <article class="metric-card">
+          <span class="metric-index">0{index + 1} / {metric.note}</span>
+          <strong>{metric.value}</strong>
+          <p>{metric.label}</p>
+        </article>
+      ))}
+      <p class="data-note">
+        DATA SNAPSHOT / 2026.07 / 播放与咨询数据来自内容后台及实际沟通；81 条用户问题已结构化归档。
+      </p>
+    </section>
+
+    <section class="case-section shell" id="project">
+      <header class="case-heading">
+        <div>
+          <p class="kimi-kicker">CASE 01 / CORE PROJECT</p>
+          <h2>从 100+ 条学生咨询，<br />到开源 AI 学习工作流</h2>
+        </div>
+        <p>
+          学生反复询问的不是某一道题，而是不知道先补什么、怎样判断问题、如何安排网课与刷题，
+          以及怎样让 AI 真正进入学习流程。
+        </p>
+      </header>
+
+      <div class="case-grid">
+        <div class="case-story">
+          <section class="case-copy">
+            <span class="case-label">01 / 问题从哪里来</span>
+            <p>
+              一条关于高中学习系统的内容获得 12 万+ 播放。随后，我从评论和私信中识别重复问题，
+              将其中 81 条完整记录结构化归档，再招募 5 名学生进入首批深度实验。
+            </p>
+          </section>
+          <section class="case-copy">
+            <span class="case-label">02 / 我实际做了什么</span>
+            <ul>
+              <li>匿名整理真实评论、私信与后续反馈</li>
+              <li>设计结构化信息采集和补充追问流程</li>
+              <li>使用 AI 生成四周路径与 7 天启动方案</li>
+              <li>逐份人工审核，记录修改理由和错误案例</li>
+              <li>收集每日执行证据，继续调整下一步</li>
+              <li>将规则、Prompt、模板和匿名案例开源</li>
+            </ul>
+          </section>
+        </div>
+        <figure class="project-cover">
+          <img src="/kimi/study-path-workflow.png" alt="AI 学习工作流实验的概念场景图" width="1672" height="941" loading="lazy" />
+          <figcaption>
+            <span>AI STUDY PATH TRIAGE / WORKFLOW CONCEPT</span>
+            <a href="https://github.com/7-an/ai-study-path-triage" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="workflow-panel" aria-label="项目工作流">
+        <div class="workflow-head">
+          <span>FROM QUESTION TO CORRECTION</span>
+          <span>8 STEPS</span>
+        </div>
+        <ol>
+          {workflow.map((step, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="module-grid">
+        <div class="module-intro">
+          <p class="kimi-kicker">SYSTEM / WHAT SHIPPED</p>
+          <h3>项目最终包含什么</h3>
+          <p>不是一段“万能 Prompt”，而是一套包含输入检查、人工判断和反馈纠偏的可运行结构。</p>
+        </div>
+        <ul>
+          {systemModules.map((item, index) => (
+            <li><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="evidence-section">
+      <div class="shell">
+        <header class="evidence-heading">
+          <p class="kimi-kicker">EVIDENCE / NOT A DEMO</p>
+          <h2>方案必须回到真实执行。</h2>
+          <p>我保留匿名反馈，不只展示“生成成功”，也记录耗时、卡点、未完成和需要人工判断的部分。</p>
+        </header>
+        <div class="evidence-grid">
+          <figure class="feedback-figure">
+            <div class="feedback-window">
+              <img src="/kimi/evidence-feedback.png" alt="五名学生匿名提交的学习执行反馈拼图" width="1200" height="5474" loading="lazy" />
+            </div>
+            <figcaption>五人首日执行反馈 / 姓名与代号已打码</figcaption>
+          </figure>
+          <div class="evidence-side">
+            <figure>
+              <img src="/kimi/evidence-chat.png" alt="匿名学习群聊中推荐使用 Kimi 的对话截图" width="1537" height="1023" loading="lazy" />
+              <figcaption>真实学习群聊 / 用户在执行中遇到工具与计划问题</figcaption>
+            </figure>
+            <div class="findings">
+              <p class="kimi-kicker">THREE FINDINGS</p>
+              <blockquote>AI 最容易完成的是生成计划，最难的是获得足够真实的信息。</blockquote>
+              <blockquote>个性化不是修改名字和成绩，而是根据执行结果改变下一步。</blockquote>
+              <blockquote>系统不需要替代老师，但必须知道什么时候停止自动判断并请求人工帮助。</blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="growth-section shell">
+      <header class="section-split">
+        <div>
+          <p class="kimi-kicker">CASE 02 / CONTENT → RESEARCH</p>
+          <h2>一条内容，<br />如何变成用户研究</h2>
+        </div>
+        <p>
+          我想证明的不是“做出了一条爆款”，而是能把内容曝光继续转化为真实用户、问题样本与产品反馈。
+        </p>
+      </header>
+      <div class="funnel" aria-label="从内容到产品反馈的转化路径">
+        <div><span>01 / REACH</span><strong>12万+</strong><p>学习内容播放</p></div>
+        <i aria-hidden="true">→</i>
+        <div><span>02 / QUESTIONS</span><strong>100+</strong><p>学生咨询与需求样本</p></div>
+        <i aria-hidden="true">→</i>
+        <div><span>03 / TEST</span><strong>5名</strong><p>首批真实实验学生</p></div>
+        <i aria-hidden="true">→</i>
+        <div><span>04 / OUTPUT</span><strong>开源</strong><p>工作流与匿名案例</p></div>
+      </div>
+      <div class="growth-note">
+        <p>内容不是终点。</p>
+        <strong>曝光 → 评论 → 咨询 → 样本 → 实验 → 修正</strong>
+        <a href="https://www.douyin.com/article/7661876024908507762" target="_blank" rel="noopener noreferrer">查看内容来源 ↗</a>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="shell lab-grid">
+        <div class="lab-copy">
+          <p class="kimi-kicker">CASE 03 / AI-COLLABORATIVE BUILD</p>
+          <h2>Ansyn Lab</h2>
+          <p class="lab-lead">AI 协作完成的个人数字主页</p>
+          <p>
+            我通过 AI 与 Codex 完成需求拆解、页面结构、代码实现、审美反馈和多轮修改，
+            最终上线个人网站，用来沉淀公开文章、项目和个人探索。
+          </p>
+          <ul>
+            <li>提出需求，定义信息结构与内容层级</li>
+            <li>使用 AI 协作生成、调试并持续迭代</li>
+            <li>根据真人反馈修改视觉与交互</li>
+            <li>完成公开上线，持续作为作品母站</li>
+          </ul>
+          <a class="button kimi-primary" href="/" target="_blank">访问 Ansyn Lab ↗</a>
+        </div>
+        <figure class="lab-preview">
+          <img src="/kimi/ansyn-lab-preview.png" alt="Ansyn Lab 个人网站预览图" width="1729" height="910" loading="lazy" />
+          <figcaption>不是只会写 Prompt，而是能把模糊想法变成公开交付物。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="contribution-section shell" id="contribution">
+      <header class="section-split">
+        <div>
+          <p class="kimi-kicker">WHY KIMI / CONTRIBUTION</p>
+          <h2>我能为 Kimi 做什么</h2>
+        </div>
+        <p>
+          不做单次功能转发，而是用真实项目证明 Kimi 能为某一类用户解决什么问题，
+          再把使用数据与一线反馈带回团队。
+        </p>
+      </header>
+      <div class="capability-grid">
+        {capabilities.map((item) => (
+          <article>
+            <span>{item.index}</span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="plan-section">
+      <div class="shell">
+        <header class="plan-heading">
+          <div>
+            <p class="kimi-kicker">FIRST 30 DAYS / ACTION PLAN</p>
+            <h2>先做出一轮可复盘的真实实验。</h2>
+          </div>
+          <p>承诺可控制的行动，不承诺不可控制的流量。</p>
+        </header>
+        <ol class="plan-grid">
+          {plan.map((item) => (
+            <li>
+              <span>{item.week}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="deliverables">
+          <span>DELIVERABLES</span>
+          <strong>内容数据复盘</strong>
+          <strong>用户问题地图</strong>
+          <strong>产品体验反馈</strong>
+          <strong>公开案例 / Demo</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-section shell">
+      <div>
+        <p class="kimi-kicker">APPLICATION PACKAGE</p>
+        <h2>30 秒看懂，<br />继续深挖有证据。</h2>
+      </div>
+      <div class="download-list">
+        <a href="/downloads/安寻_Kimi推广大使作品集.pdf" download>
+          <span><b>01</b> 7 页作品集 PDF</span><strong>下载 ↓</strong>
+        </a>
+        <a href="/downloads/安寻_个人简历.pdf" download>
+          <span><b>02</b> 1 页精简简历 PDF</span><strong>下载 ↓</strong>
+        </a>
+        <a href="/downloads/安寻_Ansyn_Kimi推广大使申请作品集.pdf" download>
+          <span><b>03</b> 作品集 + 简历单文件版</span><strong>下载 ↓</strong>
+        </a>
+        <a href="https://github.com/7-an/ai-study-path-triage" target="_blank" rel="noopener noreferrer">
+          <span><b>04</b> AI Study Path Triage</span><strong>GitHub ↗</strong>
+        </a>
+        <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">
+          <span><b>05</b> 公开实验记录</span><strong>X ↗</strong>
+        </a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .kimi-page {
+    --lime: #b7ff2a;
+    --lime-soft: #e5ffad;
+    --kimi-paper: #f3f0e6;
+    --kimi-ink: #171816;
+    --kimi-muted: #686b64;
+    overflow: hidden;
+    background: var(--kimi-paper);
+  }
+
+  .kimi-kicker {
+    margin: 0 0 18px;
+    color: var(--kimi-muted);
+    font: 700 .72rem/1.4 var(--mono);
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+
+  .kimi-hero {
+    min-height: calc(100svh - 72px);
+    display: flex;
+    flex-direction: column;
+    border-inline: 1px solid var(--kimi-ink);
+  }
+
+  .dossier-bar,
+  .workflow-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--kimi-ink);
+    font: 700 .68rem var(--mono);
+    letter-spacing: .09em;
+  }
+
+  .live-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-label i {
+    width: 8px;
+    height: 8px;
+    background: var(--lime);
+    border: 1px solid var(--kimi-ink);
+    border-radius: 50%;
+  }
+
+  .hero-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.65fr .7fr;
+  }
+
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(58px, 8vw, 112px) 6%;
+    border-right: 1px solid var(--kimi-ink);
+  }
+
+  .hero-main h1 {
+    display: flex;
+    align-items: baseline;
+    gap: .15em;
+    margin: 0;
+    font-size: clamp(5rem, 10vw, 9.4rem);
+    line-height: .8;
+    letter-spacing: -.09em;
+  }
+
+  .hero-main h1 span {
+    font-size: .42em;
+    letter-spacing: -.05em;
+  }
+
+  .role-line {
+    margin: 35px 0 0;
+    font-size: clamp(1.1rem, 2vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+
+  .role-line b {
+    padding-inline: .25em;
+    color: var(--kimi-muted);
+  }
+
+  .hero-intro {
+    max-width: 760px;
+    margin: 32px 0 0;
+    font-size: clamp(1.45rem, 2.8vw, 2.35rem);
+    line-height: 1.4;
+    font-weight: 720;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+  }
+
+  .hero-intro mark {
+    background: linear-gradient(transparent 58%, var(--lime) 58%);
+  }
+
+  .kimi-primary {
+    background: var(--lime);
+  }
+
+  .hero-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 34px;
+    background: var(--kimi-ink);
+    color: var(--kimi-paper);
+  }
+
+  .note-index {
+    margin-bottom: auto;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #494b46;
+    color: #a9aca3;
+    font: .68rem var(--mono);
+  }
+
+  .hero-note > p {
+    margin: 70px 0 35px;
+    font-size: 1.05rem;
+  }
+
+  .hero-note dl,
+  .hero-note dd {
+    margin: 0;
+  }
+
+  .hero-note dl div {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 18px;
+    padding: 11px 0;
+    border-top: 1px solid #494b46;
+    font: .7rem var(--mono);
+  }
+
+  .hero-note dt {
+    color: #9b9e96;
+  }
+
+  .hero-note dd {
+    color: var(--lime);
+  }
+
+  .hero-index {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 17px 22px;
+    border-top: 1px solid var(--kimi-ink);
+    background: var(--lime);
+    font: 800 .75rem var(--mono);
+    letter-spacing: .07em;
+  }
+
+  .metric-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-inline: 1px solid var(--kimi-ink);
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .metric-card {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    border-right: 1px solid var(--kimi-ink);
+  }
+
+  .metric-card:nth-child(4) {
+    border-right: 0;
+  }
+
+  .metric-index {
+    margin-bottom: auto;
+    color: var(--kimi-muted);
+    font: .65rem var(--mono);
+    text-transform: uppercase;
+  }
+
+  .metric-card strong {
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: .9;
+    letter-spacing: -.075em;
+  }
+
+  .metric-card p {
+    margin: 14px 0 0;
+    font-weight: 750;
+  }
+
+  .data-note {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 12px 18px;
+    border-top: 1px solid var(--kimi-ink);
+    color: var(--kimi-muted);
+    font: .65rem/1.5 var(--mono);
+  }
+
+  .case-section,
+  .growth-section,
+  .contribution-section,
+  .download-section {
+    padding-block: 132px;
+  }
+
+  .case-heading,
+  .section-split {
+    display: grid;
+    grid-template-columns: 1.35fr .65fr;
+    gap: 8%;
+    align-items: end;
+    padding-bottom: 45px;
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .case-heading h2,
+  .section-split h2,
+  .evidence-heading h2,
+  .plan-heading h2,
+  .download-section h2 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5.8vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -.075em;
+    text-wrap: balance;
+  }
+
+  .case-heading > p,
+  .section-split > p {
+    margin: 0;
+    color: var(--kimi-muted);
+    font-size: 1.05rem;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .case-story {
+    border-right: 1px solid var(--kimi-ink);
+  }
+
+  .case-copy {
+    padding: 34px;
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .case-copy:last-child {
+    border-bottom: 0;
+  }
+
+  .case-label {
+    color: var(--kimi-muted);
+    font: .7rem var(--mono);
+  }
+
+  .case-copy p {
+    margin: 52px 0 0;
+    font-size: 1.13rem;
+  }
+
+  .case-copy ul,
+  .lab-copy ul {
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-copy li,
+  .lab-copy li {
+    padding: 11px 0 11px 21px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .case-copy li::before,
+  .lab-copy li::before {
+    content: "↳";
+    position: absolute;
+    left: 0;
+    color: #4e8900;
+  }
+
+  .project-cover {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 34px;
+    background: #e5e2d8;
+  }
+
+  .project-cover img {
+    width: 100%;
+    height: 100%;
+    min-height: 440px;
+    object-fit: cover;
+    border: 1px solid var(--kimi-ink);
+    filter: saturate(.85);
+  }
+
+  .project-cover figcaption,
+  .feedback-figure figcaption,
+  .evidence-side figcaption,
+  .lab-preview figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 13px;
+    font: .65rem/1.5 var(--mono);
+  }
+
+  .workflow-panel {
+    margin-top: 70px;
+    border: 1px solid var(--kimi-ink);
+  }
+
+  .workflow-head {
+    background: var(--kimi-ink);
+    color: var(--kimi-paper);
+  }
+
+  .workflow-panel ol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .workflow-panel li {
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border-right: 1px solid var(--kimi-ink);
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .workflow-panel li:nth-child(4n) {
+    border-right: 0;
+  }
+
+  .workflow-panel li:nth-child(n + 5) {
+    border-bottom: 0;
+  }
+
+  .workflow-panel li span {
+    color: var(--kimi-muted);
+    font: .7rem var(--mono);
+  }
+
+  .workflow-panel li strong {
+    font-size: 1rem;
+  }
+
+  .workflow-panel li:nth-child(5) {
+    background: var(--lime);
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    margin-top: 70px;
+    border-top: 1px solid var(--kimi-ink);
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .module-intro {
+    padding: 40px 34px;
+    border-right: 1px solid var(--kimi-ink);
+  }
+
+  .module-intro h3 {
+    margin: 0;
+    font-size: 2.1rem;
+    letter-spacing: -.05em;
+  }
+
+  .module-intro > p:last-child {
+    margin: 30px 0 0;
+    color: var(--kimi-muted);
+  }
+
+  .module-grid ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .module-grid li {
+    padding: 23px;
+    border-right: 1px solid var(--kimi-ink);
+    border-bottom: 1px solid var(--kimi-ink);
+    font-weight: 700;
+  }
+
+  .module-grid li:nth-child(even) {
+    border-right: 0;
+  }
+
+  .module-grid li:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .module-grid li span {
+    display: block;
+    margin-bottom: 28px;
+    color: var(--kimi-muted);
+    font: .65rem var(--mono);
+  }
+
+  .evidence-section {
+    padding-block: 120px;
+    background: var(--kimi-ink);
+    color: var(--kimi-paper);
+  }
+
+  .evidence-heading {
+    display: grid;
+    grid-template-columns: 1.4fr .6fr;
+    gap: 8%;
+    align-items: end;
+    padding-bottom: 42px;
+    border-bottom: 1px solid #4c4e48;
+  }
+
+  .evidence-heading .kimi-kicker,
+  .evidence-heading h2 {
+    grid-column: 1;
+  }
+
+  .evidence-heading > p:last-child {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin: 0;
+    color: #b5b8af;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 24px;
+    padding-top: 34px;
+  }
+
+  .feedback-figure,
+  .evidence-side figure {
+    margin: 0;
+  }
+
+  .feedback-window {
+    height: 720px;
+    overflow: hidden;
+    border: 1px solid #64675f;
+    background: #fff;
+  }
+
+  .feedback-window img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .feedback-figure figcaption,
+  .evidence-side figcaption {
+    color: #aeb1a8;
+  }
+
+  .evidence-side > figure img {
+    display: block;
+    width: 100%;
+    border: 1px solid #64675f;
+  }
+
+  .findings {
+    margin-top: 55px;
+  }
+
+  .findings blockquote {
+    margin: 0;
+    padding: 22px 0;
+    border-top: 1px solid #4c4e48;
+    font-size: clamp(1.25rem, 2.3vw, 2rem);
+    line-height: 1.45;
+    font-weight: 700;
+    letter-spacing: -.035em;
+  }
+
+  .findings blockquote:last-child {
+    border-bottom: 1px solid #4c4e48;
+  }
+
+  .funnel {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    margin-top: 50px;
+    border: 1px solid var(--kimi-ink);
+  }
+
+  .funnel > div {
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .funnel > div:nth-of-type(3) {
+    background: var(--lime);
+  }
+
+  .funnel > i {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    border-inline: 1px solid var(--kimi-ink);
+    font-style: normal;
+  }
+
+  .funnel span {
+    margin-bottom: auto;
+    color: var(--kimi-muted);
+    font: .65rem var(--mono);
+  }
+
+  .funnel strong {
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1;
+    letter-spacing: -.07em;
+  }
+
+  .funnel p {
+    margin: 12px 0 0;
+  }
+
+  .growth-note {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: var(--kimi-ink);
+    color: var(--kimi-paper);
+  }
+
+  .growth-note p {
+    margin: 0;
+    color: #aeb1a8;
+  }
+
+  .growth-note strong {
+    color: var(--lime);
+  }
+
+  .growth-note a {
+    border-bottom: 1px solid currentColor;
+  }
+
+  .lab-section {
+    padding-block: 115px;
+    background: #dcd9cf;
+    border-block: 1px solid var(--kimi-ink);
+  }
+
+  .lab-grid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 7%;
+    align-items: center;
+  }
+
+  .lab-copy h2 {
+    margin: 0;
+    font-size: clamp(4rem, 7vw, 7rem);
+    line-height: .9;
+    letter-spacing: -.08em;
+  }
+
+  .lab-lead {
+    margin: 22px 0 34px;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .lab-copy > p:not(.kimi-kicker, .lab-lead) {
+    color: var(--kimi-muted);
+  }
+
+  .lab-copy .button {
+    margin-top: 32px;
+  }
+
+  .lab-preview {
+    margin: 0;
+    transform: rotate(1deg);
+  }
+
+  .lab-preview img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--kimi-ink);
+    box-shadow: 14px 14px 0 var(--lime);
+  }
+
+  .capability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .capability-grid article {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-right: 1px solid var(--kimi-ink);
+    border-bottom: 1px solid var(--kimi-ink);
+  }
+
+  .capability-grid article:first-child {
+    border-left: 1px solid var(--kimi-ink);
+  }
+
+  .capability-grid span {
+    color: var(--kimi-muted);
+    font: .7rem var(--mono);
+  }
+
+  .capability-grid h3 {
+    margin: 74px 0 14px;
+    font-size: 1.7rem;
+    letter-spacing: -.045em;
+  }
+
+  .capability-grid p {
+    margin: auto 0 0;
+    color: var(--kimi-muted);
+  }
+
+  .capability-grid article:nth-child(2) {
+    background: var(--lime);
+  }
+
+  .plan-section {
+    padding-block: 120px;
+    background: var(--kimi-ink);
+    color: var(--kimi-paper);
+  }
+
+  .plan-heading {
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 8%;
+    align-items: end;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #4c4e48;
+  }
+
+  .plan-heading > p {
+    margin: 0;
+    color: #aeb1a8;
+  }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plan-grid li {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    border-right: 1px solid #4c4e48;
+  }
+
+  .plan-grid li:last-child {
+    border-right: 0;
+  }
+
+  .plan-grid span {
+    color: var(--lime);
+    font: .7rem var(--mono);
+  }
+
+  .plan-grid h3 {
+    margin: 65px 0 15px;
+    font-size: 2rem;
+  }
+
+  .plan-grid p {
+    margin: auto 0 0;
+    color: #b5b8af;
+  }
+
+  .deliverables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    padding: 19px 22px;
+    border: 1px solid #4c4e48;
+  }
+
+  .deliverables span {
+    margin-right: auto;
+    color: #aeb1a8;
+    font: .7rem var(--mono);
+  }
+
+  .deliverables strong {
+    padding: 7px 10px;
+    background: var(--lime);
+    color: var(--kimi-ink);
+    font-size: .75rem;
+  }
+
+  .download-section {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 8%;
+    align-items: start;
+  }
+
+  .download-list {
+    border-top: 1px solid var(--kimi-ink);
+  }
+
+  .download-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 23px 18px;
+    border-bottom: 1px solid var(--kimi-ink);
+    transition: background .18s ease;
+  }
+
+  .download-list a:hover {
+    background: var(--lime);
+  }
+
+  .download-list span {
+    font-weight: 750;
+  }
+
+  .download-list b {
+    margin-right: 24px;
+    color: var(--kimi-muted);
+    font: .7rem var(--mono);
+  }
+
+  .download-list strong {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .hero-layout,
+    .case-heading,
+    .section-split,
+    .case-grid,
+    .module-grid,
+    .evidence-heading,
+    .evidence-grid,
+    .lab-grid,
+    .plan-heading,
+    .download-section {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-main {
+      min-height: 650px;
+      border-right: 0;
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .hero-note {
+      min-height: 430px;
+    }
+
+    .metric-section {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .metric-card:nth-child(2) {
+      border-right: 0;
+    }
+
+    .metric-card:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .case-heading,
+    .section-split,
+    .evidence-heading,
+    .plan-heading {
+      gap: 30px;
+    }
+
+    .case-story,
+    .module-intro {
+      border-right: 0;
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .evidence-heading > p:last-child {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .feedback-window {
+      height: 520px;
+    }
+
+    .funnel {
+      grid-template-columns: 1fr 34px 1fr;
+    }
+
+    .funnel > i:nth-of-type(2) {
+      display: none;
+    }
+
+    .funnel > div:nth-of-type(3) {
+      border-top: 1px solid var(--kimi-ink);
+    }
+
+    .funnel > div:nth-of-type(3)::before {
+      content: "↓";
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .funnel > div:nth-of-type(3),
+    .funnel > div:nth-of-type(4) {
+      grid-row: 2;
+    }
+
+    .funnel > div:nth-of-type(3) {
+      grid-column: 1;
+    }
+
+    .funnel > i:nth-of-type(3) {
+      grid-column: 2;
+      grid-row: 2;
+      border-top: 1px solid var(--kimi-ink);
+    }
+
+    .funnel > div:nth-of-type(4) {
+      grid-column: 3;
+      border-top: 1px solid var(--kimi-ink);
+    }
+
+    .growth-note {
+      grid-template-columns: 1fr;
+    }
+
+    .capability-grid,
+    .plan-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .capability-grid article:nth-child(2) {
+      border-right: 0;
+    }
+
+    .capability-grid article:nth-child(3) {
+      border-left: 1px solid var(--kimi-ink);
+    }
+
+    .plan-grid li:nth-child(2) {
+      border-right: 0;
+    }
+
+    .plan-grid li:nth-child(-n + 2) {
+      border-bottom: 1px solid #4c4e48;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .kimi-hero {
+      min-height: auto;
+    }
+
+    .dossier-bar span:first-child {
+      max-width: 20ch;
+    }
+
+    .hero-main {
+      min-height: 610px;
+      padding: 72px 20px;
+    }
+
+    .hero-main h1 {
+      display: block;
+      font-size: clamp(4.4rem, 22vw, 6.6rem);
+    }
+
+    .hero-main h1 span {
+      display: block;
+      margin-top: .3em;
+      font-size: .45em;
+    }
+
+    .role-line {
+      line-height: 1.7;
+    }
+
+    .hero-index {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .hero-index i {
+      transform: rotate(90deg);
+    }
+
+    .metric-section,
+    .module-grid ul,
+    .capability-grid,
+    .plan-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-card,
+    .metric-card:nth-child(2),
+    .metric-card:nth-child(4) {
+      border-right: 0;
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .metric-card:nth-child(4) {
+      border-bottom: 0;
+    }
+
+    .case-section,
+    .growth-section,
+    .contribution-section,
+    .download-section {
+      padding-block: 86px;
+    }
+
+    .project-cover {
+      padding: 20px;
+    }
+
+    .project-cover img {
+      min-height: 300px;
+    }
+
+    .workflow-panel ol {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .workflow-panel li,
+    .workflow-panel li:nth-child(4n),
+    .workflow-panel li:nth-child(n + 5) {
+      border-right: 1px solid var(--kimi-ink);
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .workflow-panel li:nth-child(even) {
+      border-right: 0;
+    }
+
+    .workflow-panel li:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+
+    .module-grid li,
+    .module-grid li:nth-child(even),
+    .module-grid li:nth-last-child(-n + 2) {
+      border-right: 0;
+      border-bottom: 1px solid var(--kimi-ink);
+    }
+
+    .module-grid li:last-child {
+      border-bottom: 0;
+    }
+
+    .evidence-section,
+    .lab-section,
+    .plan-section {
+      padding-block: 82px;
+    }
+
+    .funnel {
+      display: block;
+    }
+
+    .funnel > i {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      border-block: 1px solid var(--kimi-ink);
+      transform: rotate(90deg);
+    }
+
+    .funnel > i:nth-of-type(2) {
+      display: grid;
+    }
+
+    .funnel > div:nth-of-type(3)::before {
+      content: none;
+    }
+
+    .funnel > div {
+      min-height: 190px;
+    }
+
+    .lab-preview {
+      margin-top: 45px;
+    }
+
+    .capability-grid article,
+    .capability-grid article:nth-child(2),
+    .capability-grid article:nth-child(3) {
+      min-height: 270px;
+      border-left: 1px solid var(--kimi-ink);
+      border-right: 1px solid var(--kimi-ink);
+    }
+
+    .plan-grid li,
+    .plan-grid li:nth-child(2) {
+      min-height: 240px;
+      border-right: 0;
+      border-bottom: 1px solid #4c4e48;
+    }
+
+    .plan-grid li:last-child {
+      border-bottom: 0;
+    }
+
+    .deliverables {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .download-section {
+      gap: 50px;
+    }
+
+    .download-list a {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

@@ -7,17 +7,23 @@ export const siteConfig = {
   displayName: "安寻 Ansyn",
   title: "安寻 Ansyn｜07后AI时代个人成长实验",
   description:
-    "记录一个18岁年轻人如何利用AI、互联网和个人系统，从高中环境进入真实世界。",
+    "一个年轻人，如何在 AI 时代进入真实世界——安寻的公开记录。",
   tagline: "在喧嚣中保持理智，在数字世界中探索同步。",
   language: "zh-CN",
   locale: "zh_CN",
   siteUrl: SITE_URL,
   social: {
     x: "https://x.com/Ansyn_07",
-    // TODO: 有公开 GitHub 主页后填入完整 URL；为空时页面不会显示入口。
-    github: "",
+    github: "https://github.com/7-an",
+    telegram: "https://t.me/Ansyn_7",
     // TODO: 有公开联系邮箱后填入 mailto: 链接；为空时页面不会显示入口。
-    email: ""
+    email: "",
+    // TODO: 填入微信号后，联系方式区会显示微信图标（点击复制微信号）；为空时不显示。
+    wechat: ""
+  },
+  kosx: {
+    name: "KOSX.ai",
+    url: "https://kosx.ai"
   },
   keywords: [
     "安寻",

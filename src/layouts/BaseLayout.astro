@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import MusicToggle from "../components/MusicToggle.astro";
 import { siteConfig } from "../config/site";
 import "../styles/global.css";
 
@@ -37,7 +38,7 @@ const structuredData = {
     "@type": "Person",
     name: siteConfig.displayName,
     url: siteConfig.siteUrl,
-    sameAs: [siteConfig.social.x]
+    sameAs: [siteConfig.social.x, siteConfig.social.telegram]
   }
 };
 ---
@@ -50,10 +51,9 @@ const structuredData = {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="keywords" content={siteConfig.keywords.join(", ")} />
-    <meta name="theme-color" content="#f2f0e8" />
+    <meta name="theme-color" content="#f3f0e8" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title="Ansyn Lab RSS" href="/rss.xml" />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={siteConfig.locale} />
     <meta property="og:site_name" content={siteConfig.name} />
@@ -66,6 +66,9 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -75,5 +78,96 @@ const structuredData = {
       <slot />
     </main>
     <Footer />
+    <MusicToggle />
+    <script>
+      const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+      const motionAllowed = window.matchMedia("(prefers-reduced-motion: no-preference)");
+
+      if (!motionAllowed.matches || !("IntersectionObserver" in window)) {
+        revealItems.forEach((item) => item.classList.add("is-revealed"));
+      } else {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-revealed");
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -10%", threshold: 0.08 }
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      }
+
+      const motionOk = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+      if (motionOk) {
+        // 文字接近响应：把 [data-proximity] 标题拆成逐字 span，按指针距离驱动 --p
+        const splitLetters = (root: HTMLElement) => {
+          const walk = (node: Node) => {
+            Array.from(node.childNodes).forEach((child) => {
+              if (child.nodeType === Node.TEXT_NODE && child.textContent) {
+                const frag = document.createDocumentFragment();
+                for (const ch of child.textContent) {
+                  if (/\s/.test(ch)) {
+                    frag.append(document.createTextNode(ch));
+                    continue;
+                  }
+                  const span = document.createElement("span");
+                  span.className = "pl";
+                  span.textContent = ch;
+                  frag.append(span);
+                }
+                node.replaceChild(frag, child);
+              } else if (child.nodeType === Node.ELEMENT_NODE) {
+                walk(child);
+              }
+            });
+          };
+          walk(root);
+        };
+
+        const letters: HTMLElement[] = [];
+        document.querySelectorAll<HTMLElement>("[data-proximity]").forEach((el) => {
+          splitLetters(el);
+          el.querySelectorAll<HTMLElement>(".pl").forEach((s) => letters.push(s));
+        });
+
+        // 磁吸按钮：指针进入半径后按钮被轻微吸附
+        const magnetButtons = Array.from(document.querySelectorAll<HTMLElement>(".button"));
+
+        window.addEventListener("pointermove", (event) => {
+          letters.forEach((s) => {
+            const r = s.getBoundingClientRect();
+            const d = Math.hypot(event.clientX - (r.left + r.width / 2), event.clientY - (r.top + r.height / 2));
+            const p = Math.max(0, 1 - d / 90);
+            s.style.setProperty("--p", (p * p * (3 - 2 * p)).toFixed(3));
+          });
+
+          magnetButtons.forEach((btn) => {
+            const r = btn.getBoundingClientRect();
+            const dx = event.clientX - (r.left + r.width / 2);
+            const dy = event.clientY - (r.top + r.height / 2);
+            const dist = Math.hypot(dx, dy);
+            if (dist < 90) {
+              const pull = (1 - dist / 90) * .28;
+              btn.style.transform = `translate(${(dx * pull).toFixed(1)}px, ${(dy * pull).toFixed(1)}px)`;
+            } else if (btn.style.transform) {
+              btn.style.transform = "";
+            }
+          });
+        }, { passive: true });
+
+        // 卡片追光：把指针坐标写进卡片 CSS 变量
+        document.querySelectorAll<HTMLElement>(".work-card, .guide-card").forEach((card) => {
+          card.addEventListener("pointermove", (event) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty("--mx", `${event.clientX - r.left}px`);
+            card.style.setProperty("--my", `${event.clientY - r.top}px`);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

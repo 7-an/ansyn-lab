@@ -1,0 +1,17 @@
+/.git
+/.astro
+/dist
+/node_modules
+
+# Local design and research artifacts are not part of the website runtime.
+/content
+/data
+/docs
+/output
+/outputs
+/references
+/scripts
+/tmp
+/tools
+
+*.md

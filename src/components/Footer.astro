@@ -1,22 +1,39 @@
 ---
 import { siteConfig } from "../config/site";
+import SocialLinks from "./SocialLinks.astro";
 ---
 
-<footer class="site-footer">
-  <div class="shell footer-grid">
-    <div>
-      <a class="wordmark" href="/"><span class="wordmark-mark" aria-hidden="true">A/</span>{siteConfig.name}</a>
-      <p>{siteConfig.tagline}</p>
-    </div>
-    <div class="footer-meta">
-      <p>Building in public since 18.</p>
-      <nav aria-label="页脚导航">
-        <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">X ↗</a>
-        {siteConfig.social.email && <a href={siteConfig.social.email}>Email</a>}
-        {siteConfig.social.github && <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
-        <a href="/rss.xml">RSS</a>
+<footer class="site-footer" id="contact">
+  <div class="shell footer-contact">
+    <p class="footer-kicker">CONTACT / LET'S BUILD SOMETHING REAL</p>
+    <h2>从一个具体问题开始。</h2>
+    <p>如果你在做 AI、内容、社区或年轻用户相关的项目——欢迎联系我。</p>
+    <ul class="footer-offers" aria-label="我目前愿意参与的方向">
+      <li>AI 工作流与自动化探索</li>
+      <li>内容策划和 X 运营</li>
+      <li>社群工作台与信息系统</li>
+      <li>用户反馈整理与需求验证</li>
+      <li>AI 辅助网站和基础产品交付</li>
+    </ul>
+    <div class="footer-channels">
+      <nav aria-label="联系安寻">
+        <span class="footer-channel-label">联系我 / PERSONAL</span>
+        <div class="footer-channel-icons">
+          <SocialLinks networks={["telegram", "x", "github"]} />
+        </div>
+      </nav>
+      <nav aria-label="联系 KOSX">
+        <span class="footer-channel-label">联系 KOSX / ORGANIZATION</span>
+        <div class="footer-channel-links">
+          <a href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">KOSX.ai ↗</a>
+        </div>
+        <p class="footer-channel-note">企业 AI 项目 · 社群与人才合作 · Builder 协作</p>
       </nav>
     </div>
+  </div>
+  <div class="shell footer-signature">
+    <a class="footer-wordmark" href="/">A/ {siteConfig.name}</a>
+    <p>Building in public since 18.</p>
   </div>
   <div class="shell footer-bottom">
     <span>© {new Date().getFullYear()} 安寻 Ansyn</span>

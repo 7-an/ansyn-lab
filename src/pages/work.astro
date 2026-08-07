@@ -1,0 +1,284 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    org: "INDEPENDENT / 独立项目",
+    title: "AI Study Path Triage",
+    problem: "从 100 多条学生咨询出发：高中生不缺学习建议，缺一条能开始执行的路径。",
+    role: "发起人 · 开源维护者",
+    did: [
+      "从咨询中提炼问题分类，设计初筛 prompt",
+      "整理规则、模板与匿名案例",
+      "招募 5 名真实学生，完成 7 天执行实验"
+    ],
+    deliverable: "GitHub 开源仓库：prompt、规则、模板与匿名案例。",
+    next: "已完结归档。除非出现值得探讨的新问题，不再主动迭代。",
+    status: "OPEN SOURCE / V0.1",
+    tone: "completed",
+    link: { href: "https://github.com/7-an/ai-study-path-triage", label: "GitHub 开源仓库 ↗" }
+  },
+  {
+    org: "INDEPENDENT / 独立项目",
+    title: "Ansyn Lab",
+    problem: "个人网站不只是简历，更是长期沉淀内容、项目与证据的母站。",
+    role: "需求 · 信息架构 · AI 协作开发",
+    did: [
+      "需求拆解与信息架构",
+      "用 AI 与 Codex 完成开发和持续迭代",
+      "内容、项目与公开记录的统一入口"
+    ],
+    deliverable: "ansyn-lab.vercel.app 与国内访问节点。",
+    next: "持续记录项目与复盘，沉淀长期内容。",
+    status: "LIVE",
+    tone: "completed",
+    link: null
+  },
+  {
+    org: "WORK AT KOSX / 组织协作",
+    title: "社群活动管理工作台",
+    problem: "社群项目的信息散落在群聊里，活动、任务和进度依赖人工维护。",
+    role: "工作流设计 · 信息结构 · AI 介入点探索",
+    did: [
+      "拆解活动管理流程",
+      "活动看板、任务与负责人、日报与风险提醒的数据结构",
+      "标记 AI 自动化介入点"
+    ],
+    deliverable: "飞书多维表格 V0、流程图、AI 介入点清单。",
+    next: "进入真实社群试用，记录人工维护时间和反馈。",
+    status: "BUILDING",
+    tone: "active",
+    link: null
+  },
+  {
+    org: "WORK AT KOSX / 组织协作",
+    title: "个人网站交付",
+    problem: "真实成员需要自己的个人网站，但从需求到上线缺少顺畅流程。",
+    role: "需求理解 · 信息架构 · AI 辅助开发 · 修改交付",
+    did: [
+      "用户需求沟通",
+      "页面信息结构",
+      "AI 辅助开发与修改迭代"
+    ],
+    deliverable: "进行中的成员个人网站。",
+    next: "完成修改与上线交付，并记录对方反馈。",
+    status: "BUILDING",
+    tone: "active",
+    link: null
+  },
+  {
+    org: "WORK AT KOSX / 组织协作",
+    title: "社群日报内容二创",
+    problem: "群聊日报里有价值的信息，只留在群里就会消失。",
+    role: "信息提炼 · 内容二创 · 传播实验",
+    did: [
+      "将日报、讨论重点整理成可传播的内容",
+      "提炼项目进展与机会信息"
+    ],
+    deliverable: "日报二创内容，持续进行中。",
+    next: "外部传播测试，记录阅读与反馈数据。",
+    status: "IN PROGRESS",
+    tone: "learning",
+    link: null
+  }
+] as const;
+
+const buildAreas = [
+  { title: "AI 工作流", note: "把重复流程拆成输入、规则、触发条件、输出和反馈。" },
+  { title: "内容与用户研究", note: "从评论、社群和访谈中整理真实问题，再转化成内容、产品假设或行动项。" },
+  { title: "社群与项目系统", note: "搭建活动管理、任务进度、日报、反馈和复盘工作台。" },
+  { title: "AI 辅助网站", note: "通过 AI 与 Codex 完成信息结构、页面开发、修改和公开上线。" }
+];
+---
+
+<BaseLayout
+  title="项目与交付｜Ansyn Lab"
+  description="安寻的项目与交付：独立项目 AI Study Path Triage 与 Ansyn Lab，以及在 KOSX.ai 参与的社群工作台、网站交付与内容项目。"
+>
+  <section class="page-hero shell">
+    <p class="eyebrow">Selected Work / 项目与交付</p>
+    <h1 data-proximity><span class="lm"><span class="lm-in">做得出来的，</span></span><span class="lm"><span class="lm-in">才算数。</span></span></h1>
+    <p>每个项目只写清楚：什么问题、我负责哪部分、交付了什么、下一步是什么。<br />进行中的不包装成已完成。</p>
+  </section>
+
+  <section class="section shell work-list" aria-label="项目列表">
+    {projects.map((project) => (
+      <article class="work-card" data-reveal>
+        <div class="work-card-main">
+          <span class="work-org">{project.org}</span>
+          <h2>{project.title}</h2>
+          <p class="work-problem">{project.problem}</p>
+          <ul>
+            {project.did.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="work-card-side">
+          <span class:list={["status-pill", project.tone]}>{project.status}</span>
+          <div class="work-facts">
+            <p><span>ROLE</span>{project.role}</p>
+            <p><span>DELIVERABLE</span>{project.deliverable}</p>
+            <p><span>NEXT</span>{project.next}</p>
+          </div>
+          {project.link && (
+            <a href={project.link.href} target="_blank" rel="noopener noreferrer">{project.link.label}</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="section shell build-section" aria-labelledby="build-title">
+    <header class="build-heading" data-reveal>
+      <p class="eyebrow">What I Build / 我能做什么</p>
+      <h2 id="build-title">我能干什么。</h2>
+    </header>
+    <div class="build-grid">
+      {buildAreas.map((area, index) => (
+        <article data-reveal data-reveal-delay={String(index + 1)}>
+          <span>0{index + 1}</span>
+          <h3>{area.title}</h3>
+          <p>{area.note}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 44px);
+  }
+
+  .work-card {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    border: 1px solid var(--ink);
+  }
+
+  .work-card-main { padding: clamp(28px, 4vw, 50px); }
+
+  .work-org {
+    color: var(--accent-strong);
+    font: 750 .72rem var(--mono);
+    letter-spacing: .08em;
+  }
+
+  .work-card-main h2 {
+    margin: 20px 0 0;
+    font-size: clamp(1.9rem, 3.6vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: -.05em;
+  }
+
+  .work-problem {
+    max-width: 640px;
+    margin: 18px 0 0;
+    font-size: 1.05rem;
+    font-weight: 650;
+  }
+
+  .work-card-main ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--muted);
+    font-size: .95rem;
+  }
+
+  .work-card-main li { padding-left: 16px; border-left: 1px solid var(--accent); }
+
+  .work-card-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    padding: clamp(24px, 3vw, 40px);
+    border-left: 1px solid var(--ink);
+  }
+
+  .work-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .work-facts p {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 0;
+    font-size: .92rem;
+  }
+
+  .work-facts span {
+    color: var(--muted);
+    font: 700 .68rem var(--mono);
+    letter-spacing: .08em;
+  }
+
+  .work-card-side > a {
+    margin-top: auto;
+    color: var(--accent-strong);
+    font: 800 .82rem var(--mono);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .work-card-side > a:hover { color: var(--ink); }
+
+  .build-section { border-bottom: 0; }
+
+  .build-heading h2 {
+    max-width: 900px;
+    margin: 20px 0 0;
+    font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+    line-height: 1.1;
+    letter-spacing: -.055em;
+  }
+
+  .build-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: clamp(40px, 5vw, 64px);
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+
+  .build-grid article {
+    min-height: 210px;
+    padding: 32px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .build-grid span {
+    color: var(--muted);
+    font: .72rem var(--mono);
+  }
+
+  .build-grid h3 {
+    margin: 40px 0 12px;
+    font-size: 1.5rem;
+    letter-spacing: -.03em;
+  }
+
+  .build-grid p { margin: 0; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .work-card { grid-template-columns: 1fr; }
+    .work-card-side {
+      border-top: 1px solid var(--ink);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .build-grid { grid-template-columns: 1fr; }
+    .build-grid article { min-height: auto; }
+    .build-grid h3 { margin-top: 28px; }
+  }
+</style>

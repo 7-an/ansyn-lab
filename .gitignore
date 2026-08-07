@@ -5,3 +5,16 @@ dist/
 .DS_Store
 *.log
 .vercel
+
+# 非网站的工作目录，不进入公开仓库
+tmp/
+clients/
+tools/
+output/
+outputs/
+data/
+content/
+docs/
+references/
+scripts/
+.codex-work/
