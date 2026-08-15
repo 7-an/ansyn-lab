@@ -17,12 +17,12 @@ const nav = [
       <span class="wordmark-mark" aria-hidden="true">A/</span>
       <span>{siteConfig.name}</span>
     </a>
-    <nav class="desktop-nav" aria-label="主要导航" data-line-nav>
+    <nav class="desktop-nav" aria-label="主要导航">
       {nav.map((item, index) => (
         <a
           class="nav-item"
           href={item.href}
-          aria-current={item.href !== "/" && pathname.startsWith(item.href) ? "page" : undefined}
+          aria-current={item.href === "/" ? (pathname === "/" ? "page" : undefined) : (pathname.startsWith(item.href) ? "page" : undefined)}
         >
           <span class="nav-tick" aria-hidden="true"></span>
           <span class="nav-row"><span class="nav-index" aria-hidden="true">0{index + 1}</span>{item.label}</span>
@@ -39,55 +39,3 @@ const nav = [
     </details>
   </div>
 </header>
-
-<script>
-  const lineNav = document.querySelector<HTMLElement>("[data-line-nav]");
-  const navMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  if (lineNav && !navMotion.matches) {
-    const navItems = Array.from(lineNav.querySelectorAll<HTMLElement>(".nav-item"));
-    const targets = navItems.map(() => 0);
-    const currents = navItems.map(() => 0);
-    let rafId = 0;
-    let lastFrame = 0;
-
-    const runFrame = (now: number) => {
-      const dt = Math.min((now - lastFrame) / 1000, .05);
-      lastFrame = now;
-      const k = 1 - Math.exp(-dt / .1);
-
-      let moving = false;
-      navItems.forEach((el, i) => {
-        const target = targets[i];
-        const next = currents[i] + (target - currents[i]) * k;
-        const settled = Math.abs(target - next) < .0015;
-        currents[i] = settled ? target : next;
-        el.style.setProperty("--effect", currents[i].toFixed(4));
-        if (!settled) moving = true;
-      });
-
-      rafId = moving ? requestAnimationFrame(runFrame) : 0;
-    };
-
-    const startLoop = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      lastFrame = performance.now();
-      rafId = requestAnimationFrame(runFrame);
-    };
-
-    lineNav.addEventListener("pointermove", (event) => {
-      navItems.forEach((el, i) => {
-        const rect = el.getBoundingClientRect();
-        const distance = Math.abs(event.clientX - (rect.left + rect.width / 2));
-        const proximity = Math.max(0, 1 - distance / 110);
-        targets[i] = proximity * proximity * (3 - 2 * proximity);
-      });
-      startLoop();
-    });
-
-    lineNav.addEventListener("pointerleave", () => {
-      targets.fill(0);
-      startLoop();
-    });
-  }
-</script>

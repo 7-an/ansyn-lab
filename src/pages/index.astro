@@ -1,34 +1,70 @@
 ---
 import { siteConfig } from "../config/site";
+import { externalWriting } from "../data/external-writing";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+const selectedNotes = externalWriting
+  .filter((article) => article.featured && article.externalUrl)
+  .slice(0, 3);
+
+const selectedWork = [
+  {
+    index: "01",
+    type: "OPEN SOURCE / COMPLETED",
+    title: "AI Study Path Triage",
+    description: "从真实学生咨询、7 天实验与复盘中，整理出一套高中学习路径初筛框架，并公开到 GitHub。",
+    href: "https://github.com/7-an/ai-study-path-triage",
+    external: true
+  },
+  {
+    index: "02",
+    type: "PERSONAL LAB / LIVE",
+    title: "Ansyn Lab",
+    description: "不是完成版简历，而是一座持续记录行动、错误、项目和修正的个人母站。",
+    href: "/about/",
+    external: false
+  },
+  {
+    index: "03",
+    type: "WORK AT KOSX / BUILDING",
+    title: "在真实协作中接受检验",
+    description: "参与社群项目工作台、内容传播、AI 自动化与网站交付，把学习放进真实需求里。",
+    href: siteConfig.kosx.url,
+    external: true
+  }
+] as const;
+
 const coordinates = [
-  "用 AI 工作流，做真实项目与交付",
-  "建立公开记录与内容系统",
-  "探索全球互联网与 Web3"
-];
+  ["BUILD", "用 AI 与公开互联网完成真实项目"],
+  ["WRITE", "记录行动、判断、错误与修正"],
+  ["EXPLORE", "从高中系统进入真实协作网络"]
+] as const;
 ---
 
 <BaseLayout>
-  <section class="lab-hero shell" aria-labelledby="home-title">
-    <div class="lab-hero-copy" data-reveal data-reveal-delay="1">
-      <p class="lab-kicker">BUILDING IN PUBLIC / SINCE 18</p>
-      <h1 id="home-title" data-proximity><span class="lm"><span class="lm-in">安寻 <span class="latin">Ansyn</span></span></span></h1>
-      <p class="lab-question"><span class="lm"><span class="lm-in">一个年轻人，如何在 AI 时代建立自己的能力系统？</span></span></p>
-      <p class="lab-note">AI Workflow Builder · 现于 KOSX.ai 实习</p>
-      <div class="lab-actions">
-        <a class="button button-primary" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
-        <a class="button" href="#guide">查看精选内容</a>
-      </div>
-      <div class="lab-contact-links">
-        <a class="lab-text-link" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 联系我 ↗</a>
-        <a class="lab-text-link" href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer">Telegram ↗</a>
-      </div>
+  <section class="home-hero shell" aria-labelledby="home-title">
+    <div class="hero-rail" aria-hidden="true">
+      <span>ANSYN LAB / OPEN EXPERIMENT</span>
+      <span>FROM SCHOOL SYSTEM TO REAL WORLD</span>
     </div>
 
-    <figure class="lab-portrait" data-reveal data-reveal-delay="2" data-particle-portrait>
-      <div class="particle-stage">
-        <canvas class="particle-canvas" aria-hidden="true"></canvas>
+    <div class="hero-grid">
+      <div class="hero-copy" data-reveal>
+        <p class="home-kicker">BUILDING IN PUBLIC / 公开成长实验</p>
+        <h1 id="home-title">
+          <span>安寻</span>
+          <small>Ansyn</small>
+        </h1>
+        <p class="hero-question">一个年轻人，如何在 AI 时代建立自己的能力系统？</p>
+        <p class="hero-summary">从高中系统脱机，进入真实世界。用项目、内容和公开记录，留下正在形成的答案。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#current">查看当前坐标 <span aria-hidden="true">↓</span></a>
+          <a class="button" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-portrait" data-reveal data-reveal-delay="2">
+        <span class="portrait-index" aria-hidden="true">A/01</span>
         <img
           src="/ansyn-avatar-transparent.png"
           alt="安寻的个人形象：戴草帽的黑白漫画头像"
@@ -37,820 +73,472 @@ const coordinates = [
           loading="eager"
           fetchpriority="high"
         />
-      </div>
-    </figure>
+        <figcaption>
+          <span>IDENTITY / STILL FORMING</span>
+          <span>NO FINISHED PERSONA</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-footer" data-reveal data-reveal-delay="3">
+      <span>QUESTION → ACTION → EVIDENCE → REVISION</span>
+      <span>SCROLL TO EXPLORE&nbsp; ↓</span>
+    </div>
   </section>
 
-  <section class="home-section affiliation shell" aria-labelledby="affiliation-title">
-    <header class="home-heading" data-reveal>
-      <div>
-        <p class="lab-kicker">CURRENT AFFILIATION / 当前组织</p>
-        <h2 id="affiliation-title"><img class="affiliation-logo" src="/kosx-logo-black.png" alt="KOSX.ai" width="2350" height="397" /></h2>
+  <section class="home-section current-section shell" id="current" aria-labelledby="current-title">
+    <header class="section-head" data-reveal>
+      <div class="section-index">
+        <span>01</span>
+        <p>CURRENT COORDINATE / 当前坐标</p>
       </div>
-      <span class="home-status">INTERNSHIP / BUILDING</span>
+      <h2 id="current-title">在真实世界里，<br /><em>边做边校正。</em></h2>
+      <span class="section-status">2026—NOW / BUILDING</span>
     </header>
 
-    <div class="affiliation-card" data-reveal data-reveal-delay="1">
-      <div class="affiliation-main">
-        <p class="affiliation-tagline">将 AI 时代的创造者，组织成真正能够把事情做成的网络。</p>
-        <p class="affiliation-intro">我目前作为实习成员参与 KOSX 的早期建设：把群聊中的信息、人才与机会，转化为可以被追踪和交付的真实项目。这里是我现在接受真实项目检验的地方。</p>
-        <p class="affiliation-slogan">CONNECT. CREATE. COLLABORATE.</p>
-      </div>
-      <div class="affiliation-side">
-        <p class="affiliation-side-label">当前参与方向</p>
-        <ul>
-          <li>社群活动与项目管理工作台</li>
-          <li>AI 工作流与自动化节点</li>
-          <li>群内日报的内容二创与外部传播</li>
-          <li>AI 辅助网站与基础产品交付</li>
-        </ul>
-        <a class="affiliation-link" href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">了解 KOSX ↗</a>
+    <div class="current-layout">
+      <figure class="field-photo field-photo-primary" data-reveal>
+        <div class="photo-frame">
+          <img
+            src="/images/kosx-field-note.jpg"
+            alt="KOSX 线下见面时，三个人在窗前展示各自的 X 主页"
+            width="1200"
+            height="1594"
+            loading="lazy"
+          />
+          <span class="photo-code" aria-hidden="true">FIELD NOTE / 001</span>
+        </div>
+        <figcaption><span>KOSX 线下见面</span><span>现场记录 / CURRENT</span></figcaption>
+      </figure>
+
+      <div class="current-story">
+        <figure class="field-photo field-photo-secondary" data-reveal data-reveal-delay="1">
+          <div class="photo-frame">
+            <img
+              src="/images/kosx-ansyn-lab-sharing.jpg"
+              alt="漫画风格的 KOSX 线下会议现场，屏幕上正在展示 Ansyn Lab 首页"
+              width="1600"
+              height="900"
+              loading="lazy"
+            />
+            <span class="photo-code" aria-hidden="true">EVIDENCE / 002</span>
+          </div>
+          <figcaption><span>分享 Ansyn Lab</span><span>真实协作 / EVIDENCE</span></figcaption>
+        </figure>
+
+        <div class="coordinate-copy" data-reveal data-reveal-delay="2">
+          <div class="coordinate-heading">
+            <span class="coordinate-mark">K/</span>
+            <div>
+              <p>WORK AT KOSX / 当前组织</p>
+              <h3>KOSX.ai</h3>
+            </div>
+          </div>
+          <p class="coordinate-intro">我目前以实习成员身份参与 KOSX 的早期建设。这里不是我的身份标签，而是我第一次把学习放进真实项目、协作与反馈里接受检验的地方。</p>
+          <ol class="coordinate-list">
+            {coordinates.map(([label, text], index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")} / {label}</span>
+                <strong>{text}</strong>
+              </li>
+            ))}
+          </ol>
+          <a class="inline-link" href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">了解 KOSX <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="home-section home-now shell" id="now" aria-labelledby="now-title">
-    <header class="home-heading" data-reveal>
-      <div>
-        <p class="lab-kicker">NOW / CURRENT COORDINATES</p>
-        <h2 id="now-title" data-proximity><span class="lm"><span class="lm-in">当前坐标</span></span></h2>
+  <section class="home-section work-section shell" id="work" aria-labelledby="work-title">
+    <header class="section-head compact" data-reveal>
+      <div class="section-index">
+        <span>02</span>
+        <p>SELECTED WORK / 精选行动</p>
       </div>
-      <span class="home-status">BUILDING / 2026—NOW</span>
+      <h2 id="work-title">先做出来，<br /><em>再交给现实评价。</em></h2>
+      <a class="section-link" href="/work/">全部项目 <span aria-hidden="true">→</span></a>
     </header>
 
-    <ol class="coordinate-list" data-reveal data-reveal-delay="1">
-      {coordinates.map((item, index) => (
-        <li>
-          <span>00{index + 1}</span>
-          <strong>{item}</strong>
-        </li>
+    <div class="work-rows">
+      {selectedWork.map((project, index) => (
+        <a
+          class="work-row"
+          href={project.href}
+          target={project.external ? "_blank" : undefined}
+          rel={project.external ? "noopener noreferrer" : undefined}
+          data-reveal
+          data-reveal-delay={String(index + 1)}
+        >
+          <span class="work-index">{project.index}</span>
+          <div class="work-title-group">
+            <span>{project.type}</span>
+            <h3>{project.title}</h3>
+          </div>
+          <p>{project.description}</p>
+          <span class="work-arrow" aria-hidden="true">{project.external ? "↗" : "→"}</span>
+        </a>
       ))}
-    </ol>
-
-    <div class="method-line" data-reveal data-reveal-delay="2">
-      <span>METHOD / 反复校正</span>
-      <strong>问题 <i>→</i> 行动 <i>→</i> 证据 <i>→</i> 修正</strong>
-    </div>
-
-    <div class="why-public-line" data-reveal data-reveal-delay="3">
-      <span>WHY PUBLIC / 为什么公开</span>
-      <p>在高中，问题是老师给的；进入真实世界后，问题和需求都要自己寻找。<br />公开记录，既是我寻找问题的方式，也是我留下的行动证据。</p>
     </div>
   </section>
 
-  <section class="home-section home-guide shell" id="guide" aria-label="前往项目与文章页面">
-    <div class="guide-grid">
-      <a class="guide-card" href="/work/" data-reveal>
-        <span>PROJECTS / 项目与交付</span>
-        <h3>项目</h3>
-        <p>独立项目与组织协作，每张卡写清角色、交付和下一步。</p>
-        <i aria-hidden="true">→</i>
-      </a>
-      <a class="guide-card" href="/writing/" data-reveal data-reveal-delay="1">
-        <span>WRITING / 公开内容</span>
-        <h3>文章</h3>
-        <p>发布在 X 等外部平台的思考与复盘，点击前往原文。</p>
-        <i aria-hidden="true">→</i>
-      </a>
+  <section class="home-section notes-section shell" aria-labelledby="notes-title">
+    <header class="section-head compact" data-reveal>
+      <div class="section-index">
+        <span>03</span>
+        <p>LATEST NOTES / 最近记录</p>
+      </div>
+      <h2 id="notes-title">把判断写下来，<br /><em>等待现实修正。</em></h2>
+      <a class="section-link" href="/writing/">全部内容 <span aria-hidden="true">→</span></a>
+    </header>
+
+    <div class="note-list">
+      {selectedNotes.map((note, index) => (
+        <a
+          class="note-row"
+          href={note.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+          data-reveal-delay={String(index + 1)}
+        >
+          <span class="note-number">0{index + 1}</span>
+          <div>
+            <span class="note-meta">{note.platform} / {note.category}</span>
+            <h3>{note.title}</h3>
+          </div>
+          <span class="note-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section public-section shell" aria-labelledby="public-title">
+    <div class="public-grid" data-reveal>
+      <div class="section-index">
+        <span>04</span>
+        <p>WHY PUBLIC / 为什么公开</p>
+      </div>
+      <div>
+        <h2 id="public-title">没有完成的人设，<br />只有正在形成的答案。</h2>
+        <p>在高中，问题是老师给的；进入真实世界后，问题和需求都要自己寻找。公开记录既是一份赛博日记，也是我留下行动证据、看见自己如何变化的方式。</p>
+        <div class="public-method" aria-label="公开实验方法">
+          <span>问题</span><i>→</i><span>行动</span><i>→</i><span>证据</span><i>→</i><span>修正</span>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .lab-kicker {
-    margin: 0;
-    color: var(--accent-strong);
-    font: 750 .74rem/1.4 var(--mono);
-    letter-spacing: .08em;
+  .home-kicker,
+  .section-index,
+  .section-status,
+  .photo-code,
+  .field-photo figcaption,
+  .coordinate-heading p,
+  .work-title-group > span,
+  .work-index,
+  .note-meta,
+  .note-number,
+  .public-method {
+    font-family: var(--mono);
+    letter-spacing: .07em;
     text-transform: uppercase;
   }
 
-  .lab-hero {
+  .home-hero,
+  .home-section { border-inline: 1px solid var(--line); }
+
+  .home-hero {
     min-height: calc(100svh - 72px);
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .hero-rail,
+  .hero-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    color: var(--muted);
+    font: 650 .65rem/1.4 var(--mono);
+    letter-spacing: .08em;
+  }
+
+  .hero-rail { padding: 18px clamp(20px, 4vw, 54px); border-bottom: 1px solid var(--line); }
+  .hero-footer { padding: 20px clamp(20px, 4vw, 54px); border-top: 1px solid var(--line); }
+
+  .hero-grid {
+    flex: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(330px, .92fr);
     align-items: center;
-    gap: clamp(32px, 7vw, 110px);
-    padding-block: clamp(76px, 10vw, 132px);
-    border-inline: 1px solid var(--line);
-    overflow: hidden;
+    gap: clamp(42px, 7vw, 110px);
+    padding: clamp(62px, 8vw, 110px) clamp(22px, 5vw, 70px);
   }
 
-  .lab-hero-copy {
-    z-index: 1;
-    padding-left: clamp(22px, 5vw, 74px);
-  }
+  .home-kicker { margin: 0; color: var(--accent-strong); font-size: .72rem; font-weight: 760; }
 
-  .lab-hero h1 {
+  .hero-copy h1 {
     display: flex;
     align-items: baseline;
-    gap: .14em;
-    margin: 30px 0 0;
-    font-size: clamp(4.6rem, 8.4vw, 8.2rem);
+    gap: .16em;
+    margin: 26px 0 0;
+    font-size: clamp(5rem, 9vw, 8.6rem);
     font-weight: 900;
-    line-height: .9;
-    letter-spacing: -.08em;
+    line-height: .84;
+    letter-spacing: -.085em;
     white-space: nowrap;
   }
 
-  .lab-hero h1 .latin {
-    font-size: .55em;
-    font-weight: 790;
-    letter-spacing: -.05em;
-  }
+  .hero-copy h1 small { font-size: .45em; font-weight: 780; letter-spacing: -.055em; }
 
-  .lab-question {
-    max-width: 690px;
-    margin: 34px 0 0;
-    font-size: clamp(1.45rem, 2.5vw, 2.15rem);
-    font-weight: 720;
+  .hero-question {
+    max-width: 660px;
+    margin: 38px 0 0;
+    font-size: clamp(1.45rem, 2.45vw, 2.1rem);
+    font-weight: 730;
     line-height: 1.42;
-    letter-spacing: -.035em;
+    letter-spacing: -.04em;
     text-wrap: balance;
   }
 
-  .lab-note {
-    margin: 14px 0 0;
-    color: var(--muted);
-    font-size: .92rem;
-  }
+  .hero-summary { max-width: 590px; margin: 18px 0 0; color: var(--muted); font-size: .98rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
 
-  .lab-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 36px;
-  }
-
-  .lab-contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 26px;
-  }
-
-  .lab-text-link {
-    display: inline-flex;
-    color: var(--accent-strong);
-    font-weight: 800;
-    border-bottom: 1px solid currentColor;
-  }
-
-  .lab-text-link:hover { color: var(--ink); }
-
-  .lab-portrait {
-    align-self: center;
-    margin: 0;
-    padding-right: clamp(18px, 4vw, 58px);
-  }
-
-  .particle-stage {
+  .hero-portrait {
     position: relative;
-    width: min(100%, 540px);
-    aspect-ratio: 1;
-    margin-inline: auto;
+    width: min(100%, 500px);
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 36px);
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--white) 68%, transparent);
     isolation: isolate;
   }
 
-  .particle-stage img,
-  .particle-canvas {
+  .hero-portrait::before,
+  .hero-portrait::after { content: ""; position: absolute; z-index: -1; background: var(--accent); }
+  .hero-portrait::before { top: -1px; left: 18%; width: 22%; height: 3px; }
+  .hero-portrait::after { right: -1px; bottom: 18%; width: 3px; height: 22%; }
+
+  .hero-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) contrast(1.02);
+    mix-blend-mode: multiply;
+  }
+
+  .portrait-index { position: absolute; top: 16px; right: 18px; color: var(--accent-strong); font: 760 .68rem var(--mono); }
+
+  .hero-portrait figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font: 640 .62rem var(--mono);
+  }
+
+  .home-section {
+    padding: clamp(92px, 11vw, 148px) clamp(22px, 5vw, 70px);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: minmax(170px, .55fr) minmax(0, 1.45fr) auto;
+    align-items: end;
+    gap: 40px;
+    padding-bottom: clamp(34px, 4vw, 52px);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .section-head h2,
+  .public-grid h2 {
+    margin: 0;
+    font-size: clamp(3rem, 5.9vw, 5.7rem);
+    line-height: .98;
+    letter-spacing: -.068em;
+  }
+
+  .section-head h2 em { color: var(--accent-strong); font-style: normal; }
+  .section-index { display: flex; align-items: center; gap: 16px; align-self: start; }
+  .section-index > span { color: var(--accent-strong); font-size: .82rem; font-weight: 800; }
+  .section-index p { margin: 0; color: var(--muted); font-size: .68rem; font-weight: 700; }
+  .section-status { color: var(--accent-strong); font-size: .7rem; font-weight: 750; white-space: nowrap; }
+  .section-link { align-self: end; color: var(--accent-strong); font: 760 .78rem var(--mono); border-bottom: 1px solid currentColor; }
+
+  .current-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+    gap: clamp(32px, 5vw, 70px);
+    margin-top: clamp(42px, 6vw, 78px);
+  }
+
+  .field-photo { margin: 0; }
+  .photo-frame { position: relative; overflow: hidden; background: var(--paper-deep); }
+  .photo-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(145deg, rgba(53, 107, 255, .08), transparent 44%);
+    mix-blend-mode: multiply;
+  }
+
+  .field-photo img {
     display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.22, 1, .36, 1), filter .5s ease;
   }
+  .field-photo:hover img { transform: scale(1.025); filter: saturate(.9) contrast(1.03); }
+  .field-photo-primary .photo-frame { aspect-ratio: 4 / 5; }
+  .field-photo-primary img { object-position: center 44%; }
+  .field-photo-secondary .photo-frame { aspect-ratio: 16 / 9; }
 
-  .particle-stage img {
-    object-fit: contain;
-    filter: grayscale(1) contrast(1.08);
-    mix-blend-mode: multiply;
-    transition: opacity .38s ease, filter .38s ease;
-  }
-
-  .particle-canvas {
+  .photo-code {
     position: absolute;
     z-index: 2;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .58s ease;
+    top: 14px;
+    left: 14px;
+    padding: 7px 9px;
+    background: rgba(21, 23, 26, .88);
+    color: var(--white);
+    font-size: .62rem;
   }
 
-  :global([data-particle-portrait].particle-ready) .particle-stage img { opacity: 0; }
-  :global([data-particle-portrait].particle-ready) .particle-canvas { opacity: 1; }
-  :global([data-particle-portrait].particle-base-visible) .particle-stage img {
-    opacity: 1;
-    filter: grayscale(1) contrast(1.08);
-  }
-  :global([data-particle-portrait].particle-settled) .particle-canvas { opacity: .14; }
-
-  .lab-portrait img {
-    display: block;
-    width: min(100%, 540px);
-    height: auto;
-    margin-inline: auto;
-    filter: grayscale(1) contrast(1.08);
-    mix-blend-mode: multiply;
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 4%, #000 84%, transparent 99%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 4%, #000 84%, transparent 99%);
-    mask-composite: intersect;
-  }
-
-  .home-section { padding-block: clamp(92px, 11vw, 148px); }
-
-  .home-heading {
-    position: relative;
+  .field-photo figcaption {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
-    gap: 42px;
-    padding-bottom: 44px;
-    border-bottom: 1px solid var(--ink);
+    gap: 16px;
+    padding-top: 12px;
+    color: var(--muted);
+    font-size: .62rem;
   }
 
-  .js .home-heading { border-bottom-color: transparent; }
-
-  .home-heading::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 1px;
-    background: var(--ink);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1s cubic-bezier(.22, 1, .36, 1) .18s;
-  }
-
-  .home-heading.is-revealed::after { transform: scaleX(1); }
-
-  .js .lm-in {
-    transform: translateY(112%);
-    transition: transform .9s cubic-bezier(.22, 1, .36, 1);
-  }
-
-  .is-revealed .lm-in { transform: none; }
-
-  .js .lab-question .lm-in { transition-delay: .15s; }
-
-  .lab-hero h1 .lm {
-    padding-bottom: .12em;
-    margin-bottom: -.12em;
-  }
-
-  .home-heading h2 {
-    margin: 22px 0 0;
-    font-size: clamp(3.4rem, 6.6vw, 6.4rem);
-    line-height: .92;
-    letter-spacing: -.07em;
-  }
-
-  .home-status {
-    color: var(--accent-strong);
-    font: 750 .75rem var(--mono);
-    letter-spacing: .06em;
-  }
-
-  .affiliation {
-    --kx: #ff6a00;
-    --kx-strong: #d9480f;
-    --kx-soft: #ff8347;
-  }
-
-  .affiliation .lab-kicker,
-  .affiliation .home-status { color: var(--kx-strong); }
-
-  .affiliation h2 { margin: 22px 0 0; }
-
-  .affiliation-logo {
-    display: block;
-    width: auto;
-    height: clamp(52px, 6.5vw, 88px);
-  }
-
-  .affiliation-card {
+  .current-story { display: flex; flex-direction: column; gap: clamp(42px, 5vw, 64px); }
+  .coordinate-copy { border-top: 1px solid var(--ink); padding-top: 30px; }
+  .coordinate-heading { display: flex; align-items: center; gap: 18px; }
+  .coordinate-mark {
     display: grid;
-    grid-template-columns: 1.15fr .85fr;
-    margin-top: clamp(36px, 5vw, 56px);
-    padding: clamp(28px, 4vw, 52px);
-    background: var(--ink);
-    color: var(--paper);
-    box-shadow: 10px 10px 0 var(--kx);
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    background: var(--accent);
+    color: var(--ink);
+    font-size: 1.1rem;
+    font-weight: 900;
   }
+  .coordinate-heading p { margin: 0; color: var(--accent-strong); font-size: .66rem; font-weight: 760; }
+  .coordinate-heading h3 { margin: 4px 0 0; font-size: 2rem; letter-spacing: -.05em; }
+  .coordinate-intro { max-width: 690px; margin: 26px 0 0; font-size: 1.08rem; font-weight: 620; }
 
-  .affiliation-tagline {
-    max-width: 560px;
-    margin: 0;
-    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: -.02em;
-  }
-
-  .affiliation-intro {
-    max-width: 560px;
-    margin: 20px 0 0;
-    color: #b9bbb4;
-    font-size: .98rem;
-  }
-
-  .affiliation-slogan {
-    margin: 28px 0 0;
-    color: var(--kx);
-    font: 750 .74rem var(--mono);
-    letter-spacing: .14em;
-  }
-
-  .affiliation-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding-left: clamp(24px, 3vw, 48px);
-    border-left: 1px solid #4d4f4a;
-  }
-
-  .affiliation-side-label {
-    margin: 0;
-    color: var(--kx-soft);
-    font: 750 .72rem var(--mono);
-    letter-spacing: .06em;
-  }
-
-  .affiliation-side ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    color: #d3d4cf;
-    font-size: .95rem;
-  }
-
-  .affiliation-side li { padding-left: 16px; border-left: 1px solid var(--kx); }
-
-  .affiliation-link {
-    margin-top: auto;
-    color: var(--kx-soft);
-    font: 800 .85rem var(--mono);
-    border-bottom: 1px solid currentColor;
-  }
-
-  .affiliation-link:hover { color: var(--paper); }
-
-  .affiliation-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .affiliation-card::before {
-    content: "";
-    position: absolute;
-    inset: -35%;
-    pointer-events: none;
-    background:
-      radial-gradient(ellipse 42% 52% at 32% 38%, rgba(53, 107, 255, .16), transparent 62%),
-      radial-gradient(ellipse 38% 48% at 68% 62%, rgba(53, 107, 255, .1), transparent 60%);
-    animation: affiliation-mist 18s ease-in-out infinite alternate;
-  }
-
-  .affiliation-main,
-  .affiliation-side {
-    position: relative;
-    z-index: 1;
-  }
-
-  @keyframes affiliation-mist {
-    from { transform: translate3d(-3.5%, -2.5%, 0) rotate(-1.6deg); }
-    to { transform: translate3d(3.5%, 2.5%, 0) rotate(1.6deg) scale(1.05); }
-  }
-
-  .js .affiliation-card[data-reveal] {
-    opacity: 0;
-    transform: translateY(14px) scale(.97);
-    filter: blur(14px);
-    box-shadow: 0 0 0 var(--kx);
-    transition:
-      opacity 1.05s ease,
-      transform 1.05s cubic-bezier(.22, 1, .36, 1),
-      filter 1.05s ease,
-      box-shadow .9s ease .15s;
-  }
-
-  .js .affiliation-card[data-reveal].is-revealed {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-    box-shadow: 10px 10px 0 var(--kx);
-  }
-
-  .coordinate-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
+  .coordinate-list { margin: 32px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
   .coordinate-list li {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    align-items: center;
-    min-height: 112px;
+    grid-template-columns: 155px 1fr;
+    gap: 20px;
+    padding: 17px 0;
     border-bottom: 1px solid var(--line);
   }
+  .coordinate-list span { color: var(--accent-strong); font: 720 .64rem var(--mono); }
+  .coordinate-list strong { font-size: .92rem; font-weight: 660; }
+  .inline-link { display: inline-flex; gap: 8px; margin-top: 28px; color: var(--accent-strong); font-weight: 800; border-bottom: 1px solid currentColor; }
 
-  .coordinate-list li > span {
-    color: var(--accent-strong);
-    font: 750 .8rem var(--mono);
-  }
+  .work-rows,
+  .note-list { border-top: 1px solid var(--ink); margin-top: clamp(46px, 6vw, 76px); }
 
-  .coordinate-list strong {
-    position: relative;
-    padding-left: 70px;
-    font-size: clamp(1.4rem, 2.5vw, 2.25rem);
-    letter-spacing: -.035em;
-  }
-
-  .coordinate-list strong::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 1px;
-    height: 48px;
-    background: var(--accent);
-    transform: translateY(-50%);
-  }
-
-  .method-line {
-    display: flex;
-    align-items: center;
-    gap: 42px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .method-line span {
-    color: var(--accent-strong);
-    font: 750 .74rem var(--mono);
-  }
-
-  .method-line strong { font: 650 1rem var(--mono); }
-  .method-line i { padding-inline: 10px; color: var(--muted); font-style: normal; }
-
-  .why-public-line {
-    display: flex;
-    align-items: baseline;
-    gap: 42px;
-    padding-top: 44px;
-  }
-
-  .why-public-line span {
-    flex: 0 0 auto;
-    color: var(--accent-strong);
-    font: 750 .74rem var(--mono);
-    letter-spacing: .06em;
-  }
-
-  .why-public-line p {
-    max-width: 780px;
-    margin: 0;
-    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-    font-weight: 650;
-    line-height: 1.6;
-    letter-spacing: -.02em;
-  }
-
-  .home-guide { padding-bottom: clamp(116px, 13vw, 180px); }
-
-  .guide-grid {
+  .work-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--ink);
+    grid-template-columns: 72px minmax(270px, .9fr) minmax(300px, 1.1fr) 36px;
+    align-items: center;
+    gap: 30px;
+    min-height: 190px;
+    padding: 30px 18px 30px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background .25s ease, padding .35s cubic-bezier(.22, 1, .36, 1);
   }
+  .work-row:hover { padding-left: 18px; background: color-mix(in srgb, var(--accent-soft) 38%, transparent); }
+  .work-index { color: var(--accent-strong); font-size: .74rem; font-weight: 780; }
+  .work-title-group > span { color: var(--muted); font-size: .64rem; font-weight: 720; }
+  .work-title-group h3 { margin: 13px 0 0; font-size: clamp(1.65rem, 2.8vw, 2.55rem); line-height: 1.12; letter-spacing: -.045em; }
+  .work-row > p { margin: 0; color: var(--muted); }
+  .work-arrow,
+  .note-arrow { color: var(--accent-strong); font-size: 1.35rem; transition: transform .25s ease; }
+  .work-row:hover .work-arrow,
+  .note-row:hover .note-arrow { transform: translate(4px, -4px); }
 
-  .guide-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 280px;
-    padding: clamp(26px, 3.5vw, 44px);
-    transition: background .18s ease, color .18s ease;
+  .note-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 36px;
+    align-items: center;
+    gap: 30px;
+    min-height: 148px;
+    padding: 24px 18px 24px 0;
+    border-bottom: 1px solid var(--line);
   }
-
-  .guide-card + .guide-card { border-left: 1px solid var(--ink); }
-
-  .guide-card span {
-    color: var(--accent-strong);
-    font: 750 .74rem var(--mono);
-    letter-spacing: .08em;
-    transition: color .18s ease;
+  .note-number { color: var(--accent-strong); font-size: .72rem; font-weight: 780; }
+  .note-meta { color: var(--muted); font-size: .62rem; font-weight: 720; }
+  .note-row h3 {
+    max-width: 900px;
+    margin: 10px 0 0;
+    font-size: clamp(1.3rem, 2.3vw, 2rem);
+    line-height: 1.3;
+    letter-spacing: -.035em;
+    transition: color .2s ease;
   }
+  .note-row:hover h3 { color: var(--accent-strong); }
 
-  .guide-card h3 {
-    margin: 26px 0 14px;
-    font-size: clamp(2.2rem, 4vw, 3.6rem);
-    letter-spacing: -.05em;
-    transition: color .18s ease;
-  }
-
-  .guide-card p {
-    max-width: 420px;
-    margin: 0;
-    color: var(--muted);
-    transition: color .18s ease;
-  }
-
-  .guide-card i {
-    margin-top: auto;
-    padding-top: 30px;
-    font-style: normal;
-    font-size: 1.6rem;
-    transition: transform .18s ease;
-  }
-
-  .guide-card:hover { background: var(--ink); color: var(--paper); }
-  .guide-card:hover span { color: #7fa0ff; }
-  .guide-card:hover p { color: #b9bbb4; }
-  .guide-card:hover i { transform: translateX(8px); }
+  .public-section { background: var(--ink); color: var(--paper); }
+  .public-grid { display: grid; grid-template-columns: minmax(170px, .55fr) minmax(0, 1.45fr); gap: 40px; }
+  .public-grid .section-index p { color: #969991; }
+  .public-grid h2 { max-width: 900px; }
+  .public-grid > div:last-child > p { max-width: 760px; margin: 34px 0 0; color: #b9bbb4; font-size: 1.08rem; }
+  .public-method { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 42px; color: #8faaff; font-size: .72rem; font-weight: 760; }
+  .public-method i { color: #6d706a; font-style: normal; }
 
   @media (max-width: 900px) {
-    .lab-hero {
-      min-height: auto;
-      grid-template-columns: 1fr .72fr;
-      gap: 20px;
-      padding-block: 84px;
-    }
-    .lab-hero h1 { font-size: clamp(4rem, 10vw, 6rem); }
-    .coordinate-list li { grid-template-columns: 110px 1fr; }
-    .coordinate-list strong { padding-left: 42px; }
+    .hero-grid { grid-template-columns: 1fr .7fr; gap: 28px; }
+    .hero-copy h1 { font-size: clamp(4.6rem, 11vw, 6.4rem); }
+    .section-head { grid-template-columns: 1fr; align-items: start; gap: 26px; }
+    .section-link,
+    .section-status { justify-self: start; }
+    .current-layout { grid-template-columns: .78fr 1.22fr; gap: 28px; }
+    .work-row { grid-template-columns: 58px 1fr 34px; }
+    .work-row > p { grid-column: 2; }
+    .work-arrow { grid-column: 3; grid-row: 1 / span 2; }
   }
 
   @media (max-width: 700px) {
-    .lab-hero {
-      grid-template-columns: 1fr;
-      padding: 68px 18px 36px;
-      border-inline: 0;
-    }
-    .lab-hero-copy { padding: 0; }
-    .lab-hero h1 { flex-wrap: wrap; font-size: clamp(4.2rem, 20vw, 6.4rem); white-space: normal; }
-    .lab-hero h1 .latin { font-size: .43em; }
-    .lab-actions { align-items: stretch; flex-direction: column; }
-    .lab-actions .button { width: 100%; }
-    .lab-contact-links { flex-direction: column; gap: 10px; }
-    .lab-portrait { padding: 20px 10px 0; }
-    .lab-portrait img { width: 100%; }
-    .home-heading { align-items: flex-start; flex-direction: column; gap: 24px; }
-    .home-heading h2 { font-size: clamp(3.4rem, 17vw, 5rem); }
-    .affiliation-card { grid-template-columns: 1fr; box-shadow: 7px 7px 0 var(--kx); }
-    .js .affiliation-card[data-reveal].is-revealed { box-shadow: 7px 7px 0 var(--kx); }
-    .affiliation-side {
-      margin-top: 28px;
-      padding: 24px 0 0;
-      border-top: 1px solid #4d4f4a;
-      border-left: 0;
-    }
-    .coordinate-list li { grid-template-columns: 54px 1fr; min-height: 94px; }
-    .coordinate-list strong { padding-left: 22px; font-size: 1.25rem; }
-    .coordinate-list strong::before { height: 34px; }
-    .method-line { align-items: flex-start; flex-direction: column; gap: 16px; }
-    .method-line strong { font-size: .82rem; line-height: 2.2; }
-    .method-line i { padding-inline: 4px; }
-    .why-public-line { flex-direction: column; gap: 14px; }
-    .guide-grid { grid-template-columns: 1fr; }
-    .guide-card { min-height: 220px; }
-    .guide-card + .guide-card { border-top: 1px solid var(--ink); border-left: 0; }
+    .home-hero,
+    .home-section { border-inline: 0; }
+    .home-hero { min-height: auto; }
+    .hero-rail { display: none; }
+    .hero-grid { grid-template-columns: 1fr; padding: 68px 18px 38px; }
+    .hero-copy h1 { flex-wrap: wrap; font-size: clamp(4.5rem, 22vw, 6.4rem); white-space: normal; }
+    .hero-copy h1 small { font-size: .39em; }
+    .hero-question { margin-top: 30px; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions .button { width: 100%; }
+    .hero-portrait { width: min(92%, 420px); margin-top: 14px; }
+    .hero-portrait figcaption { flex-direction: column; gap: 4px; }
+    .hero-footer { flex-direction: column; gap: 6px; }
+    .home-section { padding-inline: 18px; }
+    .section-head h2,
+    .public-grid h2 { font-size: clamp(2.8rem, 14.5vw, 4.4rem); }
+    .current-layout { grid-template-columns: 1fr; }
+    .field-photo-primary .photo-frame { aspect-ratio: 4 / 4.6; }
+    .current-story { gap: 44px; }
+    .coordinate-list li { grid-template-columns: 1fr; gap: 8px; }
+    .work-row { grid-template-columns: 42px 1fr 26px; gap: 16px; min-height: 170px; padding-right: 0; }
+    .work-row:hover { padding-left: 0; }
+    .work-row > p { font-size: .9rem; }
+    .note-row { grid-template-columns: 38px 1fr 22px; gap: 14px; padding-right: 0; }
+    .public-grid { grid-template-columns: 1fr; gap: 42px; }
   }
-
 </style>
-
-<script>
-  const particlePortrait = document.querySelector<HTMLElement>("[data-particle-portrait]");
-  const particleStage = particlePortrait?.querySelector<HTMLElement>(".particle-stage");
-  const particleCanvas = particleStage?.querySelector<HTMLCanvasElement>(".particle-canvas");
-  const particleImage = particleStage?.querySelector<HTMLImageElement>("img");
-  const particleMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  type PortraitParticle = {
-    nx: number;
-    ny: number;
-    tx: number;
-    ty: number;
-    sx: number;
-    sy: number;
-    size: number;
-    delay: number;
-    duration: number;
-    phase: number;
-  };
-
-  if (particlePortrait && particleStage && particleCanvas && particleImage && !particleMotion.matches) {
-    const startParticleReveal = () => {
-      if (particlePortrait.dataset.particleStarted === "true") return;
-
-      const firstRect = particleStage.getBoundingClientRect();
-      if (firstRect.width < 2 || firstRect.height < 2) {
-        window.setTimeout(startParticleReveal, 80);
-        return;
-      }
-
-      const context = particleCanvas.getContext("2d");
-      if (!context) return;
-      particlePortrait.dataset.particleStarted = "true";
-
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.6);
-      const extensionRatio = firstRect.width < 420 ? .38 : .56;
-      let stageWidth = firstRect.width;
-      let stageHeight = firstRect.height;
-      let extension = stageWidth * extensionRatio;
-      let canvasWidth = stageWidth + extension;
-      let particles: PortraitParticle[] = [];
-      let startedAt = performance.now();
-      let frameId = 0;
-      let baseVisible = false;
-      let settled = false;
-      const pointer = { x: -9999, y: -9999, active: false };
-
-      const measure = () => {
-        const rect = particleStage.getBoundingClientRect();
-        stageWidth = rect.width;
-        stageHeight = rect.height;
-        extension = stageWidth * extensionRatio;
-        canvasWidth = stageWidth + extension;
-        particleCanvas.style.left = `${-extension}px`;
-        particleCanvas.style.width = `${canvasWidth}px`;
-        particleCanvas.style.height = `${stageHeight}px`;
-        particleCanvas.width = Math.round(canvasWidth * pixelRatio);
-        particleCanvas.height = Math.round(stageHeight * pixelRatio);
-        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      };
-
-      const layoutParticles = (first = false) => {
-        particles.forEach((particle) => {
-          particle.tx = extension + particle.nx * stageWidth;
-          particle.ty = particle.ny * stageHeight;
-          if (!first) return;
-          particle.sx = extension * (.04 + Math.random() * .78);
-          particle.sy = particle.ty + (Math.random() - .5) * Math.min(170, stageHeight * .42);
-        });
-      };
-
-      const sampleImage = () => {
-        const sampleCanvas = document.createElement("canvas");
-        const sampleWidth = Math.min(window.innerWidth < 680 ? 280 : 400, particleImage.naturalWidth);
-        const sampleHeight = Math.max(1, Math.round(sampleWidth * particleImage.naturalHeight / particleImage.naturalWidth));
-        sampleCanvas.width = sampleWidth;
-        sampleCanvas.height = sampleHeight;
-        const sampleContext = sampleCanvas.getContext("2d", { willReadFrequently: true });
-        if (!sampleContext) return;
-        sampleContext.drawImage(particleImage, 0, 0, sampleWidth, sampleHeight);
-        const pixels = sampleContext.getImageData(0, 0, sampleWidth, sampleHeight).data;
-
-        let subjectPixels = 0;
-        for (let offset = 0; offset < pixels.length; offset += 4) {
-          const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
-          const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
-          const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
-          if (!isBackground) subjectPixels += 1;
-        }
-
-        const targetCount = window.innerWidth < 680 ? 8200 : 15000;
-        const step = Math.max(1, Math.round(Math.sqrt(subjectPixels / targetCount)));
-        const nextParticles: PortraitParticle[] = [];
-
-        for (let y = 0; y < sampleHeight; y += step) {
-          for (let x = 0; x < sampleWidth; x += step) {
-            const offset = (y * sampleWidth + x) * 4;
-            const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
-            const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
-            const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
-            if (isBackground) continue;
-            const nx = x / sampleWidth;
-            nextParticles.push({
-              nx,
-              ny: y / sampleHeight,
-              tx: 0,
-              ty: 0,
-              sx: 0,
-              sy: 0,
-              size: .82 + Math.random() * 1.02,
-              delay: nx * 620 + Math.random() * 230,
-              duration: 760 + Math.random() * 520,
-              phase: Math.random() * Math.PI * 2
-            });
-          }
-        }
-
-        particles = nextParticles;
-        layoutParticles(true);
-      };
-
-      const easeOut = (value: number) => 1 - Math.pow(1 - value, 3);
-      const settleAt = 1750;
-      const revealBaseAt = 1880;
-      const softenParticlesAt = 2280;
-
-      const draw = (now: number) => {
-        const elapsed = now - startedAt;
-        if (!baseVisible && elapsed >= revealBaseAt) {
-          particlePortrait.classList.add("particle-base-visible");
-          baseVisible = true;
-        }
-        if (!settled && elapsed >= softenParticlesAt) {
-          particlePortrait.classList.add("particle-settled");
-          settled = true;
-        }
-
-        context.clearRect(0, 0, canvasWidth, stageHeight);
-        const time = now * .001;
-
-        particles.forEach((particle) => {
-          let x = particle.tx;
-          let y = particle.ty;
-          let alpha = 1;
-          let hoverBoost = 0;
-
-          if (elapsed < settleAt) {
-            const local = (elapsed - particle.delay) / particle.duration;
-            const progress = local <= 0 ? 0 : local >= 1 ? 1 : easeOut(local);
-            x = particle.sx + (particle.tx - particle.sx) * progress;
-            y = particle.sy + (particle.ty - particle.sy) * progress;
-            alpha = Math.max(0, Math.min(1, local + .14));
-          } else {
-            x += Math.sin(time * .9 + particle.phase) * .34;
-            y += Math.cos(time * .72 + particle.phase) * .42;
-
-            if (pointer.active) {
-              const dx = x - pointer.x;
-              const dy = y - pointer.y;
-              const radius = Math.max(86, Math.min(132, stageWidth * .22));
-              const distanceSquared = dx * dx + dy * dy;
-              if (distanceSquared < radius * radius) {
-                const distance = Math.sqrt(distanceSquared) || 1;
-                hoverBoost = 1 - distance / radius;
-                const force = hoverBoost * 16;
-                x += dx / distance * force;
-                y += dy / distance * force;
-              }
-            }
-          }
-
-          if (alpha <= .01) return;
-          context.fillStyle = "#030405";
-          const size = particle.size * (1 + hoverBoost * .5);
-          context.globalAlpha = alpha * .16;
-          context.fillRect(x - .35, y - .35, size + .7, size + .7);
-          context.globalAlpha = alpha;
-          context.fillRect(x, y, size, size);
-        });
-
-        context.globalAlpha = 1;
-        frameId = window.requestAnimationFrame(draw);
-      };
-
-      let resizeTimer = 0;
-      window.addEventListener("resize", () => {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(() => {
-          measure();
-          layoutParticles(false);
-        }, 150);
-      });
-
-      particlePortrait.addEventListener("pointermove", (event) => {
-        const rect = particleCanvas.getBoundingClientRect();
-        pointer.x = event.clientX - rect.left;
-        pointer.y = event.clientY - rect.top;
-        pointer.active = true;
-      });
-      particlePortrait.addEventListener("pointerleave", () => { pointer.active = false; });
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) window.cancelAnimationFrame(frameId);
-        else {
-          startedAt = performance.now() - (settleAt + 100);
-          frameId = window.requestAnimationFrame(draw);
-        }
-      });
-
-      measure();
-      sampleImage();
-      particlePortrait.classList.add("particle-ready");
-      startedAt = performance.now();
-      frameId = window.requestAnimationFrame(draw);
-    };
-
-    const scheduleParticleReveal = async () => {
-      try { await particleImage.decode(); } catch { /* load event already confirms a usable image */ }
-      window.requestAnimationFrame(() => window.requestAnimationFrame(startParticleReveal));
-    };
-
-    if (particleImage.complete && particleImage.naturalWidth > 0) void scheduleParticleReveal();
-    else particleImage.addEventListener("load", () => { void scheduleParticleReveal(); }, { once: true });
-  }
-</script>

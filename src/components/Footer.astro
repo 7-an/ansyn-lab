@@ -15,21 +15,13 @@ import SocialLinks from "./SocialLinks.astro";
       <li>用户反馈整理与需求验证</li>
       <li>AI 辅助网站和基础产品交付</li>
     </ul>
-    <div class="footer-channels">
-      <nav aria-label="联系安寻">
-        <span class="footer-channel-label">联系我 / PERSONAL</span>
-        <div class="footer-channel-icons">
-          <SocialLinks networks={["telegram", "x", "github"]} />
-        </div>
-      </nav>
-      <nav aria-label="联系 KOSX">
-        <span class="footer-channel-label">联系 KOSX / ORGANIZATION</span>
-        <div class="footer-channel-links">
-          <a href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">KOSX.ai ↗</a>
-        </div>
-        <p class="footer-channel-note">企业 AI 项目 · 社群与人才合作 · Builder 协作</p>
-      </nav>
-    </div>
+    <nav class="footer-channels" aria-label="联系安寻">
+      <span class="footer-channel-label">CONTACT / PERSONAL</span>
+      <div class="footer-channel-icons">
+        <SocialLinks networks={["telegram", "x", "github"]} />
+      </div>
+      <p class="footer-channel-note">Telegram · X · GitHub</p>
+    </nav>
   </div>
   <div class="shell footer-signature">
     <a class="footer-wordmark" href="/">A/ {siteConfig.name}</a>
