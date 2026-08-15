@@ -1,38 +1,6 @@
 ---
 import { siteConfig } from "../config/site";
-import { externalWriting } from "../data/external-writing";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const selectedNotes = externalWriting
-  .filter((article) => article.featured && article.externalUrl)
-  .slice(0, 3);
-
-const selectedWork = [
-  {
-    index: "01",
-    type: "OPEN SOURCE / COMPLETED",
-    title: "AI Study Path Triage",
-    description: "从真实学生咨询、7 天实验与复盘中，整理出一套高中学习路径初筛框架，并公开到 GitHub。",
-    href: "https://github.com/7-an/ai-study-path-triage",
-    external: true
-  },
-  {
-    index: "02",
-    type: "PERSONAL LAB / LIVE",
-    title: "Ansyn Lab",
-    description: "不是完成版简历，而是一座持续记录行动、错误、项目和修正的个人母站。",
-    href: "/about/",
-    external: false
-  },
-  {
-    index: "03",
-    type: "WORK AT KOSX / BUILDING",
-    title: "在真实协作中接受检验",
-    description: "参与社群项目工作台、内容传播、AI 自动化与网站交付，把学习放进真实需求里。",
-    href: siteConfig.kosx.url,
-    external: true
-  }
-] as const;
 
 const coordinates = [
   ["BUILD", "用 AI 与公开互联网完成真实项目"],
@@ -63,20 +31,18 @@ const coordinates = [
         </div>
       </div>
 
-      <figure class="hero-portrait" data-reveal data-reveal-delay="2">
-        <span class="portrait-index" aria-hidden="true">A/01</span>
-        <img
-          src="/ansyn-avatar-transparent.png"
-          alt="安寻的个人形象：戴草帽的黑白漫画头像"
-          width="400"
-          height="400"
-          loading="eager"
-          fetchpriority="high"
-        />
-        <figcaption>
-          <span>IDENTITY / STILL FORMING</span>
-          <span>NO FINISHED PERSONA</span>
-        </figcaption>
+      <figure class="hero-portrait" data-reveal data-reveal-delay="2" data-particle-portrait>
+        <div class="particle-stage">
+          <canvas class="particle-canvas" aria-hidden="true"></canvas>
+          <img
+            src="/ansyn-avatar-transparent.png"
+            alt="安寻的个人形象：戴草帽的黑白漫画头像"
+            width="400"
+            height="400"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
       </figure>
     </div>
 
@@ -128,7 +94,7 @@ const coordinates = [
 
         <div class="coordinate-copy" data-reveal data-reveal-delay="2">
           <div class="coordinate-heading">
-            <span class="coordinate-mark">K/</span>
+            <img class="coordinate-logo" src="/kosx-mark-black.png" alt="KOSX 标志" width="397" height="397" />
             <div>
               <p>WORK AT KOSX / 当前组织</p>
               <h3>KOSX.ai</h3>
@@ -149,73 +115,35 @@ const coordinates = [
     </div>
   </section>
 
-  <section class="home-section work-section shell" id="work" aria-labelledby="work-title">
-    <header class="section-head compact" data-reveal>
+  <section class="home-section guide-section shell" id="guide" aria-labelledby="guide-title">
+    <header class="guide-heading" data-reveal>
       <div class="section-index">
         <span>02</span>
-        <p>SELECTED WORK / 精选行动</p>
+        <p>EXPLORE / 继续浏览</p>
       </div>
-      <h2 id="work-title">先做出来，<br /><em>再交给现实评价。</em></h2>
-      <a class="section-link" href="/work/">全部项目 <span aria-hidden="true">→</span></a>
+      <h2 id="guide-title">选择一条路径，<br /><em>继续向里看。</em></h2>
     </header>
 
-    <div class="work-rows">
-      {selectedWork.map((project, index) => (
-        <a
-          class="work-row"
-          href={project.href}
-          target={project.external ? "_blank" : undefined}
-          rel={project.external ? "noopener noreferrer" : undefined}
-          data-reveal
-          data-reveal-delay={String(index + 1)}
-        >
-          <span class="work-index">{project.index}</span>
-          <div class="work-title-group">
-            <span>{project.type}</span>
-            <h3>{project.title}</h3>
-          </div>
-          <p>{project.description}</p>
-          <span class="work-arrow" aria-hidden="true">{project.external ? "↗" : "→"}</span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="home-section notes-section shell" aria-labelledby="notes-title">
-    <header class="section-head compact" data-reveal>
-      <div class="section-index">
-        <span>03</span>
-        <p>LATEST NOTES / 最近记录</p>
-      </div>
-      <h2 id="notes-title">把判断写下来，<br /><em>等待现实修正。</em></h2>
-      <a class="section-link" href="/writing/">全部内容 <span aria-hidden="true">→</span></a>
-    </header>
-
-    <div class="note-list">
-      {selectedNotes.map((note, index) => (
-        <a
-          class="note-row"
-          href={note.externalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-reveal
-          data-reveal-delay={String(index + 1)}
-        >
-          <span class="note-number">0{index + 1}</span>
-          <div>
-            <span class="note-meta">{note.platform} / {note.category}</span>
-            <h3>{note.title}</h3>
-          </div>
-          <span class="note-arrow" aria-hidden="true">↗</span>
-        </a>
-      ))}
+    <div class="guide-grid">
+      <a class="guide-card" href="/work/" data-reveal>
+        <span>PROJECTS / 项目与交付</span>
+        <h3>项目</h3>
+        <p>独立项目与组织协作，每张卡写清角色、交付和下一步。</p>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a class="guide-card" href="/writing/" data-reveal data-reveal-delay="1">
+        <span>WRITING / 公开内容</span>
+        <h3>文章</h3>
+        <p>发布在 X 等外部平台的思考与复盘，点击前往原文。</p>
+        <i aria-hidden="true">→</i>
+      </a>
     </div>
   </section>
 
   <section class="home-section public-section shell" aria-labelledby="public-title">
     <div class="public-grid" data-reveal>
       <div class="section-index">
-        <span>04</span>
+        <span>03</span>
         <p>WHY PUBLIC / 为什么公开</p>
       </div>
       <div>
@@ -236,10 +164,7 @@ const coordinates = [
   .photo-code,
   .field-photo figcaption,
   .coordinate-heading p,
-  .work-title-group > span,
-  .work-index,
-  .note-meta,
-  .note-number,
+  .guide-card > span,
   .public-method {
     font-family: var(--mono);
     letter-spacing: .07em;
@@ -254,6 +179,7 @@ const coordinates = [
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid var(--ink);
+    overflow: hidden;
   }
 
   .hero-rail,
@@ -311,36 +237,46 @@ const coordinates = [
     position: relative;
     width: min(100%, 500px);
     margin: 0 auto;
-    padding: clamp(20px, 3vw, 36px);
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--white) 68%, transparent);
+    overflow: visible;
+  }
+
+  .particle-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    margin-inline: auto;
     isolation: isolate;
   }
 
-  .hero-portrait::before,
-  .hero-portrait::after { content: ""; position: absolute; z-index: -1; background: var(--accent); }
-  .hero-portrait::before { top: -1px; left: 18%; width: 22%; height: 3px; }
-  .hero-portrait::after { right: -1px; bottom: 18%; width: 3px; height: 22%; }
-
-  .hero-portrait img {
+  .particle-stage img,
+  .particle-canvas {
     display: block;
     width: 100%;
-    height: auto;
-    filter: grayscale(1) contrast(1.02);
+    height: 100%;
+  }
+
+  .particle-stage img {
+    object-fit: contain;
+    filter: grayscale(1) contrast(1.08);
     mix-blend-mode: multiply;
+    transition: opacity .38s ease, filter .38s ease;
   }
 
-  .portrait-index { position: absolute; top: 16px; right: 18px; color: var(--accent-strong); font: 760 .68rem var(--mono); }
-
-  .hero-portrait figcaption {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font: 640 .62rem var(--mono);
+  .particle-canvas {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .58s ease;
   }
+
+  :global([data-particle-portrait].particle-ready) .particle-stage img { opacity: 0; }
+  :global([data-particle-portrait].particle-ready) .particle-canvas { opacity: 1; }
+  :global([data-particle-portrait].particle-base-visible) .particle-stage img { opacity: 1; }
+  :global([data-particle-portrait].particle-base-visible) .particle-canvas { opacity: .16; }
+  :global([data-particle-portrait].particle-finished) .particle-canvas { opacity: 0; }
 
   .home-section {
     padding: clamp(92px, 11vw, 148px) clamp(22px, 5vw, 70px);
@@ -424,16 +360,7 @@ const coordinates = [
   .current-story { display: flex; flex-direction: column; gap: clamp(42px, 5vw, 64px); }
   .coordinate-copy { border-top: 1px solid var(--ink); padding-top: 30px; }
   .coordinate-heading { display: flex; align-items: center; gap: 18px; }
-  .coordinate-mark {
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    background: var(--accent);
-    color: var(--ink);
-    font-size: 1.1rem;
-    font-weight: 900;
-  }
+  .coordinate-logo { display: block; width: 54px; height: 54px; object-fit: contain; }
   .coordinate-heading p { margin: 0; color: var(--accent-strong); font-size: .66rem; font-weight: 760; }
   .coordinate-heading h3 { margin: 4px 0 0; font-size: 2rem; letter-spacing: -.05em; }
   .coordinate-intro { max-width: 690px; margin: 26px 0 0; font-size: 1.08rem; font-weight: 620; }
@@ -450,49 +377,33 @@ const coordinates = [
   .coordinate-list strong { font-size: .92rem; font-weight: 660; }
   .inline-link { display: inline-flex; gap: 8px; margin-top: 28px; color: var(--accent-strong); font-weight: 800; border-bottom: 1px solid currentColor; }
 
-  .work-rows,
-  .note-list { border-top: 1px solid var(--ink); margin-top: clamp(46px, 6vw, 76px); }
-
-  .work-row {
+  .guide-heading {
     display: grid;
-    grid-template-columns: 72px minmax(270px, .9fr) minmax(300px, 1.1fr) 36px;
-    align-items: center;
-    gap: 30px;
-    min-height: 190px;
-    padding: 30px 18px 30px 0;
-    border-bottom: 1px solid var(--line);
-    transition: background .25s ease, padding .35s cubic-bezier(.22, 1, .36, 1);
+    grid-template-columns: minmax(170px, .55fr) minmax(0, 1.45fr);
+    gap: 40px;
+    align-items: end;
+    padding-bottom: clamp(34px, 4vw, 52px);
+    border-bottom: 1px solid var(--ink);
   }
-  .work-row:hover { padding-left: 18px; background: color-mix(in srgb, var(--accent-soft) 38%, transparent); }
-  .work-index { color: var(--accent-strong); font-size: .74rem; font-weight: 780; }
-  .work-title-group > span { color: var(--muted); font-size: .64rem; font-weight: 720; }
-  .work-title-group h3 { margin: 13px 0 0; font-size: clamp(1.65rem, 2.8vw, 2.55rem); line-height: 1.12; letter-spacing: -.045em; }
-  .work-row > p { margin: 0; color: var(--muted); }
-  .work-arrow,
-  .note-arrow { color: var(--accent-strong); font-size: 1.35rem; transition: transform .25s ease; }
-  .work-row:hover .work-arrow,
-  .note-row:hover .note-arrow { transform: translate(4px, -4px); }
-
-  .note-row {
-    display: grid;
-    grid-template-columns: 72px 1fr 36px;
-    align-items: center;
-    gap: 30px;
-    min-height: 148px;
-    padding: 24px 18px 24px 0;
-    border-bottom: 1px solid var(--line);
+  .guide-heading h2 {
+    margin: 0;
+    font-size: clamp(3rem, 5.9vw, 5.7rem);
+    line-height: .98;
+    letter-spacing: -.068em;
   }
-  .note-number { color: var(--accent-strong); font-size: .72rem; font-weight: 780; }
-  .note-meta { color: var(--muted); font-size: .62rem; font-weight: 720; }
-  .note-row h3 {
-    max-width: 900px;
-    margin: 10px 0 0;
-    font-size: clamp(1.3rem, 2.3vw, 2rem);
-    line-height: 1.3;
-    letter-spacing: -.035em;
-    transition: color .2s ease;
-  }
-  .note-row:hover h3 { color: var(--accent-strong); }
+  .guide-heading h2 em { color: var(--accent-strong); font-style: normal; }
+  .guide-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: clamp(46px, 6vw, 76px); border: 1px solid var(--ink); }
+  .guide-card { position: relative; display: flex; flex-direction: column; min-height: 280px; padding: clamp(26px, 3.5vw, 44px); transition: background .2s ease, color .2s ease; }
+  .guide-card + .guide-card { border-left: 1px solid var(--ink); }
+  .guide-card > span { color: var(--accent-strong); font-size: .72rem; font-weight: 760; }
+  .guide-card h3 { margin: 26px 0 14px; font-size: clamp(2.3rem, 4vw, 3.7rem); line-height: 1; letter-spacing: -.055em; }
+  .guide-card p { max-width: 430px; margin: 0; color: var(--muted); transition: color .2s ease; }
+  .guide-card i { margin-top: auto; padding-top: 30px; color: var(--accent-strong); font-size: 1.6rem; font-style: normal; transition: transform .2s ease, color .2s ease; }
+  .guide-card:hover { background: var(--ink); color: var(--paper); }
+  .guide-card:hover > span,
+  .guide-card:hover i { color: #8faaff; }
+  .guide-card:hover p { color: #b9bbb4; }
+  .guide-card:hover i { transform: translateX(8px); }
 
   .public-section { background: var(--ink); color: var(--paper); }
   .public-grid { display: grid; grid-template-columns: minmax(170px, .55fr) minmax(0, 1.45fr); gap: 40px; }
@@ -509,9 +420,7 @@ const coordinates = [
     .section-link,
     .section-status { justify-self: start; }
     .current-layout { grid-template-columns: .78fr 1.22fr; gap: 28px; }
-    .work-row { grid-template-columns: 58px 1fr 34px; }
-    .work-row > p { grid-column: 2; }
-    .work-arrow { grid-column: 3; grid-row: 1 / span 2; }
+    .guide-heading { grid-template-columns: 1fr; align-items: start; gap: 26px; }
   }
 
   @media (max-width: 700px) {
@@ -525,8 +434,7 @@ const coordinates = [
     .hero-question { margin-top: 30px; }
     .hero-actions { flex-direction: column; }
     .hero-actions .button { width: 100%; }
-    .hero-portrait { width: min(92%, 420px); margin-top: 14px; }
-    .hero-portrait figcaption { flex-direction: column; gap: 4px; }
+    .hero-portrait { width: min(100%, 420px); margin-top: 14px; }
     .hero-footer { flex-direction: column; gap: 6px; }
     .home-section { padding-inline: 18px; }
     .section-head h2,
@@ -535,10 +443,145 @@ const coordinates = [
     .field-photo-primary .photo-frame { aspect-ratio: 4 / 4.6; }
     .current-story { gap: 44px; }
     .coordinate-list li { grid-template-columns: 1fr; gap: 8px; }
-    .work-row { grid-template-columns: 42px 1fr 26px; gap: 16px; min-height: 170px; padding-right: 0; }
-    .work-row:hover { padding-left: 0; }
-    .work-row > p { font-size: .9rem; }
-    .note-row { grid-template-columns: 38px 1fr 22px; gap: 14px; padding-right: 0; }
+    .guide-heading h2 { font-size: clamp(2.65rem, 11vw, 3.5rem); }
+    .guide-grid { grid-template-columns: 1fr; }
+    .guide-card { min-height: 220px; }
+    .guide-card + .guide-card { border-top: 1px solid var(--ink); border-left: 0; }
     .public-grid { grid-template-columns: 1fr; gap: 42px; }
   }
 </style>
+
+<script>
+  const particlePortrait = document.querySelector<HTMLElement>("[data-particle-portrait]");
+  const particleStage = particlePortrait?.querySelector<HTMLElement>(".particle-stage");
+  const particleCanvas = particleStage?.querySelector<HTMLCanvasElement>(".particle-canvas");
+  const particleImage = particleStage?.querySelector<HTMLImageElement>("img");
+  const reduceParticleMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  type PortraitParticle = {
+    tx: number;
+    ty: number;
+    sx: number;
+    sy: number;
+    size: number;
+    delay: number;
+    duration: number;
+  };
+
+  if (particlePortrait && particleStage && particleCanvas && particleImage && !reduceParticleMotion.matches) {
+    const startParticleReveal = () => {
+      if (particlePortrait.dataset.particleStarted === "true") return;
+
+      const stageRect = particleStage.getBoundingClientRect();
+      if (stageRect.width < 2 || stageRect.height < 2) {
+        window.setTimeout(startParticleReveal, 80);
+        return;
+      }
+
+      const context = particleCanvas.getContext("2d");
+      if (!context) return;
+      particlePortrait.dataset.particleStarted = "true";
+
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.6);
+      const stageWidth = stageRect.width;
+      const stageHeight = stageRect.height;
+      const extension = stageWidth * (stageWidth < 420 ? .38 : .54);
+      const canvasWidth = stageWidth + extension;
+
+      particleCanvas.style.left = `${-extension}px`;
+      particleCanvas.style.width = `${canvasWidth}px`;
+      particleCanvas.style.height = `${stageHeight}px`;
+      particleCanvas.width = Math.round(canvasWidth * pixelRatio);
+      particleCanvas.height = Math.round(stageHeight * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const sampleCanvas = document.createElement("canvas");
+      const sampleWidth = Math.min(window.innerWidth < 680 ? 280 : 400, particleImage.naturalWidth);
+      const sampleHeight = Math.max(1, Math.round(sampleWidth * particleImage.naturalHeight / particleImage.naturalWidth));
+      sampleCanvas.width = sampleWidth;
+      sampleCanvas.height = sampleHeight;
+      const sampleContext = sampleCanvas.getContext("2d", { willReadFrequently: true });
+      if (!sampleContext) return;
+      sampleContext.drawImage(particleImage, 0, 0, sampleWidth, sampleHeight);
+      const pixels = sampleContext.getImageData(0, 0, sampleWidth, sampleHeight).data;
+
+      let subjectPixels = 0;
+      for (let offset = 0; offset < pixels.length; offset += 4) {
+        const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+        const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+        const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
+        if (!isBackground) subjectPixels += 1;
+      }
+
+      const targetCount = window.innerWidth < 680 ? 7600 : 14000;
+      const step = Math.max(1, Math.round(Math.sqrt(subjectPixels / targetCount)));
+      const particles: PortraitParticle[] = [];
+
+      for (let y = 0; y < sampleHeight; y += step) {
+        for (let x = 0; x < sampleWidth; x += step) {
+          const offset = (y * sampleWidth + x) * 4;
+          const max = Math.max(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+          const min = Math.min(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+          const isBackground = pixels[offset + 3] < 80 || ((max + min) / 2 > 218 && max - min < 34);
+          if (isBackground) continue;
+
+          const nx = x / sampleWidth;
+          const ty = y / sampleHeight * stageHeight;
+          particles.push({
+            tx: extension + nx * stageWidth,
+            ty,
+            sx: extension * (.04 + Math.random() * .78),
+            sy: ty + (Math.random() - .5) * Math.min(170, stageHeight * .42),
+            size: .82 + Math.random() * 1.02,
+            delay: nx * 620 + Math.random() * 230,
+            duration: 760 + Math.random() * 520
+          });
+        }
+      }
+
+      const startedAt = performance.now();
+      const settleAt = 1700;
+      const revealBaseAt = 1840;
+      const finishAt = 2350;
+      const easeOut = (value: number) => 1 - Math.pow(1 - value, 3);
+
+      const draw = (now: number) => {
+        const elapsed = now - startedAt;
+        if (elapsed >= revealBaseAt) particlePortrait.classList.add("particle-base-visible");
+
+        context.clearRect(0, 0, canvasWidth, stageHeight);
+        particles.forEach((particle) => {
+          const local = (elapsed - particle.delay) / particle.duration;
+          const progress = local <= 0 ? 0 : local >= 1 ? 1 : easeOut(local);
+          const x = particle.sx + (particle.tx - particle.sx) * progress;
+          const y = particle.sy + (particle.ty - particle.sy) * progress;
+          const alpha = elapsed < settleAt ? Math.max(0, Math.min(1, local + .14)) : 1;
+          if (alpha <= .01) return;
+          context.fillStyle = "#030405";
+          context.globalAlpha = alpha * .16;
+          context.fillRect(x - .35, y - .35, particle.size + .7, particle.size + .7);
+          context.globalAlpha = alpha;
+          context.fillRect(x, y, particle.size, particle.size);
+        });
+        context.globalAlpha = 1;
+
+        if (elapsed < finishAt) {
+          window.requestAnimationFrame(draw);
+        } else {
+          particlePortrait.classList.add("particle-finished");
+        }
+      };
+
+      particlePortrait.classList.add("particle-ready");
+      window.requestAnimationFrame(draw);
+    };
+
+    const scheduleParticleReveal = async () => {
+      try { await particleImage.decode(); } catch { /* 已加载时仍可继续降级渲染 */ }
+      window.requestAnimationFrame(() => window.requestAnimationFrame(startParticleReveal));
+    };
+
+    if (particleImage.complete && particleImage.naturalWidth > 0) void scheduleParticleReveal();
+    else particleImage.addEventListener("load", () => { void scheduleParticleReveal(); }, { once: true });
+  }
+</script>
