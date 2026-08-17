@@ -48,7 +48,6 @@ const coordinates = [
         <p>CURRENT COORDINATE / 当前坐标</p>
       </div>
       <h2 id="current-title">在真实世界里，<br /><em>边做边校正。</em></h2>
-      <span class="section-status">2026—NOW / BUILDING</span>
     </header>
 
     <div class="current-layout">
@@ -103,31 +102,46 @@ const coordinates = [
           </div>
         </div>
         <p class="coordinate-intro">我目前以实习成员身份参与 KOSX 的早期建设。这里不是我的身份标签，而是我第一次把学习放进真实项目、协作与反馈里接受检验的地方。</p>
-        <ol class="coordinate-list">
-          {coordinates.map(([label, text], index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, "0")} / {label}</span>
-              <strong>{text}</strong>
-            </li>
-          ))}
-        </ol>
         <a class="inline-link" href={siteConfig.kosx.url} target="_blank" rel="noopener noreferrer">了解 KOSX <span aria-hidden="true">↗</span></a>
+        <div class="coordinate-focus">
+          <p class="focus-label">CURRENT FOCUS / 当前坐标</p>
+          <ol class="coordinate-list">
+            {coordinates.map(([label, text], index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")} / {label}</span>
+                <strong>{text}</strong>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="home-section home-guide shell" id="guide" aria-label="前往项目与文章页面">
-    <div class="guide-grid">
-      <a class="guide-card" href="/work/" data-reveal>
-        <span>PROJECTS / 项目与交付</span>
-        <h3>项目</h3>
-        <p>独立项目与组织协作，每张卡写清角色、交付和下一步。</p>
+  <section class="home-section home-guide shell" id="guide" aria-label="探索入口">
+    <header class="guide-head" data-reveal>
+      <div class="section-index">
+        <span>02</span>
+        <p>EXPLORE / 继续深入</p>
+      </div>
+    </header>
+    <div class="explore-list">
+      <a class="explore-row" href="/work/" data-reveal data-reveal-delay="1">
+        <span class="explore-index">01</span>
+        <strong>PROJECTS</strong>
+        <span class="explore-note">项目与交付</span>
         <i aria-hidden="true">→</i>
       </a>
-      <a class="guide-card" href="/writing/" data-reveal data-reveal-delay="1">
-        <span>WRITING / 公开内容</span>
-        <h3>文章</h3>
-        <p>发布在 X 等外部平台的思考与复盘，点击前往原文。</p>
+      <a class="explore-row" href="/writing/" data-reveal data-reveal-delay="2">
+        <span class="explore-index">02</span>
+        <strong>WRITING</strong>
+        <span class="explore-note">公开内容</span>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a class="explore-row" href="/about/" data-reveal data-reveal-delay="3">
+        <span class="explore-index">03</span>
+        <strong>ABOUT</strong>
+        <span class="explore-note">关于安寻</span>
         <i aria-hidden="true">→</i>
       </a>
     </div>
@@ -137,11 +151,11 @@ const coordinates = [
 <style>
   .home-kicker,
   .section-index,
-  .section-status,
   .photo-code,
   .field-photo figcaption,
   .coordinate-heading p,
-  .guide-card > span {
+  .focus-label,
+  .explore-note {
     font-family: var(--mono);
     letter-spacing: .07em;
     text-transform: uppercase;
@@ -301,10 +315,11 @@ const coordinates = [
   .lab-question {
     max-width: 690px;
     margin: 34px 0 0;
-    font-size: clamp(1.45rem, 2.5vw, 2.15rem);
-    font-weight: 720;
-    line-height: 1.42;
-    letter-spacing: -.035em;
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -.02em;
     text-wrap: balance;
   }
 
@@ -393,16 +408,17 @@ const coordinates = [
 
   .section-head h2 {
     margin: 0;
+    font-family: var(--serif);
     font-size: clamp(3rem, 5.9vw, 5.7rem);
-    line-height: .98;
-    letter-spacing: -.068em;
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -.045em;
   }
 
   .section-head h2 em { color: var(--accent-strong); font-style: normal; }
   .section-index { display: flex; align-items: center; gap: 16px; align-self: start; }
   .section-index > span { color: var(--accent-strong); font-size: .82rem; font-weight: 800; }
   .section-index p { margin: 0; color: var(--muted); font-size: .68rem; font-weight: 700; }
-  .section-status { color: var(--accent-strong); font-size: .7rem; font-weight: 750; white-space: nowrap; }
   .section-link { align-self: end; color: var(--accent-strong); font: 760 .78rem var(--mono); border-bottom: 1px solid currentColor; }
 
   .current-layout {
@@ -521,56 +537,67 @@ const coordinates = [
 
   .home-guide { padding-bottom: clamp(116px, 13vw, 180px); }
 
-  .guide-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--ink);
-  }
+  .guide-head { padding-bottom: clamp(28px, 4vw, 44px); }
 
-  .guide-card {
+  .explore-list { border-top: 1px solid var(--line); }
+
+  .explore-row {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 280px;
-    padding: clamp(26px, 3.5vw, 44px);
-    transition: background .18s ease, color .18s ease;
+    display: grid;
+    grid-template-columns: 72px 1fr auto 32px;
+    align-items: baseline;
+    gap: 24px;
+    padding: clamp(26px, 3.4vw, 44px) 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .guide-card + .guide-card { border-left: 1px solid var(--ink); }
+  .explore-row::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: var(--accent-strong);
+    transition: width .45s cubic-bezier(.22, 1, .36, 1);
+  }
 
-  .guide-card span {
+  .explore-row:hover::after { width: 100%; }
+
+  .explore-index {
     color: var(--accent-strong);
-    font: 750 .74rem var(--mono);
-    letter-spacing: .08em;
-    transition: color .18s ease;
+    font: 750 .8rem var(--mono);
   }
 
-  .guide-card h3 {
-    margin: 26px 0 14px;
-    font-size: clamp(2.2rem, 4vw, 3.6rem);
-    letter-spacing: -.05em;
-    transition: color .18s ease;
+  .explore-row strong {
+    font-size: clamp(2.4rem, 5.4vw, 4.8rem);
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: -.06em;
+    transition: transform .3s cubic-bezier(.22, 1, .36, 1);
   }
 
-  .guide-card p {
-    max-width: 420px;
-    margin: 0;
+  .explore-row:hover strong { transform: translateX(14px); }
+
+  .explore-note {
     color: var(--muted);
-    transition: color .18s ease;
+    font-size: .95rem;
   }
 
-  .guide-card i {
-    margin-top: auto;
-    padding-top: 30px;
+  .explore-row i {
     font-style: normal;
-    font-size: 1.6rem;
-    transition: transform .18s ease;
+    font-size: 1.5rem;
+    transition: transform .3s cubic-bezier(.22, 1, .36, 1), color .3s;
   }
 
-  .guide-card:hover { background: var(--ink); color: var(--paper); }
-  .guide-card:hover span { color: #7fa0ff; }
-  .guide-card:hover p { color: #b9bbb4; }
-  .guide-card:hover i { transform: translateX(8px); }
+  .explore-row:hover i {
+    color: var(--accent-strong);
+    transform: translateX(8px);
+  }
+
+  .coordinate-focus { margin-top: 40px; }
+
+  .focus-label { margin: 0; color: var(--accent-strong); font-size: .66rem; font-weight: 760; }
 
   @media (max-width: 900px) {
     .lab-hero {
@@ -581,8 +608,7 @@ const coordinates = [
     }
     .lab-hero h1 { font-size: clamp(4rem, 10vw, 6rem); }
     .section-head { grid-template-columns: 1fr; align-items: start; gap: 26px; }
-    .section-link,
-    .section-status { justify-self: start; }
+    .section-link { justify-self: start; }
     .current-layout { grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr); gap: 28px; }
   }
 
@@ -607,9 +633,9 @@ const coordinates = [
     .photo-frame { aspect-ratio: 4 / 4.6; }
     .coordinate-copy { margin-top: 12px; }
     .coordinate-list li { grid-template-columns: 1fr; gap: 8px; }
-    .guide-grid { grid-template-columns: 1fr; }
-    .guide-card { min-height: 220px; }
-    .guide-card + .guide-card { border-top: 1px solid var(--ink); border-left: 0; }
+    .explore-row { grid-template-columns: 44px 1fr 24px; }
+    .explore-note { display: none; }
+    .explore-row strong { font-size: clamp(2rem, 9vw, 3.2rem); }
   }
 </style>
 

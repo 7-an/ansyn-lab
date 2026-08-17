@@ -160,7 +160,7 @@ const structuredData = {
         }, { passive: true });
 
         // 卡片追光：把指针坐标写进卡片 CSS 变量
-        document.querySelectorAll<HTMLElement>(".work-card, .guide-card").forEach((card) => {
+        document.querySelectorAll<HTMLElement>(".explore-row, .work-row-item").forEach((card) => {
           card.addEventListener("pointermove", (event) => {
             const r = card.getBoundingClientRect();
             card.style.setProperty("--mx", `${event.clientX - r.left}px`);

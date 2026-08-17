@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ArticleCard from "../../components/ArticleCard.astro";
 import { externalWriting, platformLabels } from "../../data/external-writing";
 
 const categories = Array.from(
@@ -15,7 +14,7 @@ const categories = Array.from(
   <section class="page-hero shell">
     <p class="eyebrow">Writing / 公开内容</p>
     <h1 data-proximity><span class="lm"><span class="lm-in">把判断交给现实，</span></span><span class="lm"><span class="lm-in"><mark>把过程留在这里。</mark></span></span></h1>
-    <p>文章发布在 X 等外部平台，这里只做索引和筛选；点击卡片会直接前往原平台阅读。</p>
+    <p>文章发布在 X 等外部平台，点击直接前往原平台阅读。</p>
   </section>
 
   <section class="writing-browser shell" aria-labelledby="writing-list-title">
@@ -39,20 +38,30 @@ const categories = Array.from(
       <span><b id="visible-count">{externalWriting.length}</b> ENTRIES</span>
     </div>
 
-    <div class="article-grid writing-grid" id="writing-grid">
+    <div class="notes-list">
       {externalWriting.map((article) => (
-        <div class="filter-item" data-platform={article.platform} data-category={article.category}>
-          <ArticleCard
-            title={article.title}
-            description={article.description}
-            platform={platformLabels[article.platform]}
-            category={article.category}
-            href={article.externalUrl || undefined}
-            external={true}
-            publishDate={article.publishDate}
-            tags={article.tags}
-          />
-        </div>
+        article.externalUrl ? (
+          <a
+            class="note-row filter-item"
+            data-platform={article.platform}
+            data-category={article.category}
+            href={article.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+            <strong>{article.title}</strong>
+            <p>{article.description}</p>
+            <i aria-hidden="true">↗</i>
+          </a>
+        ) : (
+          <div class="note-row filter-item is-pending" data-platform={article.platform} data-category={article.category}>
+            <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+            <strong>{article.title}</strong>
+            <p>{article.description}</p>
+            <em>链接待补充</em>
+          </div>
+        )
       ))}
     </div>
     <p class="empty-state" id="empty-state" hidden>这个筛选条件下暂时没有内容。</p>
@@ -94,3 +103,70 @@ const categories = Array.from(
     categorySelect?.addEventListener("change", update);
   </script>
 </BaseLayout>
+
+<style>
+  .notes-list { border-top: 1px solid var(--ink); }
+
+  .note-row {
+    display: grid;
+    grid-template-columns: 1fr 28px;
+    gap: 12px 24px;
+    padding: clamp(24px, 3vw, 34px) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .note-platform {
+    grid-column: 1;
+    color: var(--accent-strong);
+    font: 740 .72rem var(--mono);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .note-row strong {
+    grid-column: 1;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    letter-spacing: -.035em;
+    transition: color .2s ease;
+  }
+
+  .note-row p {
+    grid-column: 1;
+    max-width: 680px;
+    margin: 0;
+    color: var(--muted);
+    font-size: .95rem;
+  }
+
+  .note-row i {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: start;
+    font-style: normal;
+    font-size: 1.4rem;
+    transition: transform .25s cubic-bezier(.22, 1, .36, 1), color .25s;
+  }
+
+  a.note-row:hover strong { color: var(--accent-strong); }
+
+  a.note-row:hover i {
+    color: var(--accent-strong);
+    transform: translateX(6px);
+  }
+
+  .note-row.is-pending strong { color: var(--muted); }
+
+  .note-row.is-pending em {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    color: var(--muted);
+    font: 650 .72rem var(--mono);
+    font-style: normal;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .note-row i { grid-row: 1; }
+  }
+</style>
