@@ -29,7 +29,7 @@
     const preferenceKey = "ansyn-music-enabled";
     const timeKey = "ansyn-music-time";
     siteAudio.volume = .46;
-    let musicEnabled = true;
+    let musicEnabled = false;
     let unlockArmed = false;
 
     const readSession = (key: string) => {
@@ -103,7 +103,7 @@
       writeSession(timeKey, String(siteAudio.currentTime));
     });
 
-    musicEnabled = readSession(preferenceKey) !== "off";
+    musicEnabled = readSession(preferenceKey) === "on";
     renderPreference();
     renderPlayback(false);
     if (musicEnabled) void playMusic();

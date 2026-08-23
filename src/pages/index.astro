@@ -12,17 +12,12 @@ const coordinates = [
 <BaseLayout>
   <section class="lab-hero shell" aria-labelledby="home-title">
     <div class="lab-hero-copy" data-reveal data-reveal-delay="1">
-      <p class="lab-kicker">BUILDING IN PUBLIC / SINCE 18</p>
-      <h1 id="home-title" data-proximity><span class="lm"><span class="lm-in">安寻 <span class="latin">Ansyn</span></span></span></h1>
+      <h1 id="home-title"><span class="lm"><span class="lm-in">安寻 <span class="latin">Ansyn</span></span></span></h1>
       <p class="lab-question"><span class="lm"><span class="lm-in">一个年轻人，如何在 AI 时代建立自己的能力系统？</span></span></p>
-      <p class="lab-note">AI Workflow Builder · 现于 KOSX.ai 实习</p>
+      <p class="lab-note">AI Workflow Builder · Intern at KOSX.AI</p>
       <div class="lab-actions">
-        <a class="button button-primary" href="/about/">阅读我的故事 <span aria-hidden="true">→</span></a>
-        <a class="button" href="#guide">查看精选内容</a>
-      </div>
-      <div class="lab-contact-links">
-        <a class="lab-text-link" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">在 X 联系我 ↗</a>
-        <a class="lab-text-link" href={siteConfig.social.telegram} target="_blank" rel="noopener noreferrer">Telegram ↗</a>
+        <a class="button button-primary" href="#current">看我正在做什么 <span aria-hidden="true">↓</span></a>
+        <a class="lab-secondary" href="/about/">关于我 ↗</a>
       </div>
     </div>
 
@@ -43,10 +38,7 @@ const coordinates = [
 
   <section class="home-section current-section shell" id="current" aria-labelledby="current-title">
     <header class="section-head" data-reveal>
-      <div class="section-index">
-        <span>01</span>
-        <p>CURRENT COORDINATE / 当前坐标</p>
-      </div>
+      <p class="section-kicker">NOW / 2026</p>
       <h2 id="current-title">在真实世界里，<br /><em>边做边校正。</em></h2>
     </header>
 
@@ -97,7 +89,7 @@ const coordinates = [
         <div class="coordinate-heading">
           <img class="coordinate-logo" src="/kosx-mark-black.png" alt="KOSX 标志" width="397" height="397" />
           <div>
-            <p>WORK AT KOSX / 当前组织</p>
+            <p>CURRENT / 当前坐标</p>
             <h3>KOSX.ai</h3>
           </div>
         </div>
@@ -120,37 +112,34 @@ const coordinates = [
 
   <section class="home-section home-guide shell" id="guide" aria-label="探索入口">
     <header class="guide-head" data-reveal>
-      <div class="section-index">
-        <span>02</span>
-        <p>EXPLORE / 继续深入</p>
-      </div>
+      <p class="section-kicker">EXPLORE / 继续深入</p>
+      <h2>从这里，继续了解我。</h2>
     </header>
     <div class="explore-list">
       <a class="explore-row" href="/work/" data-reveal data-reveal-delay="1">
-        <span class="explore-index">01</span>
-        <strong>PROJECTS</strong>
-        <span class="explore-note">项目与交付</span>
-        <i aria-hidden="true">→</i>
+        <span class="explore-label">PROJECTS</span>
+        <strong>项目与交付</strong>
+        <span class="explore-note">看我做过什么，以及下一步还要验证什么。</span>
+        <i aria-hidden="true">↗</i>
       </a>
       <a class="explore-row" href="/writing/" data-reveal data-reveal-delay="2">
-        <span class="explore-index">02</span>
-        <strong>WRITING</strong>
-        <span class="explore-note">公开内容</span>
-        <i aria-hidden="true">→</i>
+        <span class="explore-label">WRITING</span>
+        <strong>公开内容</strong>
+        <span class="explore-note">记录行动、判断、错误与修正。</span>
+        <i aria-hidden="true">↗</i>
       </a>
       <a class="explore-row" href="/about/" data-reveal data-reveal-delay="3">
-        <span class="explore-index">03</span>
-        <strong>ABOUT</strong>
-        <span class="explore-note">关于安寻</span>
-        <i aria-hidden="true">→</i>
+        <span class="explore-label">ABOUT</span>
+        <strong>关于安寻</strong>
+        <span class="explore-note">为什么要公开成长，以及我如何看待这段路。</span>
+        <i aria-hidden="true">↗</i>
       </a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .home-kicker,
-  .section-index,
+  .section-kicker,
   .photo-code,
   .field-photo figcaption,
   .coordinate-heading p,
@@ -159,75 +148,6 @@ const coordinates = [
     font-family: var(--mono);
     letter-spacing: .07em;
     text-transform: uppercase;
-  }
-
-  .home-hero,
-  .home-section { border-inline: 1px solid var(--line); }
-
-  .home-hero {
-    min-height: calc(100svh - 72px);
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--ink);
-    overflow: hidden;
-  }
-
-  .hero-rail,
-  .hero-footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    color: var(--muted);
-    font: 650 .65rem/1.4 var(--mono);
-    letter-spacing: .08em;
-  }
-
-  .hero-rail { padding: 18px clamp(20px, 4vw, 54px); border-bottom: 1px solid var(--line); }
-  .hero-footer { padding: 20px clamp(20px, 4vw, 54px); border-top: 1px solid var(--line); }
-
-  .hero-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(330px, .92fr);
-    align-items: center;
-    gap: clamp(42px, 7vw, 110px);
-    padding: clamp(62px, 8vw, 110px) clamp(22px, 5vw, 70px);
-  }
-
-  .home-kicker { margin: 0; color: var(--accent-strong); font-size: .72rem; font-weight: 760; }
-
-  .hero-copy h1 {
-    display: flex;
-    align-items: baseline;
-    gap: .16em;
-    margin: 26px 0 0;
-    font-size: clamp(5rem, 9vw, 8.6rem);
-    font-weight: 900;
-    line-height: .84;
-    letter-spacing: -.085em;
-    white-space: nowrap;
-  }
-
-  .hero-copy h1 small { font-size: .45em; font-weight: 780; letter-spacing: -.055em; }
-
-  .hero-question {
-    max-width: 660px;
-    margin: 38px 0 0;
-    font-size: clamp(1.45rem, 2.45vw, 2.1rem);
-    font-weight: 730;
-    line-height: 1.42;
-    letter-spacing: -.04em;
-    text-wrap: balance;
-  }
-
-  .hero-summary { max-width: 590px; margin: 18px 0 0; color: var(--muted); font-size: .98rem; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-
-  .hero-portrait {
-    position: relative;
-    width: min(100%, 500px);
-    margin: 0 auto;
-    overflow: visible;
   }
 
   .particle-stage {
@@ -269,14 +189,6 @@ const coordinates = [
     filter: grayscale(1) contrast(1.08);
   }
   :global([data-particle-portrait].particle-settled) .particle-canvas { opacity: .14; }
-
-  .lab-kicker {
-    margin: 0;
-    color: var(--accent-strong);
-    font: 750 .74rem/1.4 var(--mono);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
 
   .lab-hero {
     min-height: calc(100svh - 72px);
@@ -636,6 +548,80 @@ const coordinates = [
     .explore-row { grid-template-columns: 44px 1fr 24px; }
     .explore-note { display: none; }
     .explore-row strong { font-size: clamp(2rem, 9vw, 3.2rem); }
+  }
+
+  /* V2 visual pass: fewer competing signals, spacing-led hierarchy. */
+  .lab-hero {
+    min-height: min(760px, calc(100svh - 76px));
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, .72fr);
+    gap: clamp(54px, 8vw, 118px);
+    padding: clamp(94px, 10vw, 142px) 0;
+    border: 0;
+    overflow: visible;
+  }
+
+  .lab-hero-copy { padding: 0; }
+  .lab-hero h1 { margin-top: 0; font-size: clamp(4.8rem, 8vw, 7.8rem); }
+  .lab-question { max-width: 650px; margin-top: 30px; font-size: clamp(1.55rem, 2.35vw, 2.2rem); }
+  .lab-note { max-width: 510px; margin-top: 20px; font-size: .98rem; line-height: 1.8; }
+  .lab-actions { align-items: center; gap: 22px; margin-top: 36px; }
+  .lab-secondary { color: var(--accent-strong); font-size: .88rem; font-weight: 760; }
+  .lab-secondary:hover { color: var(--ink); }
+  .home-section { border: 0; }
+  .current-section {
+    padding: clamp(72px, 8vw, 108px);
+    border-radius: 24px;
+    background: rgba(232, 229, 220, .72);
+  }
+  .section-head { display: block; padding: 0; border: 0; }
+  .section-kicker { margin: 0 0 24px; color: var(--accent-strong); font-size: .7rem; font-weight: 760; }
+  .section-head h2 { max-width: 900px; font-size: clamp(3rem, 5.5vw, 5.2rem); }
+  .current-layout { gap: 18px; margin-top: clamp(48px, 6vw, 76px); }
+  .current-gallery, .coordinate-copy { border-radius: 18px; background: rgba(252, 251, 247, .82); }
+  .current-gallery { padding: 14px; }
+  .photo-frame { border-radius: 13px; }
+  .photo-code { border-radius: 999px; }
+  .gallery-controls { margin: 14px 2px 0; padding-top: 0; border: 0; }
+  .gallery-buttons { gap: 6px; border: 0; }
+  .gallery-buttons button { border-radius: 999px; background: var(--paper-deep); }
+  .gallery-buttons button + button { border: 0; }
+  .coordinate-copy { padding: clamp(28px, 4vw, 48px); border: 0; }
+  .coordinate-intro { margin-top: 30px; font-size: 1.02rem; line-height: 1.75; }
+  .coordinate-list { display: grid; gap: 10px; margin-top: 26px; border: 0; }
+  .coordinate-list li { grid-template-columns: 132px 1fr; padding: 14px 16px; border: 0; border-radius: 12px; background: var(--paper-deep); }
+
+  .home-guide { padding: clamp(124px, 13vw, 178px) 0; }
+  .guide-head { padding: 0; }
+  .guide-head h2 { max-width: 760px; margin: 0; font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4.8rem); line-height: 1.08; letter-spacing: -.045em; }
+  .explore-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(48px, 6vw, 78px); border: 0; }
+  .explore-row { display: flex; min-height: 310px; flex-direction: column; align-items: flex-start; gap: 0; padding: 28px; border: 0; border-radius: 18px; background: var(--paper-deep); transition: background .22s ease, transform .22s ease; }
+  .explore-row::after { content: none; }
+  .explore-row:hover { background: var(--white); transform: translateY(-4px); }
+  .explore-label { color: var(--accent-strong); font: 760 .7rem var(--mono); letter-spacing: .08em; }
+  .explore-row strong { margin-top: 28px; font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 3rem); font-weight: 700; line-height: 1.08; letter-spacing: -.04em; }
+  .explore-row:hover strong { transform: none; }
+  .explore-note { max-width: 250px; margin-top: 18px; color: var(--muted); font-family: var(--sans); font-size: .86rem; line-height: 1.7; letter-spacing: 0; text-transform: none; }
+  .explore-row i { display: grid; width: 42px; height: 42px; margin-top: auto; border-radius: 50%; place-items: center; background: var(--white); font-size: 1rem; }
+  .explore-row:hover i { color: var(--white); background: var(--accent); transform: none; }
+
+  @media (max-width: 900px) {
+    .lab-hero { grid-template-columns: 1fr .75fr; gap: 24px; padding: 86px 0 100px; }
+    .current-section { padding: 64px 28px; }
+    .explore-list { grid-template-columns: 1fr; }
+    .explore-row { min-height: 230px; }
+  }
+
+  @media (max-width: 700px) {
+    .lab-hero { grid-template-columns: 1fr; padding: 72px 4px 52px; }
+    .lab-hero h1 { font-size: clamp(4rem, 19vw, 5.8rem); }
+    .lab-note { font-size: .92rem; }
+    .lab-actions { align-items: flex-start; flex-direction: row; }
+    .lab-actions .button { width: auto; }
+    .current-section { padding: 56px 18px; border-radius: 18px; }
+    .section-head h2 { font-size: clamp(2.35rem, 10vw, 3.3rem); }
+    .coordinate-copy { margin-top: 0; }
+    .coordinate-list li { grid-template-columns: 1fr; }
+    .home-guide { padding: 108px 0 132px; }
   }
 </style>
 

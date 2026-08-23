@@ -113,7 +113,7 @@ Astro 已输出带目录索引的纯静态页面，因此站内页面刷新不�
 
 - 响应式首页：粒子头像、两张现场证据图、KOSX 与当前坐标合并、项目与文章双导航卡
 - `/work/` 项目与交付页、`/writing/` 外部文章索引（平台与分类筛选）、`/about/` 关于页、自定义 404
-- 右上角社交图标（X / Telegram）、右下角背景音乐开关（默认开启、记住选择）
+- 简洁主导航与 X 入口、右下角背景音乐开关（默认关闭、记住选择）
 - title、description、canonical、Open Graph、X Card、结构化数据、favicon、robots、sitemap
 - 键盘操作、可见焦点、跳转链接与减少动态效果偏好
 - Vercel / Netlify / Cloudflare Pages 静态部署配置说明
