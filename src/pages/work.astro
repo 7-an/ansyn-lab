@@ -3,6 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const features = [
   {
+    org: "INDEPENDENT / 开源交互实验",
+    title: "VOIDTYPE",
+    problem: "把动态粒子字从网站项目中拆成可独立运行的实验，研究文字采样、流体扰动、惯性倾斜与自然回位。",
+    role: "交互拆解 · 参数调试 · AI 协作开发",
+    deliverable: "Three.js / Vite 在线演示、实现文档与 GitHub 开源仓库。",
+    next: "已完成并开源，作为后续视觉交互实验的可复用基础。",
+    status: "OPEN SOURCE / LIVE",
+    tone: "completed",
+    visual: { kind: "voidtype" },
+    links: [
+      { href: "https://7-an.github.io/voidtype/", label: "在线体验 ↗" },
+      { href: "https://github.com/7-an/voidtype", label: "GitHub ↗" }
+    ],
+    featured: true
+  },
+  {
     org: "INDEPENDENT / 独立项目",
     title: "AI Study Path Triage",
     problem: "从 100 多条学生咨询出发：高中生不缺学习建议，缺一条能开始执行的路径。",
@@ -11,14 +27,17 @@ const features = [
     next: "已完结归档。除非出现值得探讨的新问题，不再主动迭代。",
     status: "OPEN SOURCE / V0.1",
     tone: "completed",
-    image: {
-      src: "/kimi/study-path-cover.png",
-      alt: "AI Study Path Triage 项目封面图",
-      width: 1672,
-      height: 941
+    visual: {
+      kind: "image",
+      image: {
+        src: "/kimi/study-path-cover.png",
+        alt: "AI Study Path Triage 项目封面图",
+        width: 1672,
+        height: 941
+      }
     },
-    link: { href: "https://github.com/7-an/ai-study-path-triage", label: "GitHub 开源仓库 ↗" },
-    flip: false
+    links: [{ href: "https://github.com/7-an/ai-study-path-triage", label: "GitHub 开源仓库 ↗" }],
+    featured: false
   },
   {
     org: "INDEPENDENT / 独立项目",
@@ -29,14 +48,17 @@ const features = [
     next: "持续记录项目与复盘，沉淀长期内容。",
     status: "LIVE",
     tone: "completed",
-    image: {
-      src: "/kimi/ansyn-lab-preview.png",
-      alt: "Ansyn Lab 个人网站预览图",
-      width: 1729,
-      height: 910
+    visual: {
+      kind: "image",
+      image: {
+        src: "/kimi/ansyn-lab-preview.png",
+        alt: "Ansyn Lab 个人网站预览图",
+        width: 1729,
+        height: 910
+      }
     },
-    link: null,
-    flip: true
+    links: [{ href: "https://ansyn.me/", label: "访问网站 ↗" }],
+    featured: false
   }
 ] as const;
 
@@ -80,7 +102,7 @@ const buildAreas = [
 
 <BaseLayout
   title="项目与交付｜Ansyn Lab"
-  description="安寻的项目与交付：独立项目 AI Study Path Triage 与 Ansyn Lab，以及在 KOSX.ai 参与的社群工作台、网站交付与内容项目。"
+  description="安寻的项目与交付：VOIDTYPE 粒子交互实验、AI Study Path Triage、Ansyn Lab，以及在 KOSX.ai 参与的真实协作项目。"
 >
   <section class="page-hero shell">
     <p class="eyebrow">Selected Work / 项目与交付</p>
@@ -89,70 +111,84 @@ const buildAreas = [
   </section>
 
   <section class="section shell work-list" aria-label="项目列表">
-    {features.map((project) => (
-      <article class:list={["work-feature", { flip: project.flip }]} data-reveal>
-        <figure class="work-visual">
-          <img
-            src={project.image.src}
-            alt={project.image.alt}
-            width={project.image.width}
-            height={project.image.height}
-            loading="lazy"
-          />
-        </figure>
-        <div class="work-info">
-          <span class="work-org">{project.org}</span>
-          <h2>{project.title}</h2>
-          <p class="work-problem">{project.problem}</p>
-          <dl class="work-facts">
-            <div>
-              <dt>ROLE</dt>
-              <dd>{project.role}</dd>
-            </div>
-            <div>
-              <dt>DELIVERABLE</dt>
-              <dd>{project.deliverable}</dd>
-            </div>
-            <div>
-              <dt>NEXT</dt>
-              <dd>{project.next}</dd>
-            </div>
-          </dl>
-          <div class="work-foot">
-            <span class:list={["status-pill", project.tone]}>{project.status}</span>
-            {project.link && (
-              <a href={project.link.href} target="_blank" rel="noopener noreferrer">{project.link.label}</a>
+    <div class="feature-grid">
+      {features.map((project) => (
+        <article class:list={["work-feature", { "is-featured": project.featured }]} data-reveal>
+          <figure class:list={["work-visual", { "is-voidtype": project.visual.kind === "voidtype" }]}>
+            {project.visual.kind === "image" ? (
+              <img
+                src={project.visual.image.src}
+                alt={project.visual.image.alt}
+                width={project.visual.image.width}
+                height={project.visual.image.height}
+                loading="lazy"
+              />
+            ) : (
+              <div class="voidtype-preview" role="img" aria-label="VOIDTYPE 粒子动态字体效果预览">
+                <span>less is more</span>
+                <span>Slow down to speed up.</span>
+                <i aria-hidden="true">KINETIC PARTICLE TYPOGRAPHY / 2026</i>
+              </div>
             )}
+          </figure>
+          <div class="work-info">
+            <span class="work-org">{project.org}</span>
+            <h2>{project.title}</h2>
+            <p class="work-problem">{project.problem}</p>
+            <dl class="work-facts">
+              <div>
+                <dt>ROLE</dt>
+                <dd>{project.role}</dd>
+              </div>
+              <div>
+                <dt>DELIVERABLE</dt>
+                <dd>{project.deliverable}</dd>
+              </div>
+              <div>
+                <dt>NEXT</dt>
+                <dd>{project.next}</dd>
+              </div>
+            </dl>
+            <div class="work-foot">
+              <span class:list={["status-pill", project.tone]}>{project.status}</span>
+              <div class="work-links">
+                {project.links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
-    ))}
+        </article>
+      ))}
+    </div>
 
     <div class="work-rows" aria-label="KOSX 协作项目">
       <p class="rows-kicker" data-reveal>WORK AT KOSX / 组织协作</p>
-      {kosxProjects.map((project) => (
-        <article class="work-row-item" data-reveal>
-          <header>
-            <h2>{project.title}</h2>
-            <span class:list={["status-pill", project.tone]}>{project.status}</span>
-          </header>
-          <p class="work-problem">{project.problem}</p>
-          <dl class="work-facts inline">
-            <div>
-              <dt>ROLE</dt>
-              <dd>{project.role}</dd>
-            </div>
-            <div>
-              <dt>DELIVERABLE</dt>
-              <dd>{project.deliverable}</dd>
-            </div>
-            <div>
-              <dt>NEXT</dt>
-              <dd>{project.next}</dd>
-            </div>
-          </dl>
-        </article>
-      ))}
+      <div class="work-rows-grid">
+        {kosxProjects.map((project) => (
+          <article class="work-row-item" data-reveal>
+            <header>
+              <h2>{project.title}</h2>
+              <span class:list={["status-pill", project.tone]}>{project.status}</span>
+            </header>
+            <p class="work-problem">{project.problem}</p>
+            <dl class="work-facts inline">
+              <div>
+                <dt>ROLE</dt>
+                <dd>{project.role}</dd>
+              </div>
+              <div>
+                <dt>DELIVERABLE</dt>
+                <dd>{project.deliverable}</dd>
+              </div>
+              <div>
+                <dt>NEXT</dt>
+                <dd>{project.next}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -180,29 +216,115 @@ const buildAreas = [
     gap: clamp(48px, 7vw, 96px);
   }
 
-  .work-feature {
+  .feature-grid {
     display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    align-items: center;
-    gap: clamp(32px, 5vw, 72px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 
-  .work-feature.flip .work-visual { order: 2; }
-  .work-feature.flip .work-info { order: 1; }
+  .work-feature {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(252, 251, 247, .82);
+  }
+
+  .work-feature.is-featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(360px, .82fr);
+  }
 
   .work-visual {
     margin: 0;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--paper-deep);
   }
 
   .work-visual img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     transition: transform .8s cubic-bezier(.22, 1, .36, 1);
   }
 
   .work-feature:hover .work-visual img { transform: scale(1.015); }
+
+  .work-visual.is-voidtype {
+    min-height: 470px;
+    aspect-ratio: auto;
+    background: #020203;
+  }
+
+  .voidtype-preview {
+    position: relative;
+    display: flex;
+    height: 100%;
+    min-height: inherit;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .08em;
+    overflow: hidden;
+    padding: 42px;
+    color: transparent;
+    text-align: center;
+  }
+
+  .voidtype-preview::before,
+  .voidtype-preview::after {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.13) 0 1px, transparent 1.35px) 0 0 / 7px 7px;
+    opacity: .48;
+    filter: blur(.2px);
+    transition: transform .8s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .voidtype-preview::before { top: -110px; left: -70px; transform: rotate(13deg); }
+  .voidtype-preview::after { right: -90px; bottom: -120px; transform: rotate(-18deg); }
+  .work-feature:hover .voidtype-preview::before { transform: translate(18px, 10px) rotate(18deg); }
+  .work-feature:hover .voidtype-preview::after { transform: translate(-16px, -8px) rotate(-23deg); }
+
+  .voidtype-preview > span {
+    position: relative;
+    z-index: 1;
+    background: radial-gradient(circle, #f5f5f2 0 1.1px, transparent 1.35px) 0 0 / 4px 4px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: clamp(2.4rem, 5.4vw, 5.4rem);
+    font-weight: 850;
+    line-height: .98;
+    letter-spacing: -.075em;
+  }
+
+  .voidtype-preview > span:nth-child(2) { font-size: clamp(1.55rem, 3.2vw, 3.2rem); }
+
+  .voidtype-preview i {
+    position: absolute;
+    z-index: 1;
+    right: 22px;
+    bottom: 20px;
+    color: #85858b;
+    font: normal 650 .58rem var(--mono);
+    letter-spacing: .12em;
+  }
+
+  .work-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: clamp(26px, 3.5vw, 42px);
+  }
 
   .work-org {
     color: var(--accent-strong);
@@ -253,37 +375,55 @@ const buildAreas = [
   .work-foot {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 24px;
-    margin-top: 30px;
+    margin-top: auto;
+    padding-top: 30px;
   }
 
-  .work-foot a {
+  .work-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px 18px;
+  }
+
+  .work-links a {
     color: var(--accent-strong);
     font: 800 .82rem var(--mono);
     border-bottom: 1px solid currentColor;
   }
 
-  .work-foot a:hover { color: var(--ink); }
+  .work-links a:hover { color: var(--ink); }
 
   .rows-kicker {
-    margin: 0 0 8px;
+    margin: 0 0 22px;
     color: var(--accent-strong);
     font: 750 .74rem var(--mono);
     letter-spacing: .08em;
   }
 
-  .work-row-item {
-    padding: clamp(28px, 4vw, 44px) 0;
-    border-top: 1px solid var(--ink);
+  .work-rows-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
   }
 
-  .work-row-item:last-child { border-bottom: 1px solid var(--ink); }
+  .work-row-item {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: clamp(24px, 3vw, 34px);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--paper-deep);
+  }
 
   .work-row-item header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 16px;
   }
 
   .work-row-item h2 {
@@ -293,9 +433,10 @@ const buildAreas = [
   }
 
   .work-facts.inline {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+    padding-top: 26px;
   }
 
   .work-facts.inline div {
@@ -336,15 +477,24 @@ const buildAreas = [
   .build-grid p { margin: 0; color: var(--muted); }
 
   @media (max-width: 900px) {
-    .work-feature { grid-template-columns: 1fr; gap: 28px; }
-    .work-feature.flip .work-visual { order: 0; }
-    .work-feature.flip .work-info { order: 1; }
-    .work-facts.inline { grid-template-columns: 1fr; gap: 16px; }
+    .work-feature.is-featured { grid-template-columns: 1fr; }
+    .work-visual.is-voidtype { min-height: 410px; }
+    .work-rows-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 640px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .work-feature.is-featured { grid-column: auto; }
+    .work-visual.is-voidtype { min-height: 320px; }
+    .voidtype-preview { padding: 28px 18px; }
+    .work-foot { align-items: flex-start; flex-direction: column; }
+    .work-links { justify-content: flex-start; }
     .build-grid { grid-template-columns: 1fr; }
-    .work-row-item header { align-items: flex-start; flex-direction: column; gap: 14px; }
     .work-row-item .status-pill { align-self: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .voidtype-preview::before,
+    .voidtype-preview::after { transition: none; }
   }
 </style>

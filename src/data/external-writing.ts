@@ -18,6 +18,28 @@ export type ExternalArticle = {
 
 export const externalWriting: ExternalArticle[] = [
   {
+    title: "闲鱼卖 GPT 两天赚了 1k+：第一次跑通小生意闭环",
+    description:
+      "从稳定供给、闲鱼获客、成交交付到售后复购的真实复盘。金额不大，但这是我第一次完整接触定价、用户需求与商业闭环。",
+    platform: "X",
+    publishDate: "2026-08-30",
+    category: "Business Experiment",
+    tags: ["闲鱼", "代充", "商业闭环", "获客", "复购", "复盘"],
+    externalUrl: "https://x.com/Ansyn_07/status/2094003450875097417?s=20",
+    featured: true
+  },
+  {
+    title: "复刻 newmix 首页：改了十几遍才做成的粒子交互实验",
+    description:
+      "为刘哥制作个人网站时，我尝试复刻 newmix 首页的粒子效果。过程远比想象中复杂，反复调整十几遍后完成，并把在线演示与代码一同公开。",
+    platform: "X",
+    publishDate: "2026-08-18",
+    category: "Interactive Experiment",
+    tags: ["VOIDTYPE", "粒子交互", "网站实验", "开源", "复盘"],
+    externalUrl: "https://x.com/Ansyn_07/status/2089705756920803546?s=20",
+    featured: true
+  },
+  {
     title: "参加AI创业交流会后，我学到的九件事",
     description:
       "参加一场AI、创业与Web3交流会后的系统复盘，内容涉及行动、真实用户、个人IP、流量、AI应用层、商业验证，以及年轻人如何进入真实市场。",

@@ -49,14 +49,20 @@ const categories = Array.from(
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+            <span class="note-meta">
+              <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+              {article.publishDate && <time datetime={article.publishDate}>{article.publishDate.replaceAll("-", ".")}</time>}
+            </span>
             <strong>{article.title}</strong>
             <p>{article.description}</p>
             <i aria-hidden="true">↗</i>
           </a>
         ) : (
           <div class="note-row filter-item is-pending" data-platform={article.platform} data-category={article.category}>
-            <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+            <span class="note-meta">
+              <span class="note-platform">{platformLabels[article.platform]} / {article.category}</span>
+              {article.publishDate && <time datetime={article.publishDate}>{article.publishDate.replaceAll("-", ".")}</time>}
+            </span>
             <strong>{article.title}</strong>
             <p>{article.description}</p>
             <em>链接待补充</em>
@@ -116,11 +122,24 @@ const categories = Array.from(
   }
 
   .note-platform {
-    grid-column: 1;
     color: var(--accent-strong);
     font: 740 .72rem var(--mono);
     letter-spacing: .06em;
     text-transform: uppercase;
+  }
+
+  .note-meta {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .note-meta time {
+    color: var(--muted);
+    font: 650 .68rem var(--mono);
+    letter-spacing: .05em;
   }
 
   .note-row strong {
