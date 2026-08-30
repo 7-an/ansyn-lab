@@ -11,7 +11,16 @@ const features = [
     next: "已完成并开源，作为后续视觉交互实验的可复用基础。",
     status: "OPEN SOURCE / LIVE",
     tone: "completed",
-    visual: { kind: "voidtype" },
+    visual: {
+      kind: "image",
+      fit: "contain",
+      image: {
+        src: "/images/voidtype-cover.png",
+        alt: "VOIDTYPE 粒子字体项目画面：less is more，Slow down to speed up.",
+        width: 2820,
+        height: 1370
+      }
+    },
     links: [
       { href: "https://7-an.github.io/voidtype/", label: "在线体验 ↗" },
       { href: "https://github.com/7-an/voidtype", label: "GitHub ↗" }
@@ -29,6 +38,7 @@ const features = [
     tone: "completed",
     visual: {
       kind: "image",
+      fit: "cover",
       image: {
         src: "/kimi/study-path-cover.png",
         alt: "AI Study Path Triage 项目封面图",
@@ -50,6 +60,7 @@ const features = [
     tone: "completed",
     visual: {
       kind: "image",
+      fit: "cover",
       image: {
         src: "/kimi/ansyn-lab-preview.png",
         alt: "Ansyn Lab 个人网站预览图",
@@ -114,22 +125,14 @@ const buildAreas = [
     <div class="feature-grid">
       {features.map((project) => (
         <article class:list={["work-feature", { "is-featured": project.featured }]} data-reveal>
-          <figure class:list={["work-visual", { "is-voidtype": project.visual.kind === "voidtype" }]}>
-            {project.visual.kind === "image" ? (
-              <img
-                src={project.visual.image.src}
-                alt={project.visual.image.alt}
-                width={project.visual.image.width}
-                height={project.visual.image.height}
-                loading="lazy"
-              />
-            ) : (
-              <div class="voidtype-preview" role="img" aria-label="VOIDTYPE 粒子动态字体效果预览">
-                <span>less is more</span>
-                <span>Slow down to speed up.</span>
-                <i aria-hidden="true">KINETIC PARTICLE TYPOGRAPHY / 2026</i>
-              </div>
-            )}
+          <figure class:list={["work-visual", { "is-contained": project.visual.fit === "contain" }]}>
+            <img
+              src={project.visual.image.src}
+              alt={project.visual.image.alt}
+              width={project.visual.image.width}
+              height={project.visual.image.height}
+              loading="lazy"
+            />
           </figure>
           <div class="work-info">
             <span class="work-org">{project.org}</span>
@@ -255,69 +258,14 @@ const buildAreas = [
 
   .work-feature:hover .work-visual img { transform: scale(1.015); }
 
-  .work-visual.is-voidtype {
+  .work-visual.is-contained {
     min-height: 470px;
     aspect-ratio: auto;
     background: #020203;
   }
 
-  .voidtype-preview {
-    position: relative;
-    display: flex;
-    height: 100%;
-    min-height: inherit;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .08em;
-    overflow: hidden;
-    padding: 42px;
-    color: transparent;
-    text-align: center;
-  }
-
-  .voidtype-preview::before,
-  .voidtype-preview::after {
-    content: "";
-    position: absolute;
-    width: 240px;
-    height: 240px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,.13) 0 1px, transparent 1.35px) 0 0 / 7px 7px;
-    opacity: .48;
-    filter: blur(.2px);
-    transition: transform .8s cubic-bezier(.22, 1, .36, 1);
-  }
-
-  .voidtype-preview::before { top: -110px; left: -70px; transform: rotate(13deg); }
-  .voidtype-preview::after { right: -90px; bottom: -120px; transform: rotate(-18deg); }
-  .work-feature:hover .voidtype-preview::before { transform: translate(18px, 10px) rotate(18deg); }
-  .work-feature:hover .voidtype-preview::after { transform: translate(-16px, -8px) rotate(-23deg); }
-
-  .voidtype-preview > span {
-    position: relative;
-    z-index: 1;
-    background: radial-gradient(circle, #f5f5f2 0 1.1px, transparent 1.35px) 0 0 / 4px 4px;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    font-size: clamp(2.4rem, 5.4vw, 5.4rem);
-    font-weight: 850;
-    line-height: .98;
-    letter-spacing: -.075em;
-  }
-
-  .voidtype-preview > span:nth-child(2) { font-size: clamp(1.55rem, 3.2vw, 3.2rem); }
-
-  .voidtype-preview i {
-    position: absolute;
-    z-index: 1;
-    right: 22px;
-    bottom: 20px;
-    color: #85858b;
-    font: normal 650 .58rem var(--mono);
-    letter-spacing: .12em;
-  }
+  .work-visual.is-contained img { object-fit: contain; }
+  .work-feature:hover .work-visual.is-contained img { transform: none; }
 
   .work-info {
     display: flex;
@@ -478,23 +426,20 @@ const buildAreas = [
 
   @media (max-width: 900px) {
     .work-feature.is-featured { grid-template-columns: 1fr; }
-    .work-visual.is-voidtype { min-height: 410px; }
+    .work-visual.is-contained {
+      min-height: 0;
+      aspect-ratio: 2820 / 1370;
+    }
     .work-rows-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 640px) {
     .feature-grid { grid-template-columns: 1fr; }
     .work-feature.is-featured { grid-column: auto; }
-    .work-visual.is-voidtype { min-height: 320px; }
-    .voidtype-preview { padding: 28px 18px; }
     .work-foot { align-items: flex-start; flex-direction: column; }
     .work-links { justify-content: flex-start; }
     .build-grid { grid-template-columns: 1fr; }
     .work-row-item .status-pill { align-self: flex-start; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .voidtype-preview::before,
-    .voidtype-preview::after { transition: none; }
-  }
 </style>
