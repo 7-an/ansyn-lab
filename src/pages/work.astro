@@ -1,445 +1,96 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectRows from "../components/ProjectRows.astro";
+import { featuredProjects as features, communityProjects } from "../config/projects";
 
-const features = [
-  {
-    org: "INDEPENDENT / 开源交互实验",
-    title: "VOIDTYPE",
-    problem: "把动态粒子字从网站项目中拆成可独立运行的实验，研究文字采样、流体扰动、惯性倾斜与自然回位。",
-    role: "交互拆解 · 参数调试 · AI 协作开发",
-    deliverable: "Three.js / Vite 在线演示、实现文档与 GitHub 开源仓库。",
-    next: "已完成并开源，作为后续视觉交互实验的可复用基础。",
-    status: "OPEN SOURCE / LIVE",
-    tone: "completed",
-    visual: {
-      kind: "image",
-      fit: "contain",
-      image: {
-        src: "/images/voidtype-cover.png",
-        alt: "VOIDTYPE 粒子字体项目画面：less is more，Slow down to speed up.",
-        width: 2820,
-        height: 1370
-      }
-    },
-    links: [
-      { href: "https://7-an.github.io/voidtype/", label: "在线体验 ↗" },
-      { href: "https://github.com/7-an/voidtype", label: "GitHub ↗" }
-    ],
-    featured: true
-  },
-  {
-    org: "INDEPENDENT / 独立项目",
-    title: "AI Study Path Triage",
-    problem: "从 100 多条学生咨询出发：高中生不缺学习建议，缺一条能开始执行的路径。",
-    role: "发起人 · 开源维护者",
-    deliverable: "GitHub 开源仓库：prompt、规则、模板与匿名案例。",
-    next: "已完结归档。除非出现值得探讨的新问题，不再主动迭代。",
-    status: "OPEN SOURCE / V0.1",
-    tone: "completed",
-    visual: {
-      kind: "image",
-      fit: "cover",
-      image: {
-        src: "/kimi/study-path-cover.png",
-        alt: "AI Study Path Triage 项目封面图",
-        width: 1672,
-        height: 941
-      }
-    },
-    links: [{ href: "https://github.com/7-an/ai-study-path-triage", label: "GitHub 开源仓库 ↗" }],
-    featured: false
-  },
-  {
-    org: "INDEPENDENT / 独立项目",
-    title: "Ansyn Lab",
-    problem: "个人网站不只是简历，更是长期沉淀内容、项目与证据的母站。",
-    role: "需求 · 信息架构 · AI 协作开发",
-    deliverable: "ansyn.me 与国内访问节点。",
-    next: "持续记录项目与复盘，沉淀长期内容。",
-    status: "LIVE",
-    tone: "completed",
-    visual: {
-      kind: "image",
-      fit: "cover",
-      image: {
-        src: "/kimi/ansyn-lab-preview.png",
-        alt: "Ansyn Lab 个人网站预览图",
-        width: 1729,
-        height: 910
-      }
-    },
-    links: [{ href: "https://ansyn.me/", label: "访问网站 ↗" }],
-    featured: false
-  }
-] as const;
 
-const kosxProjects = [
-  {
-    title: "社群活动管理工作台",
-    problem: "社群项目的信息散落在群聊里，活动、任务和进度依赖人工维护。",
-    role: "工作流设计 · 信息结构 · AI 介入点探索",
-    deliverable: "飞书多维表格 V0、流程图、AI 介入点清单。",
-    next: "进入真实社群试用，记录人工维护时间和反馈。",
-    status: "BUILDING",
-    tone: "active"
-  },
-  {
-    title: "个人网站交付",
-    problem: "真实成员需要自己的个人网站，但从需求到上线缺少顺畅流程。",
-    role: "需求理解 · 信息架构 · AI 辅助开发 · 修改交付",
-    deliverable: "进行中的成员个人网站。",
-    next: "完成修改与上线交付，并记录对方反馈。",
-    status: "BUILDING",
-    tone: "active"
-  },
-  {
-    title: "社群日报内容二创",
-    problem: "群聊日报里有价值的信息，只留在群里就会消失。",
-    role: "信息提炼 · 内容二创 · 传播实验",
-    deliverable: "日报二创内容，持续进行中。",
-    next: "外部传播测试，记录阅读与反馈数据。",
-    status: "IN PROGRESS",
-    tone: "learning"
-  }
-] as const;
 
-const buildAreas = [
-  { title: "AI 工作流", note: "把重复流程拆成输入、规则、触发条件、输出和反馈。" },
-  { title: "内容与用户研究", note: "从评论、社群和访谈中整理真实问题，再转化成内容、产品假设或行动项。" },
-  { title: "社群与项目系统", note: "搭建活动管理、任务进度、日报、反馈和复盘工作台。" },
-  { title: "AI 辅助网站", note: "通过 AI 与 Codex 完成信息结构、页面开发、修改和公开上线。" }
-];
+
 ---
 
 <BaseLayout
-  title="项目与交付｜Ansyn Lab"
-  description="安寻的项目与交付：VOIDTYPE 粒子交互实验、AI Study Path Triage、Ansyn Lab，以及在 KOSX.ai 参与的真实协作项目。"
+  title="Work & projects | Ansyn Lab"
+  description="Projects by Ansyn: VOIDTYPE, Video Subtitle Extractor, AI Study Path Triage, Ansyn Lab and ongoing collaborations at KOSX.ai."
 >
-  <section class="page-hero shell">
-    <p class="eyebrow">Selected Work / 项目与交付</p>
-    <h1 data-proximity><span class="lm"><span class="lm-in">做得出来的，</span></span><span class="lm"><span class="lm-in">才算数。</span></span></h1>
-    <p>每个项目只写清楚：什么问题、我负责哪部分、交付了什么、下一步是什么。<br />进行中的不包装成已完成。</p>
+  <section class="page-hero-min shell" aria-labelledby="work-title">
+    <div class="hero-intro" lang="en" data-reveal>
+      <h1 id="work-title">Making things.<br />Figuring things out.</h1>
+      <p>Websites, tools and experiments with AI. Some are live, others are still taking shape. Each one starts with a question and gets better through use.</p>
+    </div>
+    <p class="hero-foot" data-reveal data-reveal-delay="1">
+      <span>SELECTED WORK / PROJECTS & EXPERIMENTS</span>
+      <span>2026 ~ now</span>
+    </p>
   </section>
 
-  <section class="section shell work-list" aria-label="项目列表">
-    <div class="feature-grid">
-      {features.map((project) => (
-        <article class:list={["work-feature", { "is-featured": project.featured }]} data-reveal>
-          <figure class:list={["work-visual", { "is-contained": project.visual.fit === "contain" }]}>
-            <img
-              src={project.visual.image.src}
-              alt={project.visual.image.alt}
-              width={project.visual.image.width}
-              height={project.visual.image.height}
-              loading="lazy"
-            />
-          </figure>
-          <div class="work-info">
-            <span class="work-org">{project.org}</span>
-            <h2>{project.title}</h2>
-            <p class="work-problem">{project.problem}</p>
-            <dl class="work-facts">
-              <div>
-                <dt>ROLE</dt>
-                <dd>{project.role}</dd>
-              </div>
-              <div>
-                <dt>DELIVERABLE</dt>
-                <dd>{project.deliverable}</dd>
-              </div>
-              <div>
-                <dt>NEXT</dt>
-                <dd>{project.next}</dd>
-              </div>
-            </dl>
-            <div class="work-foot">
-              <span class:list={["status-pill", project.tone]}>{project.status}</span>
-              <div class="work-links">
-                {project.links.map((link) => (
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div class="work-rows" aria-label="KOSX 协作项目">
-      <p class="rows-kicker" data-reveal>WORK AT KOSX / 组织协作</p>
-      <div class="work-rows-grid">
-        {kosxProjects.map((project) => (
-          <article class="work-row-item" data-reveal>
-            <header>
-              <h2>{project.title}</h2>
-              <span class:list={["status-pill", project.tone]}>{project.status}</span>
-            </header>
-            <p class="work-problem">{project.problem}</p>
-            <dl class="work-facts inline">
-              <div>
-                <dt>ROLE</dt>
-                <dd>{project.role}</dd>
-              </div>
-              <div>
-                <dt>DELIVERABLE</dt>
-                <dd>{project.deliverable}</dd>
-              </div>
-              <div>
-                <dt>NEXT</dt>
-                <dd>{project.next}</dd>
-              </div>
-            </dl>
-          </article>
-        ))}
-      </div>
-    </div>
+  <section class="showcase" aria-label="Selected projects">
+    <ProjectRows projects={[...features, ...communityProjects]} />
   </section>
 
-  <section class="section shell build-section" aria-labelledby="build-title">
-    <header class="build-heading" data-reveal>
-      <p class="eyebrow">What I Build / 我能做什么</p>
-      <h2 id="build-title">我能干什么。</h2>
-    </header>
-    <div class="build-grid">
-      {buildAreas.map((area, index) => (
-        <article data-reveal data-reveal-delay={String(index + 1)}>
-          <span>0{index + 1}</span>
-          <h3>{area.title}</h3>
-          <p>{area.note}</p>
-        </article>
-      ))}
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
-  .work-list {
+  .page-hero-min {
     display: flex;
+    padding-top: clamp(160px, 25vh, 280px);
+    padding-bottom: 0;
     flex-direction: column;
-    gap: clamp(48px, 7vw, 96px);
   }
 
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-  }
-
-  .work-feature {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: rgba(252, 251, 247, .82);
-  }
-
-  .work-feature.is-featured {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.18fr) minmax(360px, .82fr);
-  }
-
-  .work-visual {
-    margin: 0;
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-    background: var(--paper-deep);
-  }
-
-  .work-visual img {
-    display: block;
+  .hero-intro {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .8s cubic-bezier(.22, 1, .36, 1);
+    margin: 0;
+    padding-left: 37.5%;
   }
 
-  .work-feature:hover .work-visual img { transform: scale(1.015); }
-
-  .work-visual.is-contained {
-    min-height: 470px;
-    aspect-ratio: auto;
-    background: #020203;
-  }
-
-  .work-visual.is-contained img { object-fit: contain; }
-  .work-feature:hover .work-visual.is-contained img { transform: none; }
-
-  .work-info {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: clamp(26px, 3.5vw, 42px);
-  }
-
-  .work-org {
-    color: var(--accent-strong);
-    font: 750 .72rem var(--mono);
-    letter-spacing: .08em;
-  }
-
-  .work-info h2 {
-    margin: 18px 0 0;
-    font-size: clamp(1.9rem, 3.6vw, 3.1rem);
-    line-height: 1.08;
+  .hero-intro h1 {
+    margin: 0;
+    font-size: clamp(3.2rem, 5vw, 5.6rem);
+    font-weight: 400;
+    line-height: 1.12;
     letter-spacing: -.05em;
   }
 
-  .work-problem {
-    max-width: 560px;
-    margin: 18px 0 0;
-    font-size: 1.02rem;
-    font-weight: 650;
-    line-height: 1.55;
-  }
-
-  .work-facts {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin: 28px 0 0;
-  }
-
-  .work-facts div {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 18px;
-  }
-
-  .work-facts dt {
+  .hero-intro p {
+    max-width: 320px;
+    margin: 16px 0 0;
     color: var(--muted);
-    font: 700 .68rem var(--mono);
-    letter-spacing: .08em;
-    padding-top: 3px;
+    font-size: .95rem;
+    line-height: 1.75;
   }
 
-  .work-facts dd {
-    margin: 0;
-    font-size: .92rem;
-  }
-
-  .work-foot {
+  .hero-foot {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: 24px;
-    margin-top: auto;
-    padding-top: 30px;
-  }
-
-  .work-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 12px 18px;
-  }
-
-  .work-links a {
-    color: var(--accent-strong);
-    font: 800 .82rem var(--mono);
-    border-bottom: 1px solid currentColor;
-  }
-
-  .work-links a:hover { color: var(--ink); }
-
-  .rows-kicker {
-    margin: 0 0 22px;
-    color: var(--accent-strong);
-    font: 750 .74rem var(--mono);
+    margin: 24px 0 0;
+    font-family: var(--mono);
+    font-size: .72rem;
+    font-weight: 700;
     letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
-  .work-rows-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .work-row-item {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    padding: clamp(24px, 3vw, 34px);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: var(--paper-deep);
-  }
-
-  .work-row-item header {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column-reverse;
-    gap: 16px;
-  }
-
-  .work-row-item h2 {
-    margin: 0;
-    font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-    letter-spacing: -.04em;
-  }
-
-  .work-facts.inline {
-    display: flex;
-    gap: 15px;
-    margin-top: auto;
-    padding-top: 26px;
-  }
-
-  .work-facts.inline div {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .build-section { border-bottom: 0; }
-
-  .build-heading h2 {
-    margin: 20px 0 0;
-    font-size: clamp(2.2rem, 4.6vw, 4.2rem);
-    line-height: 1.1;
-    letter-spacing: -.055em;
-  }
-
-  .build-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(28px, 4vw, 48px) clamp(32px, 5vw, 72px);
-    margin-top: clamp(40px, 5vw, 64px);
-    border-top: 1px solid var(--ink);
-    padding-top: clamp(32px, 4vw, 52px);
-  }
-
-  .build-grid span {
+  .hero-foot span:last-child {
     color: var(--muted);
-    font: .72rem var(--mono);
+    font-weight: 400;
+    white-space: nowrap;
+    text-transform: none;
   }
 
-  .build-grid h3 {
-    margin: 18px 0 10px;
-    font-size: 1.4rem;
-    letter-spacing: -.03em;
-  }
-
-  .build-grid p { margin: 0; color: var(--muted); }
-
-  @media (max-width: 900px) {
-    .work-feature.is-featured { grid-template-columns: 1fr; }
-    .work-visual.is-contained {
+  @media (max-width: 700px) {
+    .page-hero-min {
       min-height: 0;
-      aspect-ratio: 2820 / 1370;
+      padding-top: 84px;
     }
-    .work-rows-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 640px) {
-    .feature-grid { grid-template-columns: 1fr; }
-    .work-feature.is-featured { grid-column: auto; }
-    .work-foot { align-items: flex-start; flex-direction: column; }
-    .work-links { justify-content: flex-start; }
-    .build-grid { grid-template-columns: 1fr; }
-    .work-row-item .status-pill { align-self: flex-start; }
+    .hero-intro {
+      width: 100%;
+      margin: 0;
+      padding-left: 0;
+    }
+    .hero-intro h1 { font-size: clamp(2rem, 11vw, 3.8rem); }
+    .hero-foot { flex-direction: column; gap: 10px; margin-top: 48px; }
   }
 
 </style>

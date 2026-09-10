@@ -1,5 +1,7 @@
 # Ansyn Lab
 
+第二版最终版（2026-09-10）。正式站：https://ansyn.me 。本地源代码是本站真源；设计师的 `7-an/lab` 仓库是设计参考。
+
 安寻 Ansyn 的长期个人网站：记录一个 07 后如何利用 AI、互联网和个人系统，从高中环境进入真实世界。网站是纯静态项目，不需要数据库、登录或后台服务，可部署到 Vercel、Netlify 或 Cloudflare Pages。
 
 ## 技术栈
@@ -28,17 +30,17 @@ npm run build
 npm run preview
 ```
 
-静态产物生成在 `dist/`。
+静态产物生成在 `dist/`。开发服务器与检查/构建使用独立依赖缓存，可在本地预览运行时执行检查，避免首页动效依赖失效。
 
 ## 站点结构
 
-- `/` 首页：粒子头像 Hero、图像化当前坐标，以及项目与文章双导航卡
-- `/work/` 项目与交付：独立项目与组织协作的项目卡（角色、交付、下一步），以及「我能干什么」
-- `/writing/` 公开内容：外部文章索引，支持按平台与分类筛选
-- `/about/` 关于：完整故事与记录原则
+- `/` 首页：原五词字符 Hero、连续地球与城市相册、KOSX 当前状态（NOW）、项目/文章/关于大字目录，以及个人联系页脚
+- `/work/` 项目与交付：统一网格中的七个独立与社区协作项目，展开 VOIDTYPE 后可在黑框内体验实时粒子
+- `/writing/` 公开内容：外部文章索引，文字索引与悬停图片/短视频预览，文章标题保留原文
+- `/about/` 关于：参考 Dennis About 的两行大标题、照片视差、三栏能力介绍、KOSX 协作与弧形联系页脚
 - `/404.html` 自定义 404 页面
 
-社交图标在右上角导航；背景音乐开关在右下角。文章一律发布在外部平台（X、抖音等），站内只保留索引，不再维护站内 Markdown 文章。
+全站导航共用 `src/components/Header.astro` 和 `src/lib/site-navigation.ts`：顶部 Work / Writing / About / Contact，下滑后收成圆形菜单；社交入口位于展开菜单中。首页保留头像与 Ansyn 随滚动显隐，背景音乐暂时关闭。文章一律发布在外部平台（X、抖音等），站内只保留索引，不再维护站内 Markdown 文章。
 
 ## 新增外部文章
 
@@ -48,7 +50,14 @@ npm run preview
 
 ## 修改项目与交付
 
-首页与 `/work/` 的项目内容直接维护在 `src/pages/index.astro` 与 `src/pages/work.astro` 顶部的数组中，每项包含标题、描述、角色、交付、下一步与状态标签。进行中的项目不包装成已完成。
+精选项目统一维护在 `src/config/projects.ts`，首页 WORK 预览与 `/work/` 共用这份内容；每项包含标题、描述、角色、交付、下一步与状态标签。KOSX 协作项目也在同一配置中维护，首页 Now at KOSX.ai 链接到组织官网。进行中的项目不包装成已完成。
+
+首页目录在 `src/components/HomeDirectory.astro`；地球、城市记录与 Now at 在 `HomeExperience.astro`，城市照片维护于 `src/config/globe-locations.ts`。全站共享 `AboutFooter.astro` 的联系页脚。About 内容在 `AboutExperience.astro`，双语翻译在 `src/data/translations.json`。
+
+首页每个标签页首次直接进入时播放多语言开屏；刷新跳过，站内切换保留圆弧页名转场。实现位于 `PageTransition.astro` 与 `src/lib/page-transition.ts`，Hero 动效在揭幕时开始。减少动态模式跳过开屏。
+
+地球地图文件 `public/data/countries.json` 和翻译表必须随源码提交。根目录 `/data/` 是内部资料，仍被忽略。
+
 
 ## 修改个人信息与社交链接
 
@@ -57,40 +66,17 @@ npm run preview
 - 名称、介绍、SEO 关键词与品牌标语在 `siteConfig` 中。
 - X、GitHub、Telegram、邮箱、微信号在 `siteConfig.social` 中；为空的项目不会显示在页面上。
 - KOSX 的组织名称与链接在 `siteConfig.kosx` 中。
-- `PUBLIC_SITE_URL` 是唯一的正式站点地址入口，默认值为 `https://ansyn-lab.vercel.app`。
+- `PUBLIC_SITE_URL` 是唯一的正式站点地址入口，默认值为 `https://ansyn.me`。
 
 绑定新域名后，在部署平台把 `PUBLIC_SITE_URL` 设置为完整正式地址（包含 `https://`），重新构建即可统一更新 canonical、OG、robots 和 sitemap 的基础地址。
 
-## 推送到 GitHub
+## 发布与回退
 
-在 GitHub 创建一个空仓库，不要额外生成 README。然后在本项目目录执行：
+正式仓库是 `7-an/ansyn-lab`，Vercel 项目为 `ansyn-lab`，正式分支是 `main`。修改后运行 `npm run check`；经用户确认后提交并推送 `main`，等待 Vercel 成功，再实际检查 https://ansyn.me 的首页、地球、项目、文章、关于与页面转场。
 
-```bash
-git add .
-git commit -m "build: launch Ansyn Lab MVP"
-git remote add origin https://github.com/YOUR_NAME/ansyn-lab.git
-git push -u origin main
-```
+第二版最终版使用标签 `v2.0.0` 保存；此前正式版为 `e2f8f60`。需要回退时，可在 Vercel 将此前成功的生产部署重新提升为正式版本，或通过新的 Git revert 提交撤回第二版发布提交。不要强推或重写历史。
 
-如果已有远程仓库，只需提交后运行 `git push`。
-
-## 部署到 Vercel（推荐）
-
-1. 登录 Vercel，选择 **Add New → Project**。
-2. 导入刚推送的 GitHub 仓库。
-3. Framework Preset 选择 **Astro**（通常会自动识别）。
-4. Build Command 使用 `npm run build`。
-5. Output Directory 使用 `dist`。
-6. Install Command 使用 `npm install`。
-7. Node.js 版本选择 20.x。
-8. 添加环境变量 `PUBLIC_SITE_URL`，值先填 Vercel 分配的正式项目地址，例如 `https://ansyn-lab.vercel.app`。
-9. 点击 Deploy。部署完成后，任何人都能通过 Vercel URL 访问。
-
-Astro 已输出带目录索引的纯静态页面，因此站内页面刷新不会依赖本地服务。后续每次向所连接的 GitHub 分支推送，Vercel 都会自动重新构建和部署。
-
-### 绑定自定义域名
-
-在 Vercel 项目中打开 **Settings → Domains**，添加域名并按提示设置 DNS。域名生效后，把 `PUBLIC_SITE_URL` 改成新的正式地址并重新部署。
+部署环境的 `PUBLIC_SITE_URL` 应为 `https://ansyn.me`，用于 canonical、OG、robots 和 sitemap。构建输出为 `dist/`，不需要数据库或运行服务器。
 
 ## 其他静态平台
 
@@ -111,7 +97,7 @@ Astro 已输出带目录索引的纯静态页面，因此站内页面刷新不�
 
 ## 当前版本已完成
 
-- 响应式首页：粒子头像、两张现场证据图、KOSX 与当前坐标合并、项目与文章双导航卡
+- 响应式首页：五词字符 Hero、连续地球、三城照片入口、NOW、通栏目录与联系页脚
 - `/work/` 项目与交付页、`/writing/` 外部文章索引（平台与分类筛选）、`/about/` 关于页、自定义 404
 - 简洁主导航与 X 入口、右下角背景音乐开关（默认关闭、记住选择）
 - title、description、canonical、Open Graph、X Card、结构化数据、favicon、robots、sitemap

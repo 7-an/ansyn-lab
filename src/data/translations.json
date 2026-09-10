@@ -1,0 +1,1390 @@
+[
+  [
+    "Work & projects | Ansyn Lab",
+    "项目与交付｜Ansyn Lab"
+  ],
+  [
+    "Projects by Ansyn: VOIDTYPE, Video Subtitle Extractor, AI Study Path Triage, Ansyn Lab and ongoing collaborations at KOSX.ai.",
+    "安寻的项目与交付：VOIDTYPE 粒子交互实验、Video Subtitle Extractor、AI Study Path Triage、Ansyn Lab，以及在 KOSX.ai 参与的真实协作项目。"
+  ],
+  [
+    "About Ansyn | Ansyn Lab",
+    "关于安寻 Ansyn｜Ansyn Lab"
+  ],
+  [
+    "Born in 2007 and exploring the real world with AI. Learning systems, open-source experiments and collaboration at KOSX.",
+    "一个用 AI 探索真实世界的 07 后。从学习系统、开源实验到 KOSX 协作，记录行动、反馈与正在形成的答案。"
+  ],
+  [
+    "Writing | Ansyn Lab",
+    "Writing｜安寻 Ansyn"
+  ],
+  [
+    "An open notebook on AI, personal experiments and the real world. Writing and reflections by Ansyn.",
+    "关于 AI、真实世界和个人实验的公开记录。安寻的文章、观察与复盘。"
+  ],
+  [
+    "SELECTED WORK / PROJECTS & EXPERIMENTS",
+    "SELECTED WORK / 项目与交付"
+  ],
+  [
+    "Selected projects",
+    "精选项目"
+  ],
+  [
+    "INDEPENDENT / INTERACTIVE EXPERIMENT",
+    "INDEPENDENT / 开源交互实验"
+  ],
+  [
+    "INDEPENDENT / PERSONAL PROJECT",
+    "INDEPENDENT / 独立项目"
+  ],
+  [
+    "KOSX / COMMUNITY COLLABORATION",
+    "KOSX / 社群共建"
+  ],
+  [
+    "A standalone particle-type experiment extracted from a website project, exploring text sampling, fluid motion, inertial tilt and a natural return to rest.",
+    "把动态粒子字从网站项目中拆成可独立运行的实验，研究文字采样、流体扰动、惯性倾斜与自然回位。"
+  ],
+  [
+    "Interaction design · Parameter tuning · Development with AI",
+    "交互拆解 · 参数调试 · AI 协作开发"
+  ],
+  [
+    "A Three.js / Vite demo, implementation notes and an open-source GitHub repository.",
+    "Three.js / Vite 在线演示、实现文档与 GitHub 开源仓库。"
+  ],
+  [
+    "Completed and open-sourced as a reusable starting point for future visual experiments.",
+    "已完成并开源，作为后续视觉交互实验的可复用基础。"
+  ],
+  [
+    "Try the demo ↗",
+    "在线体验 ↗"
+  ],
+  [
+    "Many educational YouTube videos have no extractable subtitles, making their content harder to use with AI for notes and study.",
+    "很多 YouTube 学习视频没有可直接提取的字幕轨，内容就很难继续交给 AI 整理和辅助学习。"
+  ],
+  [
+    "Problem discovery · Product design · Development with AI",
+    "需求发现 · 产品设计 · AI 协作开发"
+  ],
+  [
+    "A Chrome extension and local helper. It extracts existing subtitles or transcribes locally with Whisper, then exports MD, SRT, TXT or JSON.",
+    "Chrome 扩展与本地助手：优先提取已有字幕，无字幕时用 Whisper 本地识别，支持 MD / SRT / TXT / JSON 导出。"
+  ],
+  [
+    "Completed and open-sourced. Currently available for macOS, with installation instructions in the repository.",
+    "已完成并开源。目前提供 macOS 版，按照仓库说明即可安装使用。"
+  ],
+  [
+    "Project notes ↗",
+    "项目记录 ↗"
+  ],
+  [
+    "Started with over 100 student enquiries: moving from abundant study advice to a path a student can actually begin.",
+    "从 100 多条学生咨询出发：高中生不缺学习建议，缺一条能开始执行的路径。"
+  ],
+  [
+    "Creator · Open-source maintainer",
+    "发起人 · 开源维护者"
+  ],
+  [
+    "An open-source repository with prompts, rules, templates and anonymised cases.",
+    "GitHub 开源仓库：prompt、规则、模板与匿名案例。"
+  ],
+  [
+    "Archived. Further work will depend on a new question worth investigating.",
+    "已完结归档。除非出现值得探讨的新问题，不再主动迭代。"
+  ],
+  [
+    "GitHub repository ↗",
+    "GitHub 开源仓库 ↗"
+  ],
+  [
+    "A personal website as a lasting home for writing, projects and evidence of the work behind them.",
+    "个人网站不只是简历，更是长期沉淀内容、项目与证据的母站。"
+  ],
+  [
+    "Requirements · Information architecture · Development with AI",
+    "需求 · 信息架构 · AI 协作开发"
+  ],
+  [
+    "ansyn.me and an access point for mainland China.",
+    "ansyn.me 与国内访问节点。"
+  ],
+  [
+    "Keep documenting projects and reflections over time.",
+    "持续记录项目与复盘，沉淀长期内容。"
+  ],
+  [
+    "Visit website ↗",
+    "访问网站 ↗"
+  ],
+  [
+    "Community Workspace",
+    "社群活动管理工作台"
+  ],
+  [
+    "Community project information is scattered across chats. Activities, tasks and progress rely on manual updates.",
+    "社群项目的信息散落在群聊里，活动、任务和进度依赖人工维护。"
+  ],
+  [
+    "Workflow design · Information structure · Exploring uses for AI",
+    "工作流设计 · 信息结构 · AI 介入点探索"
+  ],
+  [
+    "A V0 Feishu Bitable workspace, workflow diagrams and a list of possible uses for AI.",
+    "飞书多维表格 V0、流程图、AI 介入点清单。"
+  ],
+  [
+    "Trial it in a real community and record maintenance time and feedback.",
+    "进入真实社群试用，记录人工维护时间和反馈。"
+  ],
+  [
+    "Personal Websites",
+    "个人网站交付"
+  ],
+  [
+    "Community members need personal websites, but the path from requirements to launch needs a clearer process.",
+    "真实成员需要自己的个人网站，但从需求到上线缺少顺畅流程。"
+  ],
+  [
+    "Requirements · Information architecture · Development with AI · Revisions",
+    "需求理解 · 信息架构 · AI 辅助开发 · 修改交付"
+  ],
+  [
+    "Personal websites for community members, currently in progress.",
+    "进行中的成员个人网站。"
+  ],
+  [
+    "Complete revisions and launch, then document feedback from the people using them.",
+    "完成修改与上线交付，并记录对方反馈。"
+  ],
+  [
+    "Community Daily Notes",
+    "社群日报内容二创"
+  ],
+  [
+    "Useful ideas in community digests are easily lost when they stay inside the chat.",
+    "群聊日报里有价值的信息，只留在群里就会消失。"
+  ],
+  [
+    "Synthesis · Content adaptation · Distribution experiments",
+    "信息提炼 · 内容二创 · 传播实验"
+  ],
+  [
+    "Adapted content from community digests, with work ongoing.",
+    "日报二创内容，持续进行中。"
+  ],
+  [
+    "Test distribution beyond the community and record readership and feedback.",
+    "外部传播测试，记录阅读与反馈数据。"
+  ],
+  [
+    "INDEX / EXPLORE FURTHER",
+    "INDEX / 继续深入"
+  ],
+  [
+    "Explore more about Ansyn",
+    "继续了解安寻"
+  ],
+  [
+    "Projects & experiments",
+    "项目与交付"
+  ],
+  [
+    "Writing & field notes",
+    "文章与记录"
+  ],
+  [
+    "Background & approach",
+    "经历与做事方式"
+  ],
+  [
+    "ANSYN / ABOUT ME",
+    "安寻 / ANSYN"
+  ],
+  [
+    "Making things with AI,",
+    "用 AI 做项目，"
+  ],
+  [
+    "and keeping notes along the way.",
+    "也记录一路改变的想法。"
+  ],
+  [
+    "Things I’ve tried. Questions I’m working through.",
+    "做过的事，正在想的问题。"
+  ],
+  [
+    "Notes on AI, personal experiments and life beyond school.",
+    "关于 AI、个人实验，以及走进真实世界之后的发现。"
+  ],
+  [
+    "Writing archive",
+    "文章目录"
+  ],
+  [
+    "Filter by platform",
+    "按平台筛选"
+  ],
+  [
+    "Filter by topic",
+    "按分类筛选"
+  ],
+  [
+    "Douyin",
+    "抖音"
+  ],
+  [
+    "Xiaohongshu",
+    "小红书"
+  ],
+  [
+    "Bilibili",
+    "B站"
+  ],
+  [
+    "External platform",
+    "外部平台"
+  ],
+  [
+    "Particle interaction excerpt · Watch the original post",
+    "粒子交互片段 · 前往原帖观看"
+  ],
+  [
+    "Original link coming soon",
+    "原文链接待补充"
+  ],
+  [
+    "No entries match these filters yet.",
+    "这个筛选条件下暂时没有内容。"
+  ],
+  [
+    "Each piece lives where it was first published. Select a title to read the original.",
+    "文章保留在最初发布的地方。点击标题，前往原平台阅读。"
+  ],
+  [
+    "Writing preview",
+    "文章预览"
+  ],
+  [
+    "Six-second VOIDTYPE particle interaction preview",
+    "VOIDTYPE 六秒粒子交互预览"
+  ],
+  [
+    "Play particle preview",
+    "播放粒子交互预览"
+  ],
+  [
+    "Pause particle preview",
+    "暂停粒子交互预览"
+  ],
+  [
+    "Skip to main content",
+    "跳至主要内容"
+  ],
+  [
+    "Skip to current chapter",
+    "跳至当前状态"
+  ],
+  [
+    "Ansyn Lab home",
+    "Ansyn Lab 首页"
+  ],
+  [
+    "Main navigation",
+    "主要导航"
+  ],
+  [
+    "Open navigation menu",
+    "打开导航菜单"
+  ],
+  [
+    "Close navigation menu",
+    "关闭导航菜单"
+  ],
+  [
+    "Site navigation",
+    "站点导航"
+  ],
+  [
+    "Full navigation",
+    "完整导航"
+  ],
+  [
+    "Ansyn: born in 2007, exploring life beyond school through personal experiments with AI",
+    "安寻 Ansyn：07 后，AI 时代个人成长实验，从高中系统进入真实世界"
+  ],
+  [
+    "Interactive globe: hover or touch for coordinates; drag within the globe or use the arrow keys to rotate",
+    "互动地球：悬停或触摸查看经纬度，仅在球面内拖动或使用方向键旋转"
+  ],
+  [
+    "Close place notes",
+    "关闭城市记录"
+  ],
+  [
+    "Previous photo",
+    "上一张照片"
+  ],
+  [
+    "Next photo",
+    "下一张照片"
+  ],
+  [
+    "Choose a place",
+    "切换地点"
+  ],
+  [
+    "Globe coordinates",
+    "球面经纬度"
+  ],
+  [
+    "Map outlines could not load. Showing the coordinate grid.",
+    "地图轮廓暂未载入，当前显示经纬网。"
+  ],
+  [
+    "Page not found | Ansyn Lab",
+    "页面未找到｜Ansyn Lab"
+  ],
+  [
+    "This page does not exist, or has not been built yet.",
+    "这个页面不存在，或仍未被构建。"
+  ],
+  [
+    "No answer down this path yet.",
+    "这条路径还没有答案。"
+  ],
+  [
+    "It may have moved, or it may still be an idea.",
+    "它可能被移动了，也可能只是还没开始构建。"
+  ],
+  [
+    "Back home →",
+    "返回首页 →"
+  ],
+  [
+    "Read the notebook",
+    "阅读公开笔记"
+  ],
+  [
+    "Hong Kong",
+    "香港"
+  ],
+  [
+    "Shenzhen",
+    "深圳"
+  ],
+  [
+    "Hangzhou",
+    "杭州"
+  ],
+  [
+    "Introducing my personal website in Hong Kong",
+    "在香港介绍个人网站的现场"
+  ],
+  [
+    "Sharing social profiles over a meal in Hong Kong",
+    "香港聚餐时的桌面与社交主页合照"
+  ],
+  [
+    "A meetup photo in Shenzhen, with the original illustrated faces",
+    "深圳见面的合照，保留原图中的漫画头像"
+  ],
+  [
+    "What feedback from six high school students taught me about AI plans, human support and daily adjustments. What worked, what I misjudged and the limits of a small sample. A research prototype, with no promise of better grades.",
+    "从 6 名高中生的真实反馈里，重新理解 AI 计划、人工陪伴与每日调整的作用。记录有效的部分，也保留误判和样本局限：这是研究原型，不是提分承诺。"
+  ],
+  [
+    "From meetups and content experiments to a first practical project and an internship at KOSX. Before leaving Shenzhen, I look back at the people, the work and a direction slowly taking shape.",
+    "从参加创业交流会，到尝试自媒体、完成第一个实战项目，再到 KOSX 实习。离开深圳前，回顾遇到的人、做过的事，以及逐渐想清楚的方向。"
+  ],
+  [
+    "A first-hand review of sourcing, finding customers on Xianyu, delivery and repeat purchases. A small amount of money, but my first full encounter with pricing, demand and running a small business.",
+    "从稳定供给、闲鱼获客、成交交付到售后复购的真实复盘。金额不大，但这是我第一次完整接触定价、用户需求与商业闭环。"
+  ],
+  [
+    "A record of sourcing, listings, sales, delivery and support in my first small business. This describes the process at the time; later posts note changes to some listing copy and practices.",
+    "把第一次小生意的供给、上架、成交、交付与售后过程整理下来。这是当时的实践记录；后续帖子已说明，部分上架文案和操作方式有变化。"
+  ],
+  [
+    "While building a personal website for Liu, I tried to recreate the particle effect on the newmix homepage. It took more than a dozen revisions. The resulting demo and code are public.",
+    "为刘哥制作个人网站时，我尝试复刻 newmix 首页的粒子效果。过程远比想象中复杂，反复调整十几遍后完成，并把在线演示与代码一同公开。"
+  ],
+  [
+    "Reflections after an AI, entrepreneurship and Web3 meetup: taking action, real users, personal identity, distribution, AI applications and testing ideas in the market.",
+    "参加一场AI、创业与Web3交流会后的系统复盘，内容涉及行动、真实用户、个人IP、流量、AI应用层、商业验证，以及年轻人如何进入真实市场。"
+  ],
+  [
+    "I once tried to understand a relationship through AI. It can help with self-reflection, but it can also turn our expectations, biases and fantasies into a convincing story.",
+    "我曾试图用AI解释一段关系，最后发现AI既能帮助人认识自己，也可能把人的期待、偏见和幻想，补全成一套看似合理的理论。"
+  ],
+  [
+    "An comes from my Chinese name and a sense of inner steadiness. Syn comes from sync: a reminder to stay open to new information. Together, they describe how I want to keep exploring.",
+    "An 来自名字里的安，也代表内心的安定；syn 来自 sync，提醒自己与新的信息同步。一个名字背后，是我希望保留的状态和探索方向。"
+  ],
+  [
+    "An introduction written at 18: my background and why I began exploring AI, personal identity, the global internet and business beyond high school.",
+    "一篇关于安寻身份、成长背景与未来方向的自我介绍，记录一个18岁年轻人如何从高中环境开始探索AI、个人IP、全球互联网与商业。"
+  ],
+  [
+    "A study system drawn from independent study in my final school year, AI assistance and ongoing reflection: mindset, identifying problems, execution, time management, practice and feedback.",
+    "根据高三自学、AI辅助和持续复盘总结出的学习系统，核心包括心态、问题定位、执行、时间管理、反馈与刷题闭环。"
+  ],
+  [
+    "Cover for a seven-day AI study experiment with six students, with green type and a laptop on black",
+    "6 名学生与 7 天实验的 AI 学习框架封面，黑底绿字与笔记本电脑"
+  ],
+  [
+    "Image from the open-source follow-up posted on July 28.",
+    "配图来自 7 月 28 日的开源后续。"
+  ],
+  [
+    "Blue-hour street scene from the original post, with towers, palms and streetlights",
+    "回顾原帖所附的蓝调时刻街景，高楼、棕榈树与亮起的路灯"
+  ],
+  [
+    "Yellow cover for the Xianyu SOP post, with a Luffy illustration",
+    "两天 1k+ 闲鱼代充完整 SOP，黄色横版封面与路飞插画"
+  ],
+  [
+    "VOIDTYPE particle demo with white type on black, responding to the pointer",
+    "VOIDTYPE 黑底白字的粒子交互演示，文字随鼠标扰动流动"
+  ],
+  [
+    "VOIDTYPE particle type: less is more. Slow down to speed up.",
+    "VOIDTYPE 粒子字体项目画面：less is more，Slow down to speed up."
+  ],
+  [
+    "Video Subtitle Extractor workflow: extract YouTube subtitles or transcribe locally with Whisper, then export",
+    "Video Subtitle Extractor 项目流程图：从 YouTube 视频提取字幕轨，或使用本地 Whisper 生成字幕并导出多种格式"
+  ],
+  [
+    "AI Study Path Triage project cover",
+    "AI Study Path Triage 项目封面图"
+  ],
+  [
+    "AI Study Path Triage workflow",
+    "AI Study Path Triage 的工作流程图"
+  ],
+  [
+    "Ansyn Lab cover: a personal experiment in growing up with AI",
+    "Ansyn Lab 个人网站封面：安寻 Ansyn，07 后 AI 时代个人成长实验"
+  ],
+  [
+    "Ansyn Lab | An ongoing experiment in the real world",
+    "安寻 Ansyn｜07后AI时代个人成长实验"
+  ],
+  [
+    "A young person finding a way into the real world with AI. An open record by Ansyn.",
+    "一个年轻人，如何在 AI 时代进入真实世界——安寻的公开记录。"
+  ],
+  [
+    "Home",
+    "首页"
+  ],
+  [
+    "Work",
+    "项目"
+  ],
+  [
+    "Writing",
+    "文章"
+  ],
+  [
+    "About",
+    "关于"
+  ],
+  [
+    "Contact",
+    "联系"
+  ],
+  [
+    "Navigation",
+    "导航"
+  ],
+  [
+    "Elsewhere",
+    "其他平台"
+  ],
+  [
+    "Making things.",
+    "把想法做出来。"
+  ],
+  [
+    "Figuring things out.",
+    "在实践中寻找答案。"
+  ],
+  [
+    "Websites, tools and experiments with AI. Some are live, others are still taking shape. Each one starts with a question and gets better through use.",
+    "用 AI 做网站、工具和实验。有些已经上线，有些还在成形。每个项目都始于一个问题，并在使用中不断改进。"
+  ],
+  [
+    "2026 ~ now",
+    "2026 至今"
+  ],
+  [
+    "INFO",
+    "项目说明"
+  ],
+  [
+    "ROLE",
+    "我的工作"
+  ],
+  [
+    "DELIVERABLE",
+    "交付内容"
+  ],
+  [
+    "NEXT",
+    "下一步"
+  ],
+  [
+    "BUILDING",
+    "构建中"
+  ],
+  [
+    "IN PROGRESS",
+    "进行中"
+  ],
+  [
+    "OPEN SOURCE / LIVE",
+    "开源 / 已上线"
+  ],
+  [
+    "OPEN SOURCE / MACOS",
+    "开源 / macOS"
+  ],
+  [
+    "OPEN SOURCE / V0.1",
+    "开源 / V0.1"
+  ],
+  [
+    "LIVE",
+    "已上线"
+  ],
+  [
+    "OPEN SOURCE",
+    "开源"
+  ],
+  [
+    "KOSX / COLLABORATION",
+    "KOSX / 协作项目"
+  ],
+  [
+    "Community",
+    "社群"
+  ],
+  [
+    "workspace.",
+    "工作台。"
+  ],
+  [
+    "Personal",
+    "个人"
+  ],
+  [
+    "websites.",
+    "网站。"
+  ],
+  [
+    "Daily",
+    "每日"
+  ],
+  [
+    "notes.",
+    "记录。"
+  ],
+  [
+    "Writing & field notes",
+    "文章与实地记录"
+  ],
+  [
+    "Notes from",
+    "来自真实世界"
+  ],
+  [
+    "the real world.",
+    "的记录。"
+  ],
+  [
+    "Things I’ve tried. Questions I’m working through.",
+    "做过的事，正在想的问题。"
+  ],
+  [
+    "An open notebook.",
+    "一本公开的笔记。"
+  ],
+  [
+    "Still figuring things out.",
+    "还在不断探索。"
+  ],
+  [
+    "All",
+    "全部"
+  ],
+  [
+    "All topics",
+    "全部主题"
+  ],
+  [
+    "Index",
+    "目录"
+  ],
+  [
+    "Learning System",
+    "学习系统"
+  ],
+  [
+    "Field Notes",
+    "实地记录"
+  ],
+  [
+    "Business Experiment",
+    "商业实验"
+  ],
+  [
+    "Interactive Experiment",
+    "交互实验"
+  ],
+  [
+    "AI & Business",
+    "AI 与商业"
+  ],
+  [
+    "AI & Self-awareness",
+    "AI 与自我认知"
+  ],
+  [
+    "About Ansyn",
+    "关于安寻"
+  ],
+  [
+    "Between the lines.",
+    "字里行间。"
+  ],
+  [
+    "Reading note",
+    "阅读笔记"
+  ],
+  [
+    "Read on X",
+    "在 X 阅读原文"
+  ],
+  [
+    "Read on Douyin",
+    "在抖音阅读原文"
+  ],
+  [
+    "Play ↗",
+    "播放 ↗"
+  ],
+  [
+    "Pause Ⅱ",
+    "暂停 Ⅱ"
+  ],
+  [
+    "WORK",
+    "项目"
+  ],
+  [
+    "WRITING",
+    "文章"
+  ],
+  [
+    "ABOUT",
+    "关于"
+  ],
+  [
+    "BUILD. WRITE. BECOME.",
+    "实践。记录。成长。"
+  ],
+  [
+    "AN ONGOING EXPERIMENT",
+    "一个持续进行的实验"
+  ],
+  [
+    "↓ KEEP IN TOUCH",
+    "↓ 保持联系"
+  ],
+  [
+    "VIEW WORK ↗",
+    "查看项目 ↗"
+  ],
+  [
+    "FROM THE NOTEBOOK",
+    "来自笔记本"
+  ],
+  [
+    "From high school → real world",
+    "从高中 → 真实世界"
+  ],
+  [
+    "Scroll ↓",
+    "向下探索 ↓"
+  ],
+  [
+    "I’m Ansyn, born in 2007 and exploring the world with AI. Places I’ve been, things I’ve built, and ideas that keep changing.",
+    "我是安寻，生于 2007 年，用 AI 探索真实世界。这里记录我去过的地方、做过的项目，以及一路改变的想法。"
+  ],
+  [
+    "NOW",
+    "近况"
+  ],
+  [
+    "Interning at",
+    "目前实习于"
+  ],
+  [
+    "LOCAL TIME:",
+    "当地时间："
+  ],
+  [
+    "TIME ZONE:",
+    "时区："
+  ],
+  [
+    "Places",
+    "地点"
+  ],
+  [
+    "ON THE MAP",
+    "留在地图上"
+  ],
+  [
+    "Photos to come.",
+    "照片以后再补。"
+  ],
+  [
+    "Finding my way",
+    "在真实世界里"
+  ],
+  [
+    "in the real world.",
+    "找到自己的路。"
+  ],
+  [
+    "I’m Ansyn, born in 2007. I’m exploring how AI, the internet and personal systems can help me find my way beyond school and into the real world.",
+    "我是安寻，生于 2007 年。我正在探索如何借助 AI、互联网和个人系统，从学校走进真实世界，找到自己的方向。"
+  ],
+  [
+    "I don’t have a finished answer. I’m making things, meeting people and learning from what happens next.",
+    "我还没有完整的答案。我在做项目、认识新的人，也从接下来发生的事情里学习。"
+  ],
+  [
+    "Always exploring",
+    "始终探索"
+  ],
+  [
+    "Introducing myself at KOSX",
+    "在 KOSX 介绍自己"
+  ],
+  [
+    "Ansyn, wearing a cap, introducing himself at KOSX with his website on the screen.",
+    "戴着帽子的安寻在 KOSX 介绍自己，屏幕上是他的个人网站。"
+  ],
+  [
+    "Sharing our profiles at KOSX, with Hong Kong harbour outside the window",
+    "在 KOSX 分享彼此的主页，窗外是香港海港"
+  ],
+  [
+    "Hong Kong · A moment at KOSX",
+    "香港 · KOSX 的一个瞬间"
+  ],
+  [
+    "Into the world.",
+    "走进真实世界。"
+  ],
+  [
+    "With KOSX.",
+    "与 KOSX 一起。"
+  ],
+  [
+    "I’m currently interning at KOSX.ai, working on community project systems, content, AI automation and website delivery.",
+    "我目前在 KOSX.ai 实习，参与社群项目系统、内容、AI 自动化和网站交付。"
+  ],
+  [
+    "It’s my first experience of a real collaboration network — working alongside other builders, with deadlines, feedback and results beyond my own screen.",
+    "这是我第一次进入真实的协作网络：和其他实践者一起做事，面对截止日期、反馈和屏幕之外的结果。"
+  ],
+  [
+    "What I’m working on",
+    "看看我正在做什么"
+  ],
+  [
+    "I can help you with",
+    "我能做什么"
+  ],
+  [
+    "AI & Systems",
+    "AI 与系统"
+  ],
+  [
+    "I break repetitive work into inputs, rules, triggers, outputs and feedback. I build community and project workspaces for activities, tasks, daily updates and reviews.",
+    "我把重复工作拆成输入、规则、触发条件、输出与反馈，搭建用于活动、任务、日报和复盘的社群及项目工作台。"
+  ],
+  [
+    "Workflows & community systems",
+    "工作流与社群系统"
+  ],
+  [
+    "Content & Research",
+    "内容与研究"
+  ],
+  [
+    "I collect real questions from comments, communities and conversations, then turn them into content, product hypotheses or practical next steps.",
+    "我从评论、社群和对话里收集真实问题，把它们整理成内容、产品假设，或可以执行的下一步。"
+  ],
+  [
+    "Read the notes",
+    "阅读我的记录"
+  ],
+  [
+    "AI-assisted Web",
+    "AI 辅助建站"
+  ],
+  [
+    "I use AI and Codex to take websites from information structure to development, revisions and a public launch — making something people can actually use and respond to.",
+    "我用 AI 和 Codex 完成网站的信息结构、开发、修改与上线，做出别人可以实际使用并给出反馈的东西。"
+  ],
+  [
+    "Explore the projects",
+    "探索项目"
+  ],
+  [
+    "Let’s make",
+    "一起做点"
+  ],
+  [
+    "something real.",
+    "真实的东西。"
+  ],
+  [
+    "Get in touch",
+    "联系我"
+  ],
+  [
+    "Version",
+    "版本"
+  ],
+  [
+    "Local time",
+    "当地时间"
+  ],
+  [
+    "Socials",
+    "社交平台"
+  ],
+  [
+    "Social links",
+    "社交链接"
+  ],
+  [
+    "120K+",
+    "12万+"
+  ],
+  [
+    "Study-content views",
+    "学习内容播放"
+  ],
+  [
+    "Distribution",
+    "传播入口"
+  ],
+  [
+    "Student enquiries and needs",
+    "学生咨询与需求样本"
+  ],
+  [
+    "Problem discovery",
+    "问题来源"
+  ],
+  [
+    "5 students",
+    "5名"
+  ],
+  [
+    "Students in the initial trial",
+    "首批真实实验学生"
+  ],
+  [
+    "In-depth trial",
+    "深度测试"
+  ],
+  [
+    "1 project",
+    "1个"
+  ],
+  [
+    "Open-source AI study project",
+    "开源 AI 学习项目"
+  ],
+  [
+    "Public output",
+    "公开交付"
+  ],
+  [
+    "Real student questions",
+    "真实学生问题"
+  ],
+  [
+    "Structured intake",
+    "结构化采集"
+  ],
+  [
+    "AI follow-up questions",
+    "AI 补充追问"
+  ],
+  [
+    "Initial path triage",
+    "路径初筛"
+  ],
+  [
+    "Four-week overview",
+    "四周地图"
+  ],
+  [
+    "Daily tasks",
+    "每日任务"
+  ],
+  [
+    "Evidence from practice",
+    "执行证据"
+  ],
+  [
+    "Ongoing adjustments",
+    "动态纠偏"
+  ],
+  [
+    "Student intake protocol",
+    "学生信息采集协议"
+  ],
+  [
+    "Input completeness checks",
+    "信息完整性检查"
+  ],
+  [
+    "Study paths and priorities",
+    "学习路径与优先级判断"
+  ],
+  [
+    "Four-week path and seven-day starter templates",
+    "四周路径与 7 天启动模板"
+  ],
+  [
+    "Maths, English, physics and chemistry rules",
+    "数学 / 英语 / 物理 / 化学规则"
+  ],
+  [
+    "Daily feedback and adjustments",
+    "每日反馈与动态纠偏"
+  ],
+  [
+    "Human review and risk boundaries",
+    "人工升级与风险边界"
+  ],
+  [
+    "Manual prompts and open-source repository",
+    "Prompt 手动版与开源仓库"
+  ],
+  [
+    "Content from real use",
+    "真实场景内容"
+  ],
+  [
+    "Create cases around study, research, websites and open-source work, documenting first successes as well as limitations and failures.",
+    "围绕学生学习、深度研究、网站与开源项目，制作从第一次成功使用到失败边界的完整案例。"
+  ],
+  [
+    "First-hand product feedback",
+    "一线产品反馈"
+  ],
+  [
+    "Record why people do not use a tool, where first use breaks down and what helps younger users understand it.",
+    "记录用户为什么没用、第一次使用卡在哪里，以及什么表达能让年轻用户真正理解功能。"
+  ],
+  [
+    "Reusable adoption cases",
+    "可复用推广案例"
+  ],
+  [
+    "Adapt the study workflow to Kimi and document it as open-source work, tutorials, reflections and a map of user questions.",
+    "把学习工作流迁移到 Kimi，沉淀为开源项目、教程、实验复盘和用户问题地图。"
+  ],
+  [
+    "Migration",
+    "迁移"
+  ],
+  [
+    "Run the existing AI study workflow with Kimi and document capabilities, limitations and migration effort.",
+    "用 Kimi 重跑现有 AI 学习工作流，记录能力、限制与迁移成本。"
+  ],
+  [
+    "Content",
+    "内容"
+  ],
+  [
+    "Produce two or three pieces covering first use, workflows and failures or limitations.",
+    "完成入门、工作流案例、失败或边界复盘 2—3 条内容。"
+  ],
+  [
+    "Testing",
+    "测试"
+  ],
+  [
+    "Invite a small group of students or younger users to try it and collect recurring questions and feedback.",
+    "邀请一小批学生或年轻用户真实使用，收集高频问题与功能反馈。"
+  ],
+  [
+    "Delivery",
+    "交付"
+  ],
+  [
+    "Deliver a content review, user-question map, product feedback and a public case or demo.",
+    "提交内容复盘、用户问题地图、产品体验反馈和一个公开案例或 Demo。"
+  ],
+  [
+    "Kimi Ambassador Application | Ansyn",
+    "Kimi 推广大使申请作品集｜安寻 Ansyn"
+  ],
+  [
+    "Ansyn’s Kimi ambassador application: younger users, AI study workflows, content and first-hand product feedback.",
+    "安寻的 Kimi 推广大使申请作品集：真实年轻用户、AI 学习工作流、内容转化与一线产品反馈。"
+  ],
+  [
+    "Kimi Ambassador Application",
+    "Kimi 推广大使申请作品集"
+  ],
+  [
+    "AI product adoption",
+    "AI 产品推广"
+  ],
+  [
+    "Content operations",
+    "内容运营"
+  ],
+  [
+    "User research",
+    "用户研究"
+  ],
+  [
+    "Starting with real needs, taking AI beyond a single piece of content into",
+    "从真实年轻用户需求出发，把 AI 从一次内容传播，推进到"
+  ],
+  [
+    "usable workflows",
+    "可执行工作流"
+  ],
+  [
+    "and ongoing feedback.",
+    "和持续反馈。"
+  ],
+  [
+    "Download portfolio PDF",
+    "下载作品集 PDF"
+  ],
+  [
+    "View open-source project ↗",
+    "查看开源项目 ↗"
+  ],
+  [
+    "Personal introduction",
+    "个人介绍"
+  ],
+  [
+    "At 18, just out of high school, I was exploring how AI could help me",
+    "我是一名刚从高中系统走出的 18 岁 AI 实践者，持续探索如何借助 AI"
+  ],
+  [
+    "understand users, build workflows and explain complex tools in ways younger people can use.",
+    "理解真实用户、搭建工作流，并把复杂产品转化为年轻用户能够理解和使用的内容。"
+  ],
+  [
+    "Status",
+    "状态"
+  ],
+  [
+    "Starting point",
+    "入口"
+  ],
+  [
+    "Real problems",
+    "真实问题"
+  ],
+  [
+    "Method",
+    "方法"
+  ],
+  [
+    "Action → Evidence → Adjustment",
+    "行动 → 证据 → 修正"
+  ],
+  [
+    "Key figures",
+    "核心数据"
+  ],
+  [
+    "DATA SNAPSHOT / 2026.07 / Views and enquiries from content analytics and direct conversations; 81 user questions have been structured and archived.",
+    "DATA SNAPSHOT / 2026.07 / 播放与咨询数据来自内容后台及实际沟通；81 条用户问题已结构化归档。"
+  ],
+  [
+    "From 100+ student enquiries",
+    "从 100+ 条学生咨询，"
+  ],
+  [
+    "to an open-source AI study workflow",
+    "到开源 AI 学习工作流"
+  ],
+  [
+    "Students kept asking where to start, how to identify gaps and how to balance online lessons with practice,",
+    "学生反复询问的不是某一道题，而是不知道先补什么、怎样判断问题、如何安排网课与刷题，"
+  ],
+  [
+    "and how to make AI part of their study routine.",
+    "以及怎样让 AI 真正进入学习流程。"
+  ],
+  [
+    "01 / WHERE IT STARTED",
+    "01 / 问题从哪里来"
+  ],
+  [
+    "One post on high school study systems reached over 120,000 views. I then identified recurring questions in comments and messages,",
+    "一条关于高中学习系统的内容获得 12 万+ 播放。随后，我从评论和私信中识别重复问题，"
+  ],
+  [
+    "structured 81 complete records and recruited five students for the initial in-depth trial.",
+    "将其中 81 条完整记录结构化归档，再招募 5 名学生进入首批深度实验。"
+  ],
+  [
+    "02 / WHAT I DID",
+    "02 / 我实际做了什么"
+  ],
+  [
+    "Anonymised comments, messages and follow-up feedback",
+    "匿名整理真实评论、私信与后续反馈"
+  ],
+  [
+    "Designed structured intake and follow-up questions",
+    "设计结构化信息采集和补充追问流程"
+  ],
+  [
+    "Used AI to draft four-week paths and seven-day starter plans",
+    "使用 AI 生成四周路径与 7 天启动方案"
+  ],
+  [
+    "Reviewed each plan manually, recording edits and errors",
+    "逐份人工审核，记录修改理由和错误案例"
+  ],
+  [
+    "Collected daily evidence and adjusted the next step",
+    "收集每日执行证据，继续调整下一步"
+  ],
+  [
+    "Open-sourced rules, prompts, templates and anonymised cases",
+    "将规则、Prompt、模板和匿名案例开源"
+  ],
+  [
+    "Concept illustration of the AI study workflow experiment",
+    "AI 学习工作流实验的概念场景图"
+  ],
+  [
+    "Project workflow",
+    "项目工作流"
+  ],
+  [
+    "What the project includes",
+    "项目最终包含什么"
+  ],
+  [
+    "A working structure with input checks, human judgement and feedback-based adjustments, beyond a single prompt.",
+    "不是一段“万能 Prompt”，而是一套包含输入检查、人工判断和反馈纠偏的可运行结构。"
+  ],
+  [
+    "Plans need to meet real life.",
+    "方案必须回到真实执行。"
+  ],
+  [
+    "I retain anonymised feedback on time spent, friction, unfinished tasks and decisions needing human judgement, alongside successful outputs.",
+    "我保留匿名反馈，不只展示“生成成功”，也记录耗时、卡点、未完成和需要人工判断的部分。"
+  ],
+  [
+    "Anonymised study feedback from five students",
+    "五名学生匿名提交的学习执行反馈拼图"
+  ],
+  [
+    "First-day feedback from five students / Names and aliases redacted",
+    "五人首日执行反馈 / 姓名与代号已打码"
+  ],
+  [
+    "An anonymised study chat discussing Kimi",
+    "匿名学习群聊中推荐使用 Kimi 的对话截图"
+  ],
+  [
+    "Study group conversations / Problems with tools and plans during use",
+    "真实学习群聊 / 用户在执行中遇到工具与计划问题"
+  ],
+  [
+    "Generating a plan is the easy part. Getting enough reliable information is harder.",
+    "AI 最容易完成的是生成计划，最难的是获得足够真实的信息。"
+  ],
+  [
+    "Personalisation means changing the next step based on what happened in practice.",
+    "个性化不是修改名字和成绩，而是根据执行结果改变下一步。"
+  ],
+  [
+    "The system must know when to stop automated judgement and ask a person for help.",
+    "系统不需要替代老师，但必须知道什么时候停止自动判断并请求人工帮助。"
+  ],
+  [
+    "How a post",
+    "一条内容，"
+  ],
+  [
+    "becomes user research",
+    "如何变成用户研究"
+  ],
+  [
+    "The aim is to connect content reach with real users, questions and product feedback.",
+    "我想证明的不是“做出了一条爆款”，而是能把内容曝光继续转化为真实用户、问题样本与产品反馈。"
+  ],
+  [
+    "From content to product feedback",
+    "从内容到产品反馈的转化路径"
+  ],
+  [
+    "Open source",
+    "开源"
+  ],
+  [
+    "Workflow and anonymised cases",
+    "工作流与匿名案例"
+  ],
+  [
+    "Content is a starting point.",
+    "内容不是终点。"
+  ],
+  [
+    "Reach → Comments → Enquiries → Cases → Trials → Adjustments",
+    "曝光 → 评论 → 咨询 → 样本 → 实验 → 修正"
+  ],
+  [
+    "View the original post ↗",
+    "查看内容来源 ↗"
+  ],
+  [
+    "A personal home on the web, built with AI",
+    "AI 协作完成的个人数字主页"
+  ],
+  [
+    "With AI and Codex, I worked through requirements, structure, code, visual feedback and revisions,",
+    "我通过 AI 与 Codex 完成需求拆解、页面结构、代码实现、审美反馈和多轮修改，"
+  ],
+  [
+    "then launched a personal website for writing, projects and exploration.",
+    "最终上线个人网站，用来沉淀公开文章、项目和个人探索。"
+  ],
+  [
+    "Defined requirements, structure and content hierarchy",
+    "提出需求，定义信息结构与内容层级"
+  ],
+  [
+    "Built, debugged and iterated with AI",
+    "使用 AI 协作生成、调试并持续迭代"
+  ],
+  [
+    "Refined visuals and interaction through feedback",
+    "根据真人反馈修改视觉与交互"
+  ],
+  [
+    "Launched a lasting home for the work",
+    "完成公开上线，持续作为作品母站"
+  ],
+  [
+    "Visit Ansyn Lab ↗",
+    "访问 Ansyn Lab ↗"
+  ],
+  [
+    "Ansyn Lab website preview",
+    "Ansyn Lab 个人网站预览图"
+  ],
+  [
+    "Taking an uncertain idea through to something people can use.",
+    "不是只会写 Prompt，而是能把模糊想法变成公开交付物。"
+  ],
+  [
+    "What I could contribute to Kimi",
+    "我能为 Kimi 做什么"
+  ],
+  [
+    "Use real projects to investigate what Kimi can help a specific group of users do,",
+    "不做单次功能转发，而是用真实项目证明 Kimi 能为某一类用户解决什么问题，"
+  ],
+  [
+    "then bring usage observations and first-hand feedback back to the team.",
+    "再把使用数据与一线反馈带回团队。"
+  ],
+  [
+    "Start with a real trial we can learn from.",
+    "先做出一轮可复盘的真实实验。"
+  ],
+  [
+    "Commit to the work, without promising reach I cannot control.",
+    "承诺可控制的行动，不承诺不可控制的流量。"
+  ],
+  [
+    "Content review",
+    "内容数据复盘"
+  ],
+  [
+    "User-question map",
+    "用户问题地图"
+  ],
+  [
+    "Product feedback",
+    "产品体验反馈"
+  ],
+  [
+    "Public case / demo",
+    "公开案例 / Demo"
+  ],
+  [
+    "An overview in 30 seconds.",
+    "30 秒看懂，"
+  ],
+  [
+    "Evidence if you want to go deeper.",
+    "继续深挖有证据。"
+  ],
+  [
+    "7-page portfolio PDF",
+    "7 页作品集 PDF"
+  ],
+  [
+    "1-page CV PDF",
+    "1 页精简简历 PDF"
+  ],
+  [
+    "Portfolio and CV in one PDF",
+    "作品集 + 简历单文件版"
+  ],
+  [
+    "Download ↓",
+    "下载 ↓"
+  ],
+  [
+    "Public experiment notes",
+    "公开实验记录"
+  ],
+  [
+    "I’m Ansyn, exploring the world with AI. Learning in public, building something real.",
+    "我是安寻，用 AI 探索真实世界。在公开学习中，把想法做成真实的东西。"
+  ],
+  [
+    "Now at",
+    "目前在"
+  ]
+]

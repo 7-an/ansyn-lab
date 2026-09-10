@@ -1,0 +1,81 @@
+---
+import { siteConfig } from "../config/site";
+const socialLinks = [
+  { label: "X / TWITTER", href: siteConfig.social.x },
+  { label: "TELEGRAM", href: siteConfig.social.telegram },
+  { label: "GITHUB", href: siteConfig.social.github }
+];
+---
+
+<footer class="home-footer" id="contact" aria-labelledby="contact-heading" data-home-footer>
+  <div class="contact-top">
+    <div class="contact-copy">
+      <p class="mono">NEXT CONVERSATION</p>
+      <h2 id="contact-heading">LET’S TALK.</h2>
+      <p class="contact-note">从一个具体问题开始。</p>
+    </div>
+    <nav class="contact-links" aria-label="联系安寻">
+      {socialLinks.map((link) => <a href={link.href} target="_blank" rel="noopener noreferrer"><span>{link.label}</span><span aria-hidden="true">↗</span></a>)}
+    </nav>
+  </div>
+  <div class="footer-word" aria-hidden="true"><span>A</span><span>N</span><span>S</span><span>Y</span><span>N</span></div>
+  <div class="footer-meta mono">
+    <span>© {new Date().getFullYear()} {siteConfig.displayName}</span>
+    <span>AN ONGOING EXPERIMENT.</span>
+    <a href="#main-content">BACK TO TOP <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+
+<script>
+  const footer = document.querySelector<HTMLElement>("[data-home-footer]");
+  if (footer) {
+    let scheduled = false;
+    const syncContrast = () => {
+      scheduled = false;
+      const top = footer.getBoundingClientRect().top;
+      document.body.classList.toggle("home-footer-visible", top < window.innerHeight - 50);
+    };
+    const requestSync = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(syncContrast);
+    };
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
+    syncContrast();
+  }
+</script>
+
+<style>
+  .home-footer { padding: 68px 6vw 26px; background: #0f0f0f; color: #fdfdfd; overflow: clip; }
+  .mono { font: 400 10px/1.5 "Chivo Mono", var(--mono); }
+  .contact-top { display: grid; grid-template-columns: 1fr 29%; gap: 70px; align-items: end; }
+  .contact-copy > .mono { margin: 0 0 22px; color: #a0a0a0; }
+  .contact-copy h2 { margin: 0; font: 700 clamp(42px, 6.3vw, 102px)/.95 "World Haas", "Helvetica Neue", Arial, var(--sans); letter-spacing: -.05em; }
+  .contact-note { margin: 20px 0 0; color: #c1c1c1; font-size: 15px; }
+  .contact-links { display: grid; }
+  .contact-links a { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 45px; padding-block: 12px; border-bottom: 1px solid #484848; font: 400 12px/1.5 "Chivo Mono", var(--mono); }
+  .contact-links a > span:last-child { font-size: 21px; transition: transform .25s ease; }
+  .contact-links a:hover > span:last-child { transform: translate(3px, -3px); }
+  .contact-links a:hover { color: #a6bfff; }
+  .footer-word { display: flex; justify-content: space-between; margin: 60px -.015em 26px; font: 700 24vw/.75 "World Haas", "Helvetica Neue", Arial, var(--sans); letter-spacing: -.06em; user-select: none; }
+  .footer-meta { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 22px; border-top: 1px solid #484848; color: #a0a0a0; }
+  .footer-meta a { display: flex; gap: 18px; color: #fdfdfd; min-height: 32px; align-items: center; }
+  .footer-meta a:hover { color: #a6bfff; }
+  :global(body.home-footer-visible .music-toggle) { color: #fdfdfd; }
+  @media(max-width: 700px) {
+    .home-footer { padding: 46px 6vw 24px; }
+    .contact-top { grid-template-columns: 1fr; gap: 30px; }
+    .contact-copy h2 { font-size: 13vw; }
+    .contact-copy > .mono { margin-bottom: 18px; }
+    .contact-note { font-size: 13px; margin-top: 16px; }
+    .contact-links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .contact-links a { font-size: 9px; gap: 5px; }
+    .contact-links a > span:last-child { font-size: 16px; }
+    .footer-word { margin-top: 46px; margin-bottom: 24px; }
+    .footer-meta { flex-wrap: wrap; gap: 16px; font-size: 9px; padding-right: 28px; }
+    .footer-meta > span:nth-child(2) { display: none; }
+    .footer-meta a { gap: 10px; }
+  }
+  @media(prefers-reduced-motion: reduce) { .contact-links a > span:last-child { transition: none; transform: none !important; } }
+</style>

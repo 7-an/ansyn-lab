@@ -1,0 +1,625 @@
+---
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  fit?: "cover" | "contain";
+}
+
+export interface ProjectLink {
+  href: string;
+  label: string;
+}
+
+export interface Project {
+  livePreview?: "voidtype";
+  anchor?: string;
+  cover?: { lines: string[]; number: string };
+  title: string;
+  org: string;
+  status: string;
+  description: string;
+  role: string;
+  deliverable: string;
+  next: string;
+  fit?: "cover" | "contain";
+  mediaBg?: string;
+  gallery: ProjectImage[];
+  links: ProjectLink[];
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="prows" data-project-rows>
+  <div class="prows-inner">
+    {projects.map((project, index) => (
+      <section class="prow" id={project.anchor} data-layout={[2, 0, 3, 1][index % 4]}>
+        <div class="prow-grid">
+          <div class="pcell pcell-preview">
+            <div class="pbox">
+              <header class="pstrip pstrip-dark">
+                <span class="pstrip-main">{project.title}</span>
+                <span class="pstrip-side">{project.org}</span>
+              </header>
+              <button
+                class:list={["pmedia", { "demo-card": project.livePreview === "voidtype" }]}
+                style={project.mediaBg ? `background:${project.mediaBg}` : (project.fit === "contain" ? "background:#0f0f0f" : undefined)}
+                type="button"
+                data-preview-toggle
+                aria-expanded="false"
+                aria-controls={`project-info-${index}`}
+                aria-label={`Toggle details for ${project.title}`}
+              >
+                {project.cover && <span class="pcover" data-cover={project.cover.number} aria-hidden="true"><span class="pcover-top">KOSX / COLLABORATION<span>{project.cover.number}</span></span><span class="pcover-title" lang="en">{project.cover.lines.map(line => <span>{line}</span>)}</span><span class="pcover-bottom">{project.status}<span>↗</span></span></span>}
+                {project.gallery.map((image, imageIndex) => (
+                  <img
+                    src={image.src}
+                    alt={imageIndex === 0 ? image.alt : ""}
+                    width={image.width}
+                    height={image.height}
+                    loading={index === 0 && imageIndex === 0 ? "eager" : "lazy"}
+                    class:list={[{ "is-active": imageIndex === 0, "fit-contain": (image.fit ?? project.fit) === "contain" }]}
+                    data-preview-image
+                  />
+                ))}
+                {project.livePreview === "voidtype" && <span class="wordmark" data-wordmark data-preserve-language aria-hidden="true"><canvas class="wordmark-canvas"></canvas><span class="wordmark-source" data-particle-source><span data-particle-line>less is more</span><span data-particle-line>Slow down to speed up.</span></span></span>}
+              </button>
+            </div>
+            <button class="parrow" type="button" data-row-control tabindex="-1" aria-label={`Toggle details for ${project.title}`} aria-expanded="false" aria-controls={`project-info-${index}`}><svg aria-hidden="true" viewBox="0 0 24 24"><g class="peye"><path d="M2 12Q12 1 22 12Q12 23 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3"/></g><path class="pclose" d="m6 6 12 12M18 6 6 18"/></svg></button>
+          </div>
+
+          <div class="pcell pcell-info" id={`project-info-${index}`} inert>
+            <div class="pbox">
+              <header class="pstrip pstrip-grey">
+                <span class="pstrip-main">INFO</span>
+                <span class="pstrip-side">{project.status}</span>
+              </header>
+              <div class="pinfo" data-lenis-prevent>
+                <div class="pinfo-stack">
+                  {project.gallery.length > 1 && (
+                    <div class="pthumbs">
+                      {project.gallery.map((image, imageIndex) => (
+                        <button
+                          class:list={["pthumb", { "is-active": imageIndex === 0 }]}
+                          type="button"
+                          data-thumb
+                          aria-label={`${project.title} image ${imageIndex + 1}`}
+                          aria-pressed={imageIndex === 0 ? "true" : "false"}
+                        >
+                          <img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  <p class="pdesc">{project.description}</p>
+                  {project.links.length > 0 && <div class="pactions">
+                    {project.links.map((link) => (
+                      <a class="plinkbtn" href={link.href} target="_blank" rel="noopener noreferrer">
+                        <i class="pdot pdot-tl" aria-hidden="true"></i>
+                        <i class="pdot pdot-tr" aria-hidden="true"></i>
+                        <i class="pdot pdot-bl" aria-hidden="true"></i>
+                        <i class="pdot pdot-br" aria-hidden="true"></i>
+                        <span>{link.label}</span>
+                      </a>
+                    ))}
+                  </div>}
+                  <ul class="pdetails">
+                    <li><h6>ROLE</h6><p>{project.role}</p></li>
+                    <li><h6>DELIVERABLE</h6><p>{project.deliverable}</p></li>
+                    <li><h6>NEXT</h6><p>{project.next}</p></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pcell pcell-ph ph-a" aria-hidden="true"><div class="pbox"></div></div>
+          <div class="pcell pcell-ph ph-b" aria-hidden="true"><div class="pbox"></div></div>
+        </div>
+      </section>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Full-bleed grey canvas, content centered at 1440px — same as the reference */
+  .prows {
+    --jg: 18px;
+    --mesh: #dedede; /* 1px, low contrast against #f0f0f0, as in the reference. */
+    overflow-x: clip;
+    padding-block: 0;
+    border-bottom: 1px solid var(--mesh);
+    background: var(--paper-deep);
+  }
+  @media (min-width: 834px) { .prows { --jg: 18px; } }
+  @media (min-width: 1440px) { .prows { --jg: 22px; } }
+
+  .prows-inner {
+    position: relative;
+    display: grid;
+    gap: 0;
+    margin-inline: auto;
+    padding-inline: var(--jg);
+  }
+
+  /* the vertical mesh lines are drawn as one continuous background layer so
+     they run unbroken through the whole canvas; the positions coincide with
+     every cell edge (identical for the 8-col and 12-col grids) */
+  .prows-inner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+      linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px);
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 1px 100%;
+    background-position-x: var(--jg), calc(100% - var(--jg));
+  }
+
+  @media (min-width: 834px) {
+    .prows-inner::before {
+      background-image:
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px),
+        linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px);
+      background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+      background-position-x:
+        var(--jg),
+        calc(25% - var(--jg) * .25),
+        calc(25% + var(--jg) * .75),
+        calc(50% - var(--jg) * .5),
+        calc(50% + var(--jg) * .5),
+        calc(75% - var(--jg) * .75),
+        calc(75% + var(--jg) * .25),
+        calc(100% - var(--jg));
+    }
+  }
+
+  .prow { position: relative; min-width: 0; user-select: none; overflow: clip; overflow-anchor: none; }
+
+  /* full-viewport hairline rails: row top edge + strip bottom edge */
+  .prow::before,
+  .prow::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    left: calc(50% - 50vw);
+    width: 100vw;
+    height: 1px;
+    background: var(--mesh);
+    pointer-events: none;
+  }
+  .prow::before { top: 0; }
+  .prow::after { top: calc(var(--jg) + 1px); }
+
+  .prow-grid {
+    padding-top: 1px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--jg);
+  }
+
+  .pcell { min-width: 0; }
+  .pcell-ph { display: none; }
+
+  /* Adjacent rows share one horizontal rule; cells do not draw another bottom edge. */
+  .pbox {
+    position: relative;
+    height: 100%;
+  }
+
+  /* strip: dark text on the grey canvas, filled bar slides down on hover / open */
+  .pstrip {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: var(--jg);
+    padding-inline: 9px;
+    font-family: var(--mono);
+    font-size: .56rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .pstrip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .35s ease;
+  }
+  .pstrip span {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: color .35s ease;
+  }
+  .pstrip-grey::before { background: var(--muted); }
+  .pcell-preview:hover .pstrip::before,
+  .prow.is-open .pstrip::before { transform: scaleY(1); }
+  .pcell-preview:hover .pstrip span,
+  .prow.is-open .pstrip span { color: var(--paper); }
+
+  .prow[id] { scroll-margin-top: 90px; }
+  .pcover { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 8%; background: #e2e2e2; color: #0f0f0f; text-align: left; }
+  .pcover[data-cover="02"] { background: #242424; color: #fdfdfd; }
+  .pcover[data-cover="03"] { background: #fdfdfd; }
+  .pcover-top, .pcover-bottom { display: flex; justify-content: space-between; gap: 8px; font: 400 clamp(8px, 2.6cqw, 15px)/1.4 var(--mono); }
+  .pcover-title { display: grid; font: 400 clamp(10px, 12cqw, 110px)/1.05 var(--sans); letter-spacing: -.065em; }
+  .pcover-bottom > span { color: var(--accent); }
+  .pmedia {
+    container-type: inline-size;
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--white);
+    cursor: pointer;
+  }
+  /* The black media box owns both clipping and pointer coordinates, even while expanding. */
+  .demo-card { isolation: isolate; contain: paint; }
+  .demo-card .wordmark { position: absolute; inset: 0; display: block; overflow: hidden; opacity: 0; pointer-events: none; touch-action: pan-y; }
+  .prow.is-open:not(.is-animating) .demo-card .wordmark.is-live { opacity: 1; pointer-events: auto; }
+  .demo-card .wordmark-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+  .demo-card .wordmark-source { position: absolute; inset: 0; visibility: hidden; font: 800 60px/.98 "Poppins", var(--sans); }
+  .demo-card .wordmark-source > span { display: block; white-space: nowrap; }
+  .prow.is-open:not(.is-animating) .demo-card:has(.wordmark.is-live) > img { opacity: 0; }
+  .pmedia img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+  .pmedia img.is-active { opacity: 1; }
+  .pmedia img.fit-contain { object-fit: contain; padding: 7%; }
+
+  /* accent arrow in the gap, pointing at the side the info will dock to */
+  .parrow {
+    position: absolute;
+    top: 0;
+    display: none;
+    width: var(--jg);
+    height: var(--jg);
+    place-items: center;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .prow[data-layout="0"] .parrow,
+  .prow[data-layout="1"] .parrow { right: calc(-1 * var(--jg)); }
+  .prow[data-layout="2"] .parrow,
+  .prow[data-layout="3"] .parrow { left: calc(-1 * var(--jg)); }
+
+
+  /* closed state on touch / small screens: only the preview, info appears on tap */
+  .pcell-info { display: none; }
+  .prow.is-open .pcell-info { display: block; animation: pfade .35s ease; }
+  @keyframes pfade { from { opacity: 0; } }
+
+  .pcell-info .pbox { display: flex; flex-direction: column; }
+
+  .pinfo { flex: 1; min-height: 0; }
+
+  .pinfo-stack {
+    display: grid;
+    gap: var(--jg);
+    padding-bottom: var(--jg);
+  }
+  .pinfo-stack > :first-child:not(.pthumbs) { padding-top: var(--jg); }
+  .pdesc, .pactions, .pdetails { padding-inline: var(--jg); }
+
+  .pthumbs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .pthumb {
+    display: block;
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--paper-deep);
+    opacity: .5;
+    cursor: pointer;
+    transition: opacity .2s ease;
+  }
+  .pthumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pthumb:hover { opacity: .85; }
+  .pthumb.is-active { opacity: 1; box-shadow: inset 0 0 0 2px var(--accent-strong); }
+
+  .pdesc {
+    margin: 0;
+    font-size: .92rem;
+    font-weight: 550;
+    line-height: 1.65;
+    text-indent: var(--jg);
+  }
+
+  .pactions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .plinkbtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 16px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: background .18s ease, color .18s ease;
+  }
+  .plinkbtn:hover { background: var(--ink); color: var(--paper); }
+
+  .pdot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: currentColor;
+    transition: transform .18s ease;
+  }
+  .pdot-tl { top: -2px; left: -2px; }
+  .pdot-tr { top: -2px; right: -2px; }
+  .pdot-bl { bottom: -2px; left: -2px; }
+  .pdot-br { bottom: -2px; right: -2px; }
+  .plinkbtn:hover .pdot-tl { transform: translate(2px, 2px); }
+  .plinkbtn:hover .pdot-tr { transform: translate(-2px, 2px); }
+  .plinkbtn:hover .pdot-bl { transform: translate(2px, -2px); }
+  .plinkbtn:hover .pdot-br { transform: translate(-2px, -2px); }
+
+  .pdetails {
+    display: grid;
+    gap: 13px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pdetails li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+  }
+  .pdetails h6 {
+    margin: 0;
+    padding-top: 2px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .pdetails p {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  /* tablet: 8-column grid, half of the cells stay empty */
+  @media (min-width: 834px) {
+    .prow-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+    .pcell { grid-row: 1; }
+    .pcell-ph { display: block; transition: opacity .5s ease .35s, visibility 0s .35s; }
+
+    .prow[data-layout="0"] .pcell-preview { grid-column: 1 / span 2; }
+    .prow[data-layout="0"] .pcell-info { grid-column: 3 / span 2; }
+    .prow[data-layout="0"] .ph-a { grid-column: 5 / span 2; }
+    .prow[data-layout="0"] .ph-b { grid-column: 7 / span 2; }
+
+    .prow[data-layout="1"] .ph-a { grid-column: 1 / span 2; }
+    .prow[data-layout="1"] .pcell-preview { grid-column: 3 / span 2; }
+    .prow[data-layout="1"] .pcell-info { grid-column: 5 / span 2; }
+    .prow[data-layout="1"] .ph-b { grid-column: 7 / span 2; }
+
+    .prow[data-layout="2"] .ph-a { grid-column: 1 / span 2; }
+    .prow[data-layout="2"] .pcell-info { grid-column: 3 / span 2; }
+    .prow[data-layout="2"] .pcell-preview { grid-column: 5 / span 2; }
+    .prow[data-layout="2"] .ph-b { grid-column: 7 / span 2; }
+
+    .prow[data-layout="3"] .ph-a { grid-column: 1 / span 2; }
+    .prow[data-layout="3"] .ph-b { grid-column: 3 / span 2; }
+    .prow[data-layout="3"] .pcell-info { grid-column: 5 / span 2; }
+    .prow[data-layout="3"] .pcell-preview { grid-column: 7 / span 2; }
+
+    /* expanded: preview grows, info docks to the side, placeholders fade out */
+    .prow.is-open .pcell-ph {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility 0s .25s;
+    }
+    .prow.is-open[data-layout="0"] .pcell-preview,
+    .prow.is-open[data-layout="1"] .pcell-preview { grid-column: 1 / span 6; }
+    .prow.is-open[data-layout="0"] .pcell-info,
+    .prow.is-open[data-layout="1"] .pcell-info { grid-column: 7 / span 2; }
+    .prow.is-open[data-layout="2"] .pcell-info,
+    .prow.is-open[data-layout="3"] .pcell-info { grid-column: 1 / span 2; }
+    .prow.is-open[data-layout="2"] .pcell-preview,
+    .prow.is-open[data-layout="3"] .pcell-preview { grid-column: 3 / span 6; }
+
+    /* closed state: info cell is part of the mesh but its content is hidden.
+       choreography matches the reference: on open the geometry flies first,
+       content fades in after; on close content fades out first. */
+    .pcell-info { display: block; }
+    .pcell-info .pstrip,
+    .pcell-info .pinfo {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .35s ease 0s, visibility 0s .4s;
+    }
+    .prow.is-open .pcell-info .pstrip,
+    .prow.is-open .pcell-info .pinfo {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .35s ease .85s, visibility 0s .85s;
+    }
+
+    /* info column is bound to the row height (driven by the square preview)
+       and scrolls internally, like the reference */
+    .pcell-info { position: relative; }
+    .pcell-info .pbox { position: absolute; inset: 0; height: auto; }
+    .pinfo {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-strong) transparent;
+    }
+    .pinfo::-webkit-scrollbar { width: 2px; }
+    .pinfo::-webkit-scrollbar-track { background: transparent; }
+    .pinfo::-webkit-scrollbar-thumb { background: var(--accent-strong); }
+
+    .pcell-preview { position: relative; }
+    .parrow { display: grid; border: 0; border-radius: 0; padding: 0; cursor: pointer; pointer-events: auto; }
+    .pcell-preview:hover .parrow,
+    .prow.is-open .parrow { opacity: 1; }
+  }
+
+  /* desktop: 12-column grid, projects interspersed in the empty cells */
+  @media (min-width: 1440px) {
+    .prow-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+    .prow[data-layout="0"] .pcell-preview { grid-column: 1 / span 3; }
+    .prow[data-layout="0"] .pcell-info { grid-column: 4 / span 3; }
+    .prow[data-layout="0"] .ph-a { grid-column: 7 / span 3; }
+    .prow[data-layout="0"] .ph-b { grid-column: 10 / span 3; }
+
+    .prow[data-layout="1"] .ph-a { grid-column: 1 / span 3; }
+    .prow[data-layout="1"] .pcell-preview { grid-column: 4 / span 3; }
+    .prow[data-layout="1"] .pcell-info { grid-column: 7 / span 3; }
+    .prow[data-layout="1"] .ph-b { grid-column: 10 / span 3; }
+
+    .prow[data-layout="2"] .ph-a { grid-column: 1 / span 3; }
+    .prow[data-layout="2"] .pcell-info { grid-column: 4 / span 3; }
+    .prow[data-layout="2"] .pcell-preview { grid-column: 7 / span 3; }
+    .prow[data-layout="2"] .ph-b { grid-column: 10 / span 3; }
+
+    .prow[data-layout="3"] .ph-a { grid-column: 1 / span 3; }
+    .prow[data-layout="3"] .ph-b { grid-column: 4 / span 3; }
+    .prow[data-layout="3"] .pcell-info { grid-column: 7 / span 3; }
+    .prow[data-layout="3"] .pcell-preview { grid-column: 10 / span 3; }
+
+    .prow.is-open[data-layout="0"] .pcell-preview,
+    .prow.is-open[data-layout="1"] .pcell-preview { grid-column: 1 / span 9; }
+    .prow.is-open[data-layout="0"] .pcell-info,
+    .prow.is-open[data-layout="1"] .pcell-info { grid-column: 10 / span 3; }
+    .prow.is-open[data-layout="2"] .pcell-info,
+    .prow.is-open[data-layout="3"] .pcell-info { grid-column: 1 / span 3; }
+    .prow.is-open[data-layout="2"] .pcell-preview,
+    .prow.is-open[data-layout="3"] .pcell-preview { grid-column: 4 / span 9; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pmedia img {
+      transform: scale(1.04);
+      transition: opacity .35s ease, transform .18s cubic-bezier(.455, .03, .515, .955);
+    }
+    .pmedia img.is-active { transform: scale(1); }
+    .pmedia:hover img.is-active { transform: scale(1.05); }
+  }
+
+  .pcell-preview { position: relative; align-self: start; }
+  .pstrip-main { flex: 1; min-width: 0; }
+  .parrow { display: grid; border: 0; border-radius: 0; padding: 0; cursor: pointer; pointer-events: auto; }
+  .parrow svg { width: 82%; height: 82%; fill: none; stroke: #fff; stroke-width: 1.6; }
+  .parrow .pupil { fill: #fff; stroke: none; }
+  .peye { transform-origin: 12px 12px; transition: opacity .2s, transform .25s; }
+  .pclose { opacity: 0; transform-origin: center; transform: rotate(-90deg); transition: opacity .25s, transform .4s; }
+  .prow.is-open .peye { opacity: 0; transform: scaleY(0); }
+  .prow.is-open .pclose { opacity: 1; transform: rotate(0); }
+  .pcell-preview:hover .parrow, .pcell-preview:focus-within .parrow, .prow.is-open .parrow { opacity: 1; }
+  .pcell-preview:focus-within .pstrip::before { transform: scaleY(1); }
+  .pcell-preview:focus-within .pstrip span { color: var(--paper); }
+  .pmedia:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+  .pcell-preview[data-entry="bottom"] .pstrip::before { transform-origin: bottom; }
+  .prow:not(.is-open) .pcell-preview:is(:hover, :focus-within) .peye { animation: pblink 3.8s both; }
+  .prow:not(.is-open) .pcell-preview:is(:hover, :focus-within) .pupil { animation: plook 3.8s both; }
+  @keyframes pblink { 0%, 4%, 48%, 52% { transform: scaleY(.07); } 12%, 44%, 58%, 100% { transform: scaleY(1); } }
+  @keyframes plook { 0%, 12%, 100% { transform: translateX(0); } 22%, 38% { transform: translateX(3px); } 60%, 78% { transform: translateX(-3px); } }
+  .pcell-info .pstrip, .pcell-info .pinfo { transition: none; }
+  .prow.is-open .pcell-info { animation: none; }
+  .prow.is-open .pcell-info .pstrip, .prow.is-open .pcell-info .pinfo { transition: none; }
+  .prow.is-animating .pmedia img.is-active { transform: scale(1); }
+  .pdetails { border-top: 1px solid var(--mesh); padding: var(--jg); }
+  .pthumbs { padding: var(--jg); order: 4; }
+  .pdesc { font-weight: 400; }
+  .pstrip { font-weight: 400; letter-spacing: .02em; padding-inline: 5px; }
+  @media (max-width: 833px) {
+    .prows-inner::before {
+      background-image: linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px), linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px), linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px), linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px), linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px), linear-gradient(90deg, var(--mesh) 0 1px, transparent 1px);
+      background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+      background-position-x: var(--jg), calc((100% - var(--jg)) / 3), calc((100% - var(--jg)) / 3 + var(--jg)), calc((100% - var(--jg)) * 2 / 3), calc((100% - var(--jg)) * 2 / 3 + var(--jg)), calc(100% - var(--jg));
+    }
+    .prow-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 0; }
+    .pcell-preview { grid-row: 1; }
+    .prow[data-layout="0"] .pcell-preview { grid-column: 1; }
+    .prow[data-layout="1"] .pcell-preview, .prow[data-layout="2"] .pcell-preview { grid-column: 2; }
+    .prow[data-layout="3"] .pcell-preview { grid-column: 3; }
+    .prow.is-open .pcell-preview { grid-column: 1 / -1; }
+    .pcell-info { grid-column: 1 / -1; grid-row: 2; }
+    .pstrip-side { display: none; }
+    .pstrip { font-size: 8px; }
+    .pstrip-grey { display: none; }
+    .pinfo-stack { padding-top: var(--jg); }
+    .prow.is-open .parrow { left: auto; right: 0; z-index: 5; }
+    .prow.is-open .pstrip-dark { padding-right: calc(var(--jg) + 5px); }
+    .pthumbs { order: 0; }
+    .pmedia { min-height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prows *, .prows *::before { animation: none !important; transition: none !important; }
+  }
+  :global(html[data-reduced]) .prows *, :global(html[data-reduced]) .prows *::before { animation: none !important; transition: none !important; }
+</style>
+
+<script>
+  import { initProjectRows } from "../lib/project-rows";
+  initProjectRows();
+  import { initWorkParticlePreview } from "../lib/work-particle-preview";
+  initWorkParticlePreview();
+</script>

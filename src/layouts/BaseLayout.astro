@@ -1,8 +1,9 @@
 ---
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import MusicToggle from "../components/MusicToggle.astro";
+import PageTransition from "../components/PageTransition.astro";
+import Footer from "../components/AboutFooter.astro";
 import { siteConfig } from "../config/site";
+import { pageTransitionNames } from "../config/page-transitions";
 import "../styles/global.css";
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   publishDate?: Date;
+  hideHeader?: boolean;
+  nativeScroll?: boolean;
 }
 
 const {
@@ -18,8 +21,14 @@ const {
   description = siteConfig.description,
   image = "/og.png",
   type = "website",
-  publishDate
+  publishDate,
+  hideHeader = false,
+  nativeScroll = false
 } = Astro.props;
+
+const transitionBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+const transitionRoute = Astro.url.pathname.slice(transitionBase.length).replace(/^\/|\/$/g, "");
+const transitionNames = pageTransitionNames[transitionRoute] ?? pageTransitionNames["404.html"];
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
 const imageUrl = new URL(image, Astro.site ?? siteConfig.siteUrl);
@@ -44,16 +53,17 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en" data-home-page={transitionRoute === "" || undefined} data-page-name-en={transitionNames[0]} data-page-name-zh={transitionNames[1]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="keywords" content={siteConfig.keywords.join(", ")} />
-    <meta name="theme-color" content="#f3f0e8" />
+    <meta name="theme-color" content="#fdfdfd" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-avatar-32.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-avatar.svg" />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={siteConfig.locale} />
     <meta property="og:site_name" content={siteConfig.name} />
@@ -68,17 +78,58 @@ const structuredData = {
     <title>{title}</title>
     <script is:inline>
       document.documentElement.classList.add("js");
+      try { document.documentElement.lang = localStorage.getItem("ansyn-language") === "zh-CN" ? "zh-CN" : "en"; } catch { /* Use English when storage is unavailable. */ }
+    </script>
+    <script is:inline>
+      let pending = null;
+      try {
+        pending = JSON.parse(sessionStorage.getItem('ansyn-page-transition') || 'null');
+        sessionStorage.removeItem('ansyn-page-transition');
+      } catch { /* Direct entry also works when storage is unavailable. */ }
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).get('motion') === 'reduce';
+      const root = document.documentElement;
+      const reloading = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+      const handoff = !reloading && pending && pending.url === location.href && Date.now() - pending.at < 20000;
+      let opening = false;
+      try {
+        opening = root.hasAttribute('data-home-page') && !reloading && !handoff && !location.hash && !sessionStorage.getItem('ansyn-opening-seen');
+        if (root.hasAttribute('data-home-page')) sessionStorage.setItem('ansyn-opening-seen', '1');
+      } catch { /* Skip the optional greeting if session storage is unavailable. */ }
+      if (!reduced && (opening || !root.hasAttribute('data-home-page') || handoff)) {
+        if (opening) root.dataset.openingIntro = '';
+        root.dataset.transitionIncoming = '';
+        root.dataset.transitionTitle = opening ? 'Hello' : handoff
+          ? String(pending.title).slice(0, 40)
+          : (root.lang === 'zh-CN' ? root.dataset.pageNameZh : root.dataset.pageNameEn);
+        if (handoff && pending.keyboard) root.dataset.transitionKeyboard = '';
+        // Greet once per tab; reloads skip the opening, internal links keep their page title.
+        // Fail open if a module cannot load.
+        setTimeout(() => {
+          if (!root.hasAttribute('data-transition-incoming')) return;
+          window.dispatchEvent(new Event('page-transition-release'));
+          const curtain = document.querySelector('[data-page-transition]');
+          if (curtain?.open) curtain.close();
+          root.removeAttribute('data-transition-incoming');
+          root.removeAttribute('data-page-transitioning');
+          if (root.hasAttribute('data-opening-intro')) {
+            root.removeAttribute('data-opening-intro');
+            window.dispatchEvent(new Event('site:opening-reveal'));
+          }
+        }, 6000);
+      }
     </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
-  <body>
-    <a class="skip-link" href="#main-content">跳至主要内容</a>
-    <Header />
+  <body data-native-scroll={nativeScroll || undefined}>
+    <PageTransition />
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    {!hideHeader && <Header />}
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
-    <MusicToggle />
+    <slot name="footer"><Footer /></slot>
+    <script>import { initLanguage } from "../lib/i18n"; initLanguage();</script>
+    <!-- Background music is temporarily disabled; retain MusicToggle for a future licensed track. -->
     <script>
       const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
       const motionAllowed = window.matchMedia("(prefers-reduced-motion: no-preference)");
@@ -90,6 +141,7 @@ const structuredData = {
           (entries, observer) => {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return;
+              entry.target.classList.remove("reveal-pending");
               entry.target.classList.add("is-revealed");
               observer.unobserve(entry.target);
             });
@@ -97,10 +149,37 @@ const structuredData = {
           { rootMargin: "0px 0px -10%", threshold: 0.08 }
         );
 
-        revealItems.forEach((item) => revealObserver.observe(item));
+        revealItems.forEach((item) => {
+          // The first screen renders immediately; only later sections wait to enter.
+          if (item.getBoundingClientRect().top < window.innerHeight) {
+            item.classList.add("is-revealed");
+          } else {
+            revealObserver.observe(item);
+            item.classList.add("reveal-pending");
+          }
+        });
+        document.addEventListener("focusin", (event) => {
+          if (!(event.target instanceof Element)) return;
+          const item = event.target.closest(".reveal-pending");
+          item?.classList.remove("reveal-pending");
+          item?.classList.add("is-revealed");
+        });
       }
 
       const motionOk = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+      if (motionOk && !document.body.hasAttribute("data-native-scroll")) {
+        // Lenis 惯性平滑滚动：奖站手感；锚点跳转仍平滑（anchors: true）
+        // Optional scrolling must never block content or the rest of the page.
+        import("lenis").then(({ default: Lenis }) => {
+          const lenis = new Lenis({ lerp: .1, anchors: true });
+          const raf = (time: number) => {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          };
+          requestAnimationFrame(raf);
+        }).catch(() => { /* Native scrolling remains available. */ });
+      }
 
       if (motionOk) {
         // 文字接近响应：把 [data-proximity] 标题拆成逐字 span，按指针距离驱动 --p

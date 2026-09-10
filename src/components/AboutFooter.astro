@@ -1,0 +1,68 @@
+---
+import { siteConfig } from "../config/site";
+---
+<footer id="contact" class="about-contact" data-screen-stop lang="en">
+  <span id="about-contact" class="about-contact-anchor" aria-hidden="true"></span>
+  <div class="about-footer-curve" aria-hidden="true"></div>
+  <div class="about-contact-inner">
+    <div class="about-contact-heading"><h2><span><img src="/ansyn-avatar-transparent.png" alt="" width="80" height="80" />Let’s make</span><span>something real.</span></h2><span class="about-contact-arrow" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M6 20h28M22 8l12 12-12 12" stroke="currentColor" stroke-width="1.4" /></svg></span></div>
+    <div class="about-contact-rule"><a class="about-contact-ball" href={siteConfig.social.telegram} target="_blank" rel="noreferrer" data-soft-magnet>Get in touch</a></div>
+    <div class="about-contact-links"><a href={siteConfig.social.telegram} target="_blank" rel="noreferrer"><span>Telegram</span><i class="channel-mark" aria-hidden="true"></i></a><a href={siteConfig.social.x} target="_blank" rel="noreferrer"><span>X / @Ansyn_07</span><i class="channel-mark" aria-hidden="true"></i></a></div>
+  </div>
+  <div class="about-contact-bottom"><div><span class="about-micro">Version</span><span>{new Date().getFullYear()} © Ansyn Lab</span></div><div><span class="about-micro">Local time</span><span><time data-about-time></time> UTC+08:00</span></div><div class="about-contact-socials"><nav aria-label="Social links"><a href={siteConfig.social.github} target="_blank" rel="noreferrer">GitHub</a></nav></div></div>
+</footer>
+<script>
+  import { initSharedFooter } from "../lib/shared-footer";
+  initSharedFooter();
+</script>
+<style is:global>
+  .about-contact { font-family: "Neue Montreal", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: clamp(15px, 1.2vw, 19px); line-height: 1.7; }
+  .about-contact h2 { font-weight: 400; letter-spacing: -.035em; margin: 0; }
+  .about-contact .about-micro { color: #aaa; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+  .about-contact-anchor { position: absolute; top: 0; }
+  .about-contact a:focus-visible { outline: 2px solid #91b0ff; outline-offset: 6px; }
+  @media (prefers-reduced-motion: reduce) { .about-contact * { animation: none !important; transition: none !important; } }
+  html[data-reduced] .about-contact * { animation: none !important; transition: none !important; }
+  .about-contact { position: relative; display: flex; flex-direction: column; min-height: 100svh; background: var(--ink); color: var(--paper); padding-top: clamp(72px, min(12vw, 18svh), 200px); overflow: hidden; }
+  .about-footer-curve { position: absolute; top: -1px; left: -10%; width: 120%; height: var(--about-curve, clamp(140px, 22svh, 220px)); border-radius: 0 0 50% 50%; background: var(--paper); }
+  .about-contact-inner { width: 100%; max-width: 2000px; padding: 0 16vw; margin-inline: auto; transform: translateY(var(--about-footer-drift, 0px)); }
+  .about-contact-heading { display: flex; align-items: center; justify-content: space-between; }
+  .about-contact-heading h2 { font-size: clamp(40px, min(6.125vw, 12svh), 122px); line-height: 1.06; }
+  .about-contact-heading h2 > span { display: flex; align-items: center; gap: 25px; }
+  .about-contact-heading h2 img { width: .95em; height: .95em; border-radius: 50%; background: #eee; }
+  .about-contact-arrow { display: block; width: 40px; height: 40px; flex-shrink: 0; margin-left: 20px; }
+  .about-contact-arrow svg { display: block; width: 100%; height: 100%; transform: rotate(var(--contact-arrow-angle, 120deg)); }
+  .about-contact-rule { position: relative; height: 1px; background: #484848; margin-top: clamp(56px, 10svh, 100px); }
+  .about-contact-ball { position: absolute; right: 8%; top: 0; translate: 0 -50%; display: grid; place-items: center; width: clamp(144px, 12vw, 176px); height: clamp(144px, 12vw, 176px); border-radius: 50%; background: var(--accent); font-size: 16px; transform: scale(var(--contact-scale, 1)); transition: transform 320ms cubic-bezier(.22,1,.36,1); }
+  .about-contact-ball:focus-visible { transform: scale(1.07); }
+  @media(hover:hover) and (pointer:fine) { .about-contact-ball:hover { transform: scale(1.07); } }
+  .about-contact-ball:active { transform: scale(.97); }
+  .about-contact-links { display: flex; flex-wrap: wrap; gap: 14px; padding-top: clamp(36px, 7svh, 58px); padding-bottom: clamp(36px, 8svh, 100px); }
+  .about-contact-links a { display: flex; align-items: center; justify-content: space-between; gap: 24px; isolation: isolate; transition: color 220ms, transform 220ms cubic-bezier(.19,1,.22,1); border: 1px solid #565656; border-radius: 99px; padding: 22px 38px; overflow: hidden; position: relative; }
+  .about-contact-links a::before { content: ""; z-index: -1; position: absolute; inset: 0; background: #242424; border-radius: inherit; transform: scaleX(0); transform-origin: left; transition: transform 350ms cubic-bezier(.19,1,.22,1); }
+  .about-contact-links a:is(:hover,:focus-visible)::before { transform: scaleX(1); }
+  .channel-mark { display: block; width: 6px; height: 6px; flex: none; border-radius: 50%; background: #777; transition: transform 280ms cubic-bezier(.19,1,.22,1), background 220ms; }
+  .about-contact-links a:is(:hover,:focus-visible) .channel-mark { transform: scale(1.5); background: #7398ff; }
+  .about-contact-links a:active { transform: translateY(2px); }
+  .about-contact-bottom { margin-top: auto; padding: 20px 4vw; display: flex; gap: 45px; font-size: 13px; }
+  .about-contact-bottom > div { display: flex; flex-direction: column; gap: 14px; }
+  .about-contact-socials { margin-left: auto; justify-content: flex-end; }
+  .about-contact-socials nav { display: flex; gap: 28px; }
+  .about-contact-socials a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  body.about-dark-footer .music-toggle { color: white; }
+  @media (max-width: 840px) { .about-contact-inner { padding-inline: 8vw; } .about-contact-ball { width: 140px; height: 140px;  } }
+  @media (max-width: 600px) {
+    .about-contact { padding-top: 90px; }
+    .about-contact-inner { padding: 20px 24px 0; }
+    .about-contact-heading h2 { font-size: 10vw; }
+    .about-contact-heading h2 > span { gap: 12px; }
+    .about-contact-arrow { width: 24px; height: 24px; margin-left: 8px; }
+    .about-contact-rule { margin-top: 78px; }
+    .about-contact-ball { width: 110px; height: 110px;  right: 5%; font-size: 13px; }
+    .about-contact-links { padding-top: 83px; padding-bottom: 70px; flex-direction: column; gap: 10px; }
+    .about-contact-links a { padding: 19px 25px; text-align: center; }
+    .about-contact-bottom { padding: 24px 24px 60px; flex-wrap: wrap; gap: 30px; font-size: 11px; }
+    .about-contact-socials { margin-left: 0; order: -1; width: 100%; padding-bottom: 24px; border-bottom: 1px solid #444; }
+    .about-contact-socials nav { font-size: 14px; }
+  }
+</style>

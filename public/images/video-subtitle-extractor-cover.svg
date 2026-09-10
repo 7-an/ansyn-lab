@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Video Subtitle Extractor</title>
+  <desc id="desc">A visual workflow showing a YouTube video flowing into direct subtitle extraction or local Whisper transcription, with four export formats.</desc>
+  <rect width="1600" height="900" fill="#15171a"/>
+  <g fill="none" stroke="#34373d">
+    <path d="M80 0v900M200 0v900M320 0v900M440 0v900M560 0v900M680 0v900M800 0v900M920 0v900M1040 0v900M1160 0v900M1280 0v900M1400 0v900M1520 0v900" opacity=".34"/>
+    <path d="M0 90h1600M0 210h1600M0 330h1600M0 450h1600M0 570h1600M0 690h1600M0 810h1600" opacity=".34"/>
+  </g>
+
+  <text x="74" y="78" fill="#8f918a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="700" letter-spacing="3">LOCAL TRANSCRIPT / 01</text>
+  <text x="74" y="142" fill="#f3f0e8" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="58" font-weight="800" letter-spacing="-3">YouTube → readable text.</text>
+  <text x="74" y="184" fill="#b9bbb4" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22">已有字幕直接提取，没有字幕就在本地识别。</text>
+
+  <g transform="translate(74 244)">
+    <rect width="688" height="454" rx="22" fill="#24272c" stroke="#4b4f56" stroke-width="2"/>
+    <circle cx="28" cy="28" r="6" fill="#73766f"/><circle cx="49" cy="28" r="6" fill="#73766f"/><circle cx="70" cy="28" r="6" fill="#73766f"/>
+    <rect x="98" y="17" width="562" height="22" rx="11" fill="#30333a"/>
+    <rect x="25" y="62" width="638" height="332" rx="13" fill="#090a0c"/>
+    <path d="M296 173l94 55-94 55z" fill="#f3f0e8"/>
+    <rect x="25" y="414" width="426" height="13" rx="6.5" fill="#51555c"/>
+    <rect x="25" y="414" width="268" height="13" rx="6.5" fill="#356bff"/>
+    <text x="493" y="430" fill="#a7aaa3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">NO CAPTION TRACK</text>
+  </g>
+
+  <g transform="translate(824 244)">
+    <rect width="702" height="524" rx="22" fill="#f3f0e8" stroke="#c9c8c0" stroke-width="2"/>
+    <text x="34" y="48" fill="#73766f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700" letter-spacing="2">VIDEO SUBTITLE EXTRACTOR</text>
+    <rect x="566" y="23" width="102" height="34" rx="17" fill="#d9e2ff"/>
+    <text x="617" y="45" fill="#154dcc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" text-anchor="middle">LOCAL</text>
+
+    <rect x="34" y="86" width="634" height="84" rx="13" fill="#fcfbf7" stroke="#c9c8c0"/>
+    <text x="56" y="119" fill="#73766f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">CURRENT VIDEO</text>
+    <text x="56" y="149" fill="#15171a" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="700">How to learn with long-form video</text>
+
+    <g transform="translate(34 193)">
+      <rect width="304" height="120" rx="13" fill="#fcfbf7" stroke="#c9c8c0"/>
+      <text x="20" y="32" fill="#73766f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">PATH A / CAPTION FOUND</text>
+      <text x="20" y="65" fill="#15171a" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700">直接提取字幕</text>
+      <rect x="20" y="83" width="264" height="7" rx="3.5" fill="#d9e2ff"/>
+      <rect x="20" y="83" width="226" height="7" rx="3.5" fill="#356bff"/>
+    </g>
+    <g transform="translate(364 193)">
+      <rect width="304" height="120" rx="13" fill="#154dcc"/>
+      <text x="20" y="32" fill="#d9e2ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">PATH B / NO CAPTION</text>
+      <text x="20" y="65" fill="#fcfbf7" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700">Whisper 本地识别</text>
+      <text x="20" y="94" fill="#d9e2ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">AUDIO STAYS ON DEVICE</text>
+    </g>
+
+    <path d="M352 328v54" stroke="#356bff" stroke-width="3"/>
+    <path d="M343 373l9 12 9-12" fill="none" stroke="#356bff" stroke-width="3"/>
+    <text x="34" y="405" fill="#73766f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">EXPORT</text>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="800" text-anchor="middle">
+      <rect x="34" y="427" width="142" height="58" rx="10" fill="#e8e5dc"/><text x="105" y="463" fill="#15171a">MD</text>
+      <rect x="198" y="427" width="142" height="58" rx="10" fill="#e8e5dc"/><text x="269" y="463" fill="#15171a">SRT</text>
+      <rect x="362" y="427" width="142" height="58" rx="10" fill="#e8e5dc"/><text x="433" y="463" fill="#15171a">TXT</text>
+      <rect x="526" y="427" width="142" height="58" rx="10" fill="#e8e5dc"/><text x="597" y="463" fill="#15171a">JSON</text>
+    </g>
+  </g>
+
+  <g transform="translate(74 798)">
+    <rect width="226" height="40" rx="20" fill="#356bff"/>
+    <text x="113" y="26" fill="#fcfbf7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="800" text-anchor="middle">OPEN SOURCE / MACOS</text>
+    <text x="258" y="26" fill="#8f918a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">CHROME EXTENSION + LOCAL HELPER</text>
+  </g>
+</svg>

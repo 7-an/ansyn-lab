@@ -1,0 +1,129 @@
+---
+import Header from "./Header.astro";
+const practices = [
+  { number: "01", title: "AI & Systems", text: "I break repetitive work into inputs, rules, triggers, outputs and feedback. I build community and project workspaces for activities, tasks, daily updates and reviews.", href: "/work/#kosx", link: "Workflows & community systems" },
+  { number: "02", title: "Content & Research", text: "I collect real questions from comments, communities and conversations, then turn them into content, product hypotheses or practical next steps.", href: "/writing/", link: "Read the notes" },
+  { number: "03", title: "AI-assisted Web", text: "I use AI and Codex to take websites from information structure to development, revisions and a public launch — making something people can actually use and respond to.", href: "/work/", link: "Explore the projects" }
+];
+---
+<script is:inline>
+  if (new URLSearchParams(location.search).get("motion") === "reduce") document.documentElement.setAttribute("data-reduced", "");
+</script>
+<div class="about-page" lang="en">
+  <Header />
+
+  <div class="about-light">
+    <section class="about-intro about-medium" aria-labelledby="about-title">
+      <h1 id="about-title"><span>Finding my way</span><span>in the real world.</span></h1>
+    </section>
+    <div class="about-divider about-medium" aria-hidden="true">
+      <div class="about-rule"></div>
+      <div class="about-digital-ball"><div class="about-wire-globe" aria-hidden="true"><div class="about-globe-wrap"><i></i><i></i><i></i><b></b><b></b></div></div></div>
+    </div>
+    <section class="about-photo-section about-wide" aria-label="About Ansyn">
+      <div class="about-intro-copy">
+        <div data-about-drift="0.04"><p>I’m Ansyn, born in 2007. I’m exploring how AI, the internet and personal systems can help me find my way beyond school and into the real world.</p><p>I don’t have a finished answer. I’m making things, meeting people and learning from what happens next.</p><p class="about-exploring">Always exploring<span class="about-dots">...</span></p></div>
+      </div>
+      <figure class="about-main-photo"><div class="about-image-window"><img src="/images/kosx-introduction-original.jpg" alt="Ansyn, wearing a cap, introducing himself at KOSX with his website on the screen." width="3235" height="1819" fetchpriority="high" /></div><figcaption>Introducing myself at KOSX</figcaption></figure>
+    </section>
+  <section class="about-chapter about-medium" id="kosx-chapter" aria-labelledby="about-chapter-title">
+    <figure><div class="about-image-window"><img src="/images/kosx-field-note.jpg" alt="Sharing our profiles at KOSX, with Hong Kong harbour outside the window" width="1200" height="1594" loading="lazy" /></div><figcaption>Hong Kong · A moment at KOSX</figcaption></figure>
+    <div class="about-chapter-copy"><h2 id="about-chapter-title">Into the world.<br />With KOSX.</h2><p>I’m currently interning at KOSX.ai, working on community project systems, content, AI automation and website delivery.</p><p>It’s my first experience of a real collaboration network — working alongside other builders, with deadlines, feedback and results beyond my own screen.</p><a class="about-inline-link" href="/work/#kosx">What I’m working on</a></div>
+  </section>
+    <section class="about-practices about-wide" id="capabilities" aria-labelledby="about-practices-title">
+      <h2 id="about-practices-title">I can help you with<span class="about-dots">...</span></h2>
+      <div class="about-practice-grid">{practices.map((practice) => <article><span class="about-number">{practice.number}</span><div class="about-rule"></div><h3>{practice.number === "03" && <span class="about-spark" aria-hidden="true">✦</span>}{practice.title}</h3><p>{practice.text}</p><a class="about-inline-link" href={practice.href} target={practice.href.startsWith("https") ? "_blank" : undefined} rel={practice.href.startsWith("https") ? "noreferrer" : undefined}>{practice.link}</a></article>)}</div>
+    </section>
+  </div>
+
+</div>
+<script>
+  import { initAboutExperience } from "../lib/about-experience";
+  initAboutExperience();
+</script>
+<style is:global>
+  .about-page { font-family: "Neue Montreal", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: clamp(15px, 1.2vw, 19px); line-height: 1.7; }
+  .about-page { --about-gutter: clamp(24px, 8vw, 160px); --about-section: clamp(96px, 12vw, 240px); background: var(--paper); }
+  .about-page h1, .about-page h2, .about-page h3 { font-weight: 400; letter-spacing: -.035em; margin: 0; }
+  .about-page p { margin: 0 0 1.4em; }
+  .about-page figure { margin: 0; min-width: 0; }
+  .about-wide { max-width: 2000px; margin-inline: auto; padding-inline: var(--about-gutter); }
+  .about-medium { max-width: 2000px; margin-inline: auto; padding-inline: calc(var(--about-gutter) * 2); }
+  .about-light { background: var(--about-surface, #fdfdfd); }
+  .about-intro { padding-top: calc(var(--about-section) * 1.33); padding-bottom: calc(var(--about-section) * .66); }
+  .about-intro h1 { font-size: clamp(46px, 6.125vw, 122px); line-height: 1.065; }
+  .about-intro h1 span { display: block; animation: about-enter .9s cubic-bezier(.16,1,.3,1) both; }
+  .about-intro h1 span:nth-child(2) { animation-delay: .08s; }
+  .about-divider { position: relative; }
+  .about-rule { height: 1px; background: #c9c9c9; }
+  .about-digital-ball { position: absolute; right: calc(var(--about-gutter) * 2 + clamp(72px, 6vw, 88px)); top: 0; transform: translateY(-50%); width: clamp(144px, 12vw, 176px); aspect-ratio: 1; border-radius: 50%; background: var(--accent); display: grid; place-items: center; z-index: 2; transition: background 1s; }
+  .about-digital-ball:hover { background: #5056d8; }
+  .about-wire-globe { width: 31%; aspect-ratio: 1; position: relative; border-radius: 50%; overflow: hidden; font-size: 12px; }
+  .about-globe-wrap { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; box-shadow: inset 0 0 0 1.5px #fff; transform: rotate(15deg); animation: about-globe-sway 5.4s cubic-bezier(.35,0,.65,1) infinite; }
+  .about-globe-wrap i { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%,-50%); border-radius: 50%; box-shadow: inset 1.2px 0 0 1px #fff; animation: about-meridian 2.7s linear infinite; }
+  .about-globe-wrap i:nth-child(1) { animation-delay: -1.8s; }
+  .about-globe-wrap i:nth-child(2) { animation-delay: -.9s; }
+  .about-globe-wrap b { position: absolute; top: 50%; left: 50%; width: 150%; height: 55%; transform: translate(-50%,-50%); border-radius: 50%; box-shadow: inset 0 0 0 1.5px #fff; }
+  .about-globe-wrap b:last-child { height: 1.5px; border-radius: 0; background: #fff; box-shadow: none; }
+  @keyframes about-globe-sway { 0%,100% { transform: rotate(15deg); } 50% { transform: rotate(-15deg); } }
+  @keyframes about-meridian {
+    0% { width: 100%; border-radius: 50%; box-shadow: inset 1.2px 0 0 1px #fff; }
+    49% { border-radius: 50%; background: transparent; box-shadow: inset 1.2px 0 0 1px #fff; }
+    50% { width: 1.6px; border-radius: 0; background: #fff; }
+    51% { border-radius: 50%; background: transparent; box-shadow: inset -1.2px 0 0 1px #fff; }
+    100% { width: 100%; border-radius: 50%; box-shadow: inset -1.2px 0 0 1px #fff; }
+  }
+  .about-photo-section { display: grid; grid-template-columns: 30% 70%; padding-top: calc(var(--about-section) * .75); }
+  .about-intro-copy { padding-left: calc(var(--about-gutter) * .55); padding-right: calc(var(--about-gutter) / 2); position: relative; }
+  .about-exploring { color: #777; }
+  .about-dots { animation: about-dots 2s infinite; }
+  .about-image-window { overflow: hidden; position: relative; background: #ddd; }
+  .about-main-photo .about-image-window { aspect-ratio: 3235 / 1819; }
+  .about-image-window img { width: 100%; height: 114%; position: absolute; top: -7%; left: 0; object-fit: cover; will-change: transform; }
+  .about-main-photo .about-image-window img { height: 100%; top: 0; object-fit: contain; will-change: auto; }
+  .about-page figcaption { font-size: 11px; color: #666; margin-top: 10px; }
+  .about-practices { padding-top: calc(var(--about-section) * .75); padding-bottom: var(--about-section); }
+  .about-page h2 { font-size: clamp(36px, 3.75vw, 64px); line-height: 1.13; }
+  .about-practices > h2 { margin-bottom: calc(var(--about-section) / 2); }
+  .about-practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: calc(var(--about-gutter) / 1.5); }
+  .about-practice-grid article { display: grid; grid-row: span 5; grid-template-rows: subgrid; min-width: 0; }
+  .about-practice-grid .about-inline-link { align-self: end; justify-self: start; }
+  html[data-page-name-en="About"] .about-contact-arrow { display: none; }
+  .about-number { display: block; font-size: 12px; color: #777; padding-bottom: 2em; }
+  .about-practice-grid h3 { font-size: clamp(27px, 2.3vw, 42px); line-height: 1.45; margin-block: 26px; }
+  .about-spark { display: inline-block; margin-right: 6px; }
+  .about-inline-link { display: inline-flex; max-width: 100%; width: fit-content; min-height: 44px; line-height: 1.5; gap: 0; align-items: center; border-bottom: 1px solid #aaa; padding-block: 8px; font-size: .86em; }
+  .about-inline-link:hover { color: var(--accent); border-color: currentColor; }
+  .about-chapter { scroll-margin-top: 88px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--about-gutter); align-items: center; padding-block: var(--about-section); }
+  .about-chapter .about-image-window { aspect-ratio: 4 / 5; }
+  .about-chapter .about-image-window img { height: 100%; top: 0; object-position: 50% 60%; will-change: auto; }
+  .about-chapter h2 { margin-bottom: .7em; }
+  @keyframes about-enter { from { transform: translateY(45px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes about-dots { 50% { opacity: .35; } }
+  @media (max-width: 1100px) {
+    .about-photo-section { grid-template-columns: 1fr; gap: 36px; }
+    .about-intro-copy { max-width: 680px; padding-right: var(--about-gutter); }
+  }
+  @media (max-width: 840px) {
+    .about-chapter { padding-inline: var(--about-gutter); gap: 6vw; }
+    .about-practice-grid { gap: 26px; }
+  }
+  @media (max-width: 600px) {
+    .about-page { --about-gutter: 24px; --about-section: 90px; }
+    .about-medium { padding-inline: var(--about-gutter); }
+    .about-intro { padding-top: 165px; padding-bottom: 92px; }
+    .about-intro h1 { font-size: 10vw; line-height: 1.1; }
+    .about-digital-ball { width: 100px; right: 48px; }
+    .about-photo-section { grid-template-columns: 1fr; padding-top: 85px; gap: 32px; }
+    .about-intro-copy { padding-left: 0; padding-right: 52px; }
+      .about-practice-grid { grid-template-columns: 1fr; gap: 44px; }
+    .about-practice-grid article { display: block; grid-row: auto; }
+    .about-practices h2 { font-size: 32px; }
+    .about-practice-grid h3 { margin-block: 20px; font-size: 30px; }
+    .about-number { padding-bottom: 18px; }
+    .about-chapter { grid-template-columns: 1fr; gap: 40px; }
+    .about-chapter h2 { font-size: 42px; }
+    }
+  @media (prefers-reduced-motion: reduce) { .about-page * { animation: none !important; transition: none !important; } }
+  html[data-reduced] .about-page *, html[data-reduced] .about-contact * { animation: none !important; transition: none !important; }
+</style>

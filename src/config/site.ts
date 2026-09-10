@@ -1,16 +1,16 @@
 export const SITE_URL =
-  import.meta.env.PUBLIC_SITE_URL || "https://ansyn-lab.vercel.app";
+  import.meta.env.PUBLIC_SITE_URL || "https://ansyn.me";
 
 export const siteConfig = {
   name: "Ansyn Lab",
   chineseName: "安寻",
   displayName: "安寻 Ansyn",
-  title: "安寻 Ansyn｜07后AI时代个人成长实验",
+  title: "Ansyn Lab | An ongoing experiment in the real world",
   description:
-    "一个年轻人，如何在 AI 时代进入真实世界——安寻的公开记录。",
+    "A young person finding a way into the real world with AI. An open record by Ansyn.",
   tagline: "在喧嚣中保持理智，在数字世界中探索同步。",
-  language: "zh-CN",
-  locale: "zh_CN",
+  language: "en",
+  locale: "en_US",
   siteUrl: SITE_URL,
   social: {
     x: "https://x.com/Ansyn_07",

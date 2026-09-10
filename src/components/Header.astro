@@ -1,39 +1,109 @@
 ---
 import { siteConfig } from "../config/site";
-
+interface Props { home?: boolean }
+const { home = false } = Astro.props;
 const pathname = Astro.url.pathname;
+const contact = "#contact";
 const nav = [
-  { href: "/", label: "首页" },
-  { href: "/work/", label: "项目" },
-  { href: "/writing/", label: "文章" },
-  { href: "/about/", label: "关于" }
+  { href: "/work/", label: "Work" },
+  { href: "/writing/", label: "Writing" },
+  { href: "/about/", label: "About" },
+  { href: contact, label: "Contact" }
 ];
+const active = (href: string) => href === "/" ? pathname === "/" : href.startsWith("/") && pathname.startsWith(href);
 ---
-
-<header class="site-header">
-  <div class="shell header-inner">
-    <a class="wordmark" href="/" aria-label="Ansyn Lab 首页">
-      <span class="wordmark-mark" aria-hidden="true">A/</span>
-      <span>{siteConfig.name}</span>
-    </a>
-    <nav class="desktop-nav" aria-label="主要导航">
-      {nav.map((item) => (
-        <a
-          class="nav-item"
-          href={item.href}
-          aria-current={item.href === "/" ? (pathname === "/" ? "page" : undefined) : (pathname.startsWith(item.href) ? "page" : undefined)}
-        >
-          {item.label}
-        </a>
-      ))}
-      <a class="header-contact" href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">X ↗</a>
-    </nav>
-    <details class="mobile-menu">
-      <summary aria-label="打开导航菜单">菜单 <span aria-hidden="true">＋</span></summary>
-      <nav aria-label="移动端导航">
-        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">X ↗</a>
-      </nav>
-    </details>
-  </div>
+<header class:list={["site-navigation", { "is-home": home }]} data-site-navigation>
+  <a class="site-identity" href="/" aria-label="Ansyn Lab home">
+    <img src="/ansyn-avatar-transparent.png" alt="" width="36" height="36" />
+    <span class="site-identity-name" data-identity-name={home || undefined}>Ansyn<span class="site-identity-dot">.</span></span>
+  </a>
+  <nav class="site-nav-links" aria-label="Main navigation">
+    {nav.map(item => <a href={item.href} aria-current={active(item.href) ? "page" : undefined}>{item.label}</a>)}
+    <button class="language-switch" data-language-toggle type="button" hidden aria-label="Switch to Chinese">中文</button>
+  </nav>
+  <button class="site-menu-toggle" aria-label="Open navigation menu" aria-haspopup="dialog" aria-controls="site-menu" aria-expanded="false"><span></span><span></span></button>
 </header>
+<dialog id="site-menu" class="site-menu" aria-label="Site navigation" data-lenis-prevent>
+  <div class="site-menu-scrim" data-menu-dismiss aria-hidden="true"></div>
+  <div class="site-menu-panel">
+    <div class="site-menu-curve" aria-hidden="true"><i></i></div>
+    <div class="site-menu-inner">
+  <div class="menu-language-row"><p class="site-menu-label">Navigation</p><button class="language-switch" data-language-toggle type="button" hidden aria-label="Switch to Chinese">中文</button></div>
+  <nav aria-label="Full navigation">{[{ href: "/", label: "Home" }, ...nav].map((item, index) => <a style={`--menu-index:${index}`} href={item.href} aria-current={active(item.href) ? "page" : undefined}>{item.label}</a>)}</nav>
+  <div class="site-menu-bottom"><p class="site-menu-label">Elsewhere</p><div class="site-menu-socials"><a href={siteConfig.social.x} target="_blank" rel="noreferrer">X / Twitter ↗</a><a href={siteConfig.social.telegram} target="_blank" rel="noreferrer">Telegram ↗</a><a href={siteConfig.social.github} target="_blank" rel="noreferrer">GitHub ↗</a></div></div>
+  </div>
+  </div>
+  <button class="site-menu-close" aria-label="Close navigation menu"><span></span><span></span></button>
+</dialog>
+<script>import "../lib/site-navigation";</script>
+<style>
+  .language-switch { color: inherit; background: none; border: 0; padding: 8px 0; font: inherit; font-size: 12px; cursor: pointer; }
+  .language-switch[hidden] { display: none; }
+  .language-switch:hover { color: var(--accent); }
+  .language-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+  .menu-language-row { display: flex; align-items: baseline; justify-content: space-between; }
+
+  .site-navigation { position: fixed; z-index: 45; top: 0; left: 0; width: 100%; padding: 20px 3%; display: flex; align-items: center; justify-content: space-between; gap: 24px; pointer-events: none; color: var(--ink); }
+  .site-identity { display: flex; align-items: center; gap: 10px; font: 600 21px "Poppins", var(--sans); pointer-events: auto; transition: opacity .25s; }
+  .site-identity img { display: block; width: 36px; height: 36px; border-radius: 50%; background: #fdfdfdb8; box-shadow: 0 0 0 1px #0f0f0f24; object-fit: cover; }
+  .site-identity-dot { color: var(--accent); }
+  :global(html.js) .is-home .site-identity-name { opacity: 0; }
+  .site-nav-links { display: flex; align-items: center; gap: 28px; font: 400 13px/1.5 "Helvetica Neue", Arial, var(--sans); pointer-events: auto; transition: opacity .2s, transform .3s; }
+  .site-nav-links a { position: relative; padding-block: 10px; color: #555; transition: color .2s; }
+  .site-nav-links a:hover, .site-nav-links a[aria-current] { color: #0f0f0f; }
+  .site-nav-links a::after { content: ""; position: absolute; left: 50%; bottom: 1px; width: 4px; height: 4px; border-radius: 50%; background: currentColor; transform: translateX(-50%) scale(0); transition: transform .25s; }
+  .site-nav-links a:hover::after, .site-nav-links a[aria-current]::after { transform: translateX(-50%) scale(1); }
+  .site-menu-toggle { position: absolute; top: 12px; right: 3%; width: 52px; height: 52px; display: grid; align-content: center; justify-items: center; gap: 6px; border-radius: 50%; border: 1px solid #ffffff26; background: #0f0f0f; color: #fdfdfd; cursor: pointer; pointer-events: none; visibility: hidden; opacity: 0; scale: .8; transition: opacity .25s, scale .35s cubic-bezier(.22,1,.36,1), background .25s; }
+  .site-menu-toggle span { width: 18px; height: 1px; background: currentColor; }
+  .site-menu-toggle:hover { background: var(--accent); }
+  .site-navigation.is-condensed .site-nav-links { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); }
+  .site-navigation.is-condensed:not(.is-home) .site-identity { opacity: 0; visibility: hidden; pointer-events: none; }
+  .site-navigation.is-condensed .site-menu-toggle { opacity: 1; visibility: visible; pointer-events: auto; scale: 1; }
+  .site-navigation.is-dark { color: #fdfdfd; }
+  .site-navigation.is-dark .site-menu-toggle { border-color: #555; }
+  .site-menu { --menu-ease: cubic-bezier(.7,0,.2,1); --menu-curve-width: 6vw; box-sizing: border-box; margin: 0; padding: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; border: none; overflow: clip; background: transparent; color: #fdfdfd; font: 400 14px/1.5 "Helvetica Neue", Arial, var(--sans); overscroll-behavior: contain; }
+  .site-menu[open] { display: block; }
+  .site-menu::backdrop { background: transparent; }
+  .site-menu-scrim { position: absolute; inset: 0; background: linear-gradient(to right, #0000004d 40%, #000 80%); opacity: 0; transition: opacity .8s var(--menu-ease); }
+  .site-menu-panel { position: absolute; right: 0; top: 0; width: min(480px, 100%); height: 100%; background: #0f0f0f; transform: translateX(calc(100% + var(--menu-curve-width))); transition: transform .8s var(--menu-ease); will-change: transform; }
+  .site-menu-inner { position: relative; height: 100%; display: flex; flex-direction: column; padding: 100px 52px 40px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; }
+  .site-menu-curve { position: absolute; left: 1px; top: 0; height: 100%; width: var(--menu-curve-width); overflow: hidden; transform: translateX(-100%); transition: width .85s var(--menu-ease); }
+  .site-menu-curve i { position: absolute; display: block; left: 50%; top: 50%; width: 775%; height: 150%; border-radius: 50%; background: #0f0f0f; transform: translate(-6.5%, -50%); }
+  .site-menu.is-visible .site-menu-scrim { opacity: .35; }
+  .site-menu.is-visible .site-menu-panel { transform: translateX(0); }
+  .site-menu.is-visible .site-menu-curve { width: 0; }
+  /* The control stays at the trigger position, outside the moving panel.
+     Focusing an offscreen control made the old dialog scroll horizontally. */
+  .site-menu-close { position: absolute; z-index: 2; top: 12px; right: 3%; width: 52px; height: 52px; border: 1px solid #ffffff26; background: #0f0f0f; color: #fdfdfd; border-radius: 50%; display: grid; place-items: center; cursor: pointer; transition: background .25s cubic-bezier(.36,0,.66,0), border-color .25s; }
+  .site-menu.is-visible .site-menu-close, .site-menu-close:hover { background: var(--accent); border-color: transparent; }
+  .site-menu-close span { grid-area: 1/1; width: 18px; height: 1px; background: currentColor; transform: translateY(-3.5px); transition: transform .3s cubic-bezier(.7,0,.3,1); }
+  .site-menu-close span:last-child { transform: translateY(3.5px); }
+  .site-menu.is-visible .site-menu-close span { transform: rotate(45deg); }
+  .site-menu.is-visible .site-menu-close span:last-child { transform: rotate(-45deg); }
+  .site-menu-label { margin: 0 0 20px; font: 400 10px/1.5 var(--mono); color: #999; text-transform: uppercase; letter-spacing: .08em; }
+  .site-menu nav { display: flex; flex-direction: column; align-items: start; gap: 5px; border-top: 1px solid #444; padding-top: 28px; }
+  .site-menu nav a { position: relative; font-size: 44px; line-height: 1.35; letter-spacing: -.03em; transform: translateX(15vw); transition: transform .8s var(--menu-ease), translate .25s, color .25s; transition-delay: calc(var(--menu-index) * .03s), 0s, 0s; }
+  .site-menu.is-visible nav a { transform: translateX(0); }
+  .site-menu nav a:hover { translate: 6px; }
+  .site-menu nav a[aria-current]::before { content: ""; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); left: -19px; top: 50%; }
+  .site-menu-bottom { margin-top: clamp(64px, 14vh, 112px); padding-top: 0; flex-shrink: 0; }
+  .site-menu-socials { display: flex; gap: 22px; font-size: 12px; }
+  .site-menu-socials a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  @media (max-width: 600px) {
+    .site-navigation { padding: 12px 5%; gap: 10px; }
+    .site-identity { font-size: 18px; gap: 6px; }
+    .site-identity img { width: 30px; height: 30px; }
+    .site-nav-links { display: none; }
+    .site-menu-toggle { top: 7px; right: 5%; width: 42px; height: 42px; opacity: 1; visibility: visible; pointer-events: auto; scale: 1; }
+    .site-menu { --menu-curve-width: 20vw; }
+    .site-menu-panel { width: 100%; }
+    .site-menu-inner { padding: 100px 32px 34px; }
+    .site-menu-scrim { background: #0f0f0f; }
+    .site-menu.is-visible nav a { transition-delay: calc(.1s + var(--menu-index) * .03s), 0s, 0s; }
+    .site-menu nav a { font-size: 38px; }
+    .site-menu-close { top: 7px; right: 5%; width: 42px; height: 42px; }
+    .site-menu-socials { gap: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .site-navigation *, .site-menu, .site-menu * { animation: none !important; transition: none !important; } }
+  :global(html[data-reduced]) :is(.site-navigation *, .site-menu, .site-menu *) { animation: none !important; transition: none !important; }
+</style>
