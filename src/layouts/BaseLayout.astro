@@ -32,23 +32,52 @@ const transitionNames = pageTransitionNames[transitionRoute] ?? pageTransitionNa
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
 const imageUrl = new URL(image, Astro.site ?? siteConfig.siteUrl);
+const siteUrl = new URL("/", Astro.site ?? siteConfig.siteUrl).href;
+const websiteId = `${siteUrl}#website`;
+const personId = `${siteUrl}#ansyn`;
+const isHome = transitionRoute === "";
+const pageType = type === "article" ? "BlogPosting"
+  : transitionRoute === "about" ? "ProfilePage"
+  : ["work", "writing"].includes(transitionRoute) ? "CollectionPage"
+  : "WebPage";
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": type === "article" ? "BlogPosting" : "WebSite",
-  name: title,
-  headline: title,
-  description,
-  url: canonical.href,
-  inLanguage: siteConfig.language,
-  ...(type === "article" && publishDate
-    ? { datePublished: publishDate.toISOString() }
-    : {}),
-  author: {
-    "@type": "Person",
-    name: siteConfig.displayName,
-    url: siteConfig.siteUrl,
-    sameAs: [siteConfig.social.x, siteConfig.social.telegram]
-  }
+  "@graph": [
+    ...(isHome ? [{
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: siteConfig.name,
+      alternateName: ["Ansyn", siteConfig.displayName],
+      url: siteUrl,
+      description,
+      inLanguage: siteConfig.language,
+      publisher: { "@id": personId }
+    }] : []),
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: siteConfig.displayName,
+      alternateName: ["Ansyn", siteConfig.chineseName],
+      url: new URL("about/", siteUrl).href,
+      sameAs: [siteConfig.social.x, siteConfig.social.github, siteConfig.social.telegram]
+    },
+    {
+      "@type": pageType,
+      "@id": `${canonical.href}#webpage`,
+      name: title,
+      description,
+      url: canonical.href,
+      inLanguage: siteConfig.language,
+      isPartOf: { "@id": websiteId },
+      author: { "@id": personId },
+      ...(pageType === "ProfilePage" ? { mainEntity: { "@id": personId } } : {}),
+      ...(type === "article" ? {
+        headline: title,
+        image: imageUrl.href,
+        ...(publishDate ? { datePublished: publishDate.toISOString() } : {})
+      } : {})
+    }
+  ]
 };
 ---
 
