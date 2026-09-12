@@ -57,6 +57,12 @@ export function initLanguage() {
     });
     localize(document.body);
     document.title = translate(document.title);
+    for (const selector of ['meta[name="description"]', 'meta[property="og:title"]', 'meta[property="og:description"]', 'meta[name="twitter:title"]', 'meta[name="twitter:description"]']) {
+      const meta = document.querySelector<HTMLMetaElement>(selector);
+      if (meta) meta.content = translate(meta.content);
+    }
+    const locale = document.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
+    if (locale) locale.content = language === "en" ? "en_US" : "zh_CN";
     document.querySelectorAll<HTMLButtonElement>("[data-language-toggle]").forEach(button => {
       button.hidden = false;
       button.textContent = language === "en" ? "中文" : "EN";

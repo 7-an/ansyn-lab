@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ansyn.me"
+        }
+      ],
+      "destination": "https://ansyn.me/:path*",
+      "permanent": true
+    }
+  ]
+}

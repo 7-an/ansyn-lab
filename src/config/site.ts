@@ -5,9 +5,9 @@ export const siteConfig = {
   name: "Ansyn Lab",
   chineseName: "安寻",
   displayName: "安寻 Ansyn",
-  title: "Ansyn Lab | An ongoing experiment in the real world",
+  title: "Ansyn | AI Projects, Writing & Experiments",
   description:
-    "A young person finding a way into the real world with AI. An open record by Ansyn.",
+    "Explore Ansyn's AI projects, open-source tools and writing, with field notes from learning, building and collaborating beyond school.",
   tagline: "在喧嚣中保持理智，在数字世界中探索同步。",
   language: "en",
   locale: "en_US",

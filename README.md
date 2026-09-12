@@ -70,6 +70,12 @@ npm run preview
 
 绑定新域名后，在部署平台把 `PUBLIC_SITE_URL` 设置为完整正式地址（包含 `https://`），重新构建即可统一更新 canonical、OG、robots 和 sitemap 的基础地址。
 
+## 搜索展示信息
+
+首页搜索标题与摘要维护在 `src/config/site.ts`；Work、Writing、About 的独立标题和摘要维护在对应页面的 `BaseLayout` 参数中。视觉大标题与正文独立保留。新增元数据文案的中文翻译同时加入 `src/data/translations.json`，现有切换按钮会同步浏览器标题、描述及社交预览信息；当前仍是同网址切换语言，没有独立中文收录路由。
+
+`BaseLayout.astro` 在首页输出统一的 `WebSite` 名称，在各页关联同一个 `Person`，并区分普通页面、项目/文章目录和个人介绍页。`vercel.json` 仅把 `www.ansyn.me` 永久跳转到 `ansyn.me`，保留路径和查询参数。域名重定向需要在 Vercel 部署后验证，本地 Astro 不执行此规则。
+
 ## 发布与回退
 
 正式仓库是 `7-an/ansyn-lab`，Vercel 项目为 `ansyn-lab`，正式分支是 `main`。修改后运行 `npm run check`；经用户确认后提交并推送 `main`，等待 Vercel 成功，再实际检查 https://ansyn.me 的首页、地球、项目、文章、关于与页面转场。

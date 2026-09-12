@@ -60,7 +60,7 @@ const { projects } = Astro.props;
                 {project.gallery.map((image, imageIndex) => (
                   <img
                     src={image.src}
-                    alt={imageIndex === 0 ? image.alt : ""}
+                    alt={image.alt}
                     width={image.width}
                     height={image.height}
                     loading={index === 0 && imageIndex === 0 ? "eager" : "lazy"}
