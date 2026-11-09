@@ -17,6 +17,7 @@ const heroField = createOriginalHeroField(opening, field, identityName);
 const latitudeOutput = document.querySelector<HTMLElement>("[data-hover-lat]")!;
 const longitudeOutput = document.querySelector<HTMLElement>("[data-hover-lon]")!;
 const mapStatus = document.querySelector<HTMLElement>("[data-map-status]")!;
+const compactRendering = window.matchMedia("(max-width: 759px), (pointer: coarse)");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const motion = { get matches() { return motionPreference.matches || new URLSearchParams(location.search).get("motion") === "reduce"; } };
 const globe = earth.getContext("2d");
@@ -56,13 +57,26 @@ for (let lon = -180; lon < 180; lon += 15) {
   grid.push({geometry:{type:"LineString",coordinates:Array.from({length:181},(_,i)=>[lon,i-90])},alpha:lon % 45 === 0 ? .7 : .4});
 }
 let raf = 0, previous = 0, dirty = true, visible = true;
+let sceneDirty = true;
+let lastPaint = -Infinity;
+let lastGeometry = "";
+const copyControls = [...copy.querySelectorAll<HTMLElement>("a,button")];
+let lastCopyPointer = "";
+const pinShown = pins.map(() => null as boolean | null);
 
 
 function resize() {
-  width = stage.clientWidth;
-  canvasTop = earth.offsetTop;
-  height = motion.matches ? earth.clientHeight : stage.clientHeight;
-  ratio = Math.min(devicePixelRatio || 1, 2);
+  const nextWidth = stage.clientWidth;
+  const nextTop = earth.offsetTop;
+  const nextHeight = motion.matches ? earth.clientHeight : stage.clientHeight;
+  const nextRatio = Math.min(devicePixelRatio || 1, compactRendering.matches ? 1.5 : 2);
+  const geometry = `${nextWidth}:${nextHeight}:${nextTop}:${nextRatio}:${motion.matches}`;
+  // Mobile browser chrome can fire resize without changing the stable stage.
+  // Avoid reallocating every canvas and rebuilding the glyph mask in that case.
+  if (geometry === lastGeometry) { sceneDirty = true; dirty = true; start(); return; }
+  lastGeometry = geometry;
+  width = nextWidth; canvasTop = nextTop; height = nextHeight; ratio = nextRatio;
+  sceneDirty = true;
   for (const canvas of [earth]) {
     canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
     canvas.getContext("2d")?.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -126,24 +140,28 @@ function drawGlobe() {
     const target = p;
     const shown = enter > .97 && p.z >= 0;
     pins[i].style.left=`${target.x}px`; pins[i].style.top=`${target.y}px`;
-    pins[i].style.visibility=shown ? "visible" : "hidden";
-    pins[i].style.pointerEvents=shown ? "auto" : "none";
-    pins[i].tabIndex=shown ? 0 : -1;
+    if (pinShown[i] !== shown) {
+      pinShown[i] = shown;
+      pins[i].style.visibility=shown ? "visible" : "hidden";
+      pins[i].style.pointerEvents=shown ? "auto" : "none";
+      pins[i].tabIndex=shown ? 0 : -1;
+    }
     return target;
   });
 }
 
-function updateReadout() {
+function updateReadout(rect: DOMRect | null) {
   const geometry = globeGeometry();
-  const rect = earth.getBoundingClientRect();
-  const coords = hover && geometry.enter > .9 ? unprojectGlobe(
+  const coords = rect && hover && geometry.enter > .9 ? unprojectGlobe(
     (hover.x - rect.left - geometry.x) / geometry.r,
     -(hover.y - rect.top - geometry.y) / geometry.r, longitude, tilt
   ) : null;
   if (coords) lastHovered = coords;
   const displayed = coords ?? lastClicked ?? lastHovered;
-  latitudeOutput.textContent = displayed ? `${Math.abs(displayed.lat).toFixed(4)}° ${displayed.lat >= 0 ? "N" : "S"}` : "—";
-  longitudeOutput.textContent = displayed ? `${Math.abs(displayed.lon).toFixed(4)}° ${displayed.lon >= 0 ? "E" : "W"}` : "—";
+  const latitudeText = displayed ? `${Math.abs(displayed.lat).toFixed(4)}° ${displayed.lat >= 0 ? "N" : "S"}` : "—";
+  const longitudeText = displayed ? `${Math.abs(displayed.lon).toFixed(4)}° ${displayed.lon >= 0 ? "E" : "W"}` : "—";
+  if (latitudeOutput.textContent !== latitudeText) latitudeOutput.textContent = latitudeText;
+  if (longitudeOutput.textContent !== longitudeText) longitudeOutput.textContent = longitudeText;
 }
 
 function updateScene() {
@@ -156,7 +174,8 @@ function updateScene() {
   copy.style.pointerEvents = "none";
   copy.inert = worldOpacity < .9;
   // Only controls intercept pointers; the middle remains a draggable globe.
-  copy.querySelectorAll<HTMLElement>("a,button").forEach(e => e.style.pointerEvents = worldOpacity > .9 ? "auto" : "none");
+  const copyPointer = worldOpacity > .9 ? "auto" : "none";
+  if (copyPointer !== lastCopyPointer) { lastCopyPointer = copyPointer; copyControls.forEach(e => e.style.pointerEvents = copyPointer); }
   // Enable the visible globe as it settles, independently of the later copy fade.
   const bounds = globeGeometry(), globeReady = bounds.enter > .9;
   globeInput.style.left = `${bounds.x-bounds.r}px`;
@@ -165,7 +184,6 @@ function updateScene() {
   globeInput.style.height = `${bounds.r*2}px`;
   globeInput.style.pointerEvents = globeReady ? "auto" : "none";
   globeInput.tabIndex = globeReady ? 0 : -1;
-  globeInput.style.cursor = drag ? "grabbing" : "grab";
   for (let i = 0; i < words.length; i++) {
     const leave = motion.matches ? 0 : range(progress, .025 + i * .025, .4 + i * .035);
     words[i].style.transform = `translate3d(0, ${-leave * height * (.3 + i * .05)}px, 0)`;
@@ -181,9 +199,18 @@ function updateScene() {
 function frame(now: number) {
   raf = 0;
   if (!visible || document.hidden || (!dirty && motion.matches && !focusTarget)) return;
+  // Keep touch scrolling responsive while preserving the same time-based motion.
+  // Scroll/input dirtiness still paints at the next animation frame.
+  if (compactRendering.matches && !dirty && now - lastPaint < 1000 / 30 - 1) { start(); return; }
+  lastPaint = now;
   const elapsed = Math.min(50, now - (previous || now));
   previous = now;
-  updateScene();
+  // Read layout before this frame's style writes, so the browser never has to
+  // recalculate layout mid-frame. Scene writes never move the earth canvas.
+  const earthRect = hover ? earth.getBoundingClientRect() : null;
+  if (sceneDirty) { updateScene(); sceneDirty = false; }
+  const cursor = drag ? "grabbing" : "grab";
+  if (globeInput.style.cursor !== cursor) globeInput.style.cursor = cursor;
   if (focusTarget) {
     const amount=motion.matches ? 1 : 1-Math.exp(-elapsed/140);
     longitude+=(focusTarget.longitude-longitude)*amount; tilt+=(focusTarget.tilt-tilt)*amount;
@@ -197,11 +224,11 @@ function frame(now: number) {
     velocityTilt = Math.abs(vertical.velocity) < .000001 || Math.abs(tilt) >= 1.2 ? 0 : vertical.velocity;
     if (!paused && gallery.hidden) longitude += elapsed * .0025 * autoDirection;
   }
-  heroField.draw(now, fieldExit, motion.matches); drawGlobe(); updateReadout(); dirty = false;
+  heroField.draw(now, fieldExit, motion.matches); drawGlobe(); updateReadout(earthRect); dirty = false;
   if (!motion.matches || focusTarget) start();
 }
 function start() { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame); }
-function stop() { cancelAnimationFrame(raf); raf = 0; previous = 0; }
+function stop() { cancelAnimationFrame(raf); raf = 0; previous = 0; lastPaint = -Infinity; }
 
 globeInput.style.touchAction = "pan-y";
 function coordinatesAt(clientX: number, clientY: number) {
@@ -293,7 +320,7 @@ window.addEventListener("pointermove", e => {
   hover = {x:e.clientX,y:e.clientY}; dirty=true; start();
 }, {passive:true});
 document.documentElement.addEventListener("pointerleave", () => {hover=null;dirty=true;start();});
-window.addEventListener("scroll", () => { dirty = true; start(); }, {passive:true});
+window.addEventListener("scroll", () => { sceneDirty = true; dirty = true; start(); }, {passive:true});
 let resizeTimer = 0;
 window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = window.setTimeout(resize,100); });
 motionPreference.addEventListener("change", () => { document.documentElement.toggleAttribute("data-reduced", motion.matches); resize(); });
@@ -399,7 +426,7 @@ gallery.addEventListener("pointerenter",()=>{hover=null;dirty=true;start();});
 document.documentElement.toggleAttribute("data-reduced", motion.matches);
 document.documentElement.classList.add("motion-ready");
 resize();
-Promise.all([document.fonts.load('800 100px Poppins'),document.fonts.load('12px "Space Mono"')]).then(resize).catch(() => {dirty = true; start();});
+Promise.all([document.fonts.load('800 100px Poppins'),document.fonts.load('12px "Space Mono"')]).then(() => { lastGeometry = ""; resize(); }).catch(() => {dirty = true; start();});
 
 // Preserve the original seven-strip word entrance.
 if (!motion.matches) {

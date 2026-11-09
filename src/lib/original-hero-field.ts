@@ -98,6 +98,15 @@ export function createOriginalHeroField(fluidHero: HTMLElement, fluidCanvas: HTM
     let atlasWord: HTMLCanvasElement | null = null;
     let atlasCellWidth = 0;
     let charToIndex = new Map<string, number>();
+    let overprintCount = -1;
+    // Word boxes relative to the hero, without their scroll translate. The only
+    // per-frame movement is the inline translate3d set by home-experience, so
+    // the live box is base + that offset — no layout read is needed per frame.
+    let wordBases: { left: number; right: number; top: number; bottom: number }[] = [];
+    const translateYOf = (word: HTMLElement) => {
+      const match = /translate3d\(\s*[^,]+,\s*(-?[\d.e+-]+)px/.exec(word.style.transform);
+      return match ? Number(match[1]) : 0;
+    };
 
     const buildAtlas = (font: string, fontSize: number, color: string) => {
       const atlas = document.createElement("canvas");
@@ -225,6 +234,14 @@ export function createOriginalHeroField(fluidHero: HTMLElement, fluidCanvas: HTM
       atlasCellWidth = Math.ceil(cellWidth) + 2;
       atlasField = buildAtlas(font, fontSize, COLOR_FIELD);
       atlasWord = buildAtlas(font, fontSize, COLOR_WORD);
+
+      const origin = fluidHero.getBoundingClientRect();
+      wordBases = foregroundWords.map(word => {
+        const rect = word.getBoundingClientRect();
+        const shift = translateYOf(word);
+        return { left: rect.left - origin.left, right: rect.right - origin.left,
+          top: rect.top - origin.top - shift, bottom: rect.bottom - origin.top - shift };
+      });
     };
 
     const draw = (now: number, exit: number, reduced: boolean) => {
@@ -232,15 +249,13 @@ export function createOriginalHeroField(fluidHero: HTMLElement, fluidCanvas: HTM
       fluidCtx.clearRect(0, 0, viewWidth, viewHeight);
       overprintCtx?.clearRect(0, 0, viewWidth, viewHeight);
       // Only a few of the existing field characters cross the large words.
-      // Read their live bounds so the overlay follows the scroll exit exactly.
+      // Follow the scroll exit exactly from cached boxes plus the current translate.
       const overprintFade = reduced ? 0 : Math.max(0, 1 - exit * 3);
-      const origin = overprintFade > 0 ? fluidHero.getBoundingClientRect() : null;
-      const wordBounds = origin ? foregroundWords.map(word => {
-        const rect = word.getBoundingClientRect();
-        return { left: rect.left - origin.left, right: rect.right - origin.left,
-          top: rect.top - origin.top, bottom: rect.bottom - origin.top,
-          opacity: Number(word.style.opacity || 1) };
-      }) : [];
+      const wordBounds = overprintFade > 0 ? foregroundWords.map((word, index) => {
+        const base = wordBases[index], shift = translateYOf(word);
+        return base ? { left: base.left, right: base.right, top: base.top + shift, bottom: base.bottom + shift,
+          opacity: Number(word.style.opacity || 1) } : null;
+      }).filter(bounds => bounds !== null) : [];
       let overprinted = 0;
       if (exit >= 1 && !reduced) return;
       const time = reduced ? 0 : now * TIME_SCALE;
@@ -315,7 +330,10 @@ export function createOriginalHeroField(fluidHero: HTMLElement, fluidCanvas: HTM
           }
         }
       }
-      if (overprint) overprint.dataset.visibleCharacters = String(overprinted);
+      if (overprint && overprinted !== overprintCount) {
+        overprintCount = overprinted;
+        overprint.dataset.visibleCharacters = String(overprinted);
+      }
     };
 
 
