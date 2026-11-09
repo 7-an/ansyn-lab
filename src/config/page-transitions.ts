@@ -4,6 +4,5 @@ export const pageTransitionNames: Record<string, [string, string]> = {
   work: ["Work", "项目"],
   writing: ["Writing", "文章"],
   about: ["About", "关于"],
-  kimi: ["Portfolio", "作品集"],
   "404.html": ["Page not found", "页面未找到"]
 };

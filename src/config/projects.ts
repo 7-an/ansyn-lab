@@ -14,7 +14,7 @@ export const featuredProjects: Project[] = [
     mediaBg: "#000000",
     gallery: [
       {
-        src: "/images/voidtype-cover.png",
+        src: "/images/voidtype-cover.webp",
         alt: "VOIDTYPE particle type: less is more. Slow down to speed up.",
         width: 2820,
         height: 1370
@@ -60,13 +60,13 @@ export const featuredProjects: Project[] = [
     mediaBg: "#030303",
     gallery: [
       {
-        src: "/kimi/study-path-cover.png",
+        src: "/images/study-path-cover.webp",
         alt: "AI Study Path Triage project cover",
         width: 1672,
         height: 941
       },
       {
-        src: "/kimi/study-path-workflow.png",
+        src: "/images/study-path-workflow.webp",
         alt: "AI Study Path Triage workflow",
         width: 1672,
         height: 941,

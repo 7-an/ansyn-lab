@@ -7,8 +7,20 @@ export function initSharedFooter() {
   const arrow = footer.querySelector<HTMLElement>(".about-contact-arrow");
   const contact = footer.querySelector<HTMLElement>(".about-contact-ball");
   let frame = 0;
+  // While the footer is well below the viewport its progress is a constant 0,
+  // so skip the per-scroll layout reads; the margin re-arms it before it shows.
+  let near = true;
+  let settledFar = false;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(entries => {
+      near = entries[entries.length - 1].isIntersecting;
+      settledFar = false;
+      schedule();
+    }, { rootMargin: "300px 0px" }).observe(footer);
+  }
   const render = () => {
     frame = 0;
+    if (!near) { if (settledFar) return; settledFar = true; }
     const bounds = footer.getBoundingClientRect();
     const progress = Math.max(0, Math.min(1, (innerHeight - bounds.top) / Math.min(innerHeight, bounds.height)));
     const curveDepth = Math.max(140, Math.min(220, innerHeight * .22));
@@ -23,9 +35,9 @@ export function initSharedFooter() {
       arrow.style.setProperty("--contact-arrow-angle", `${angle}deg`);
     }
   };
-  const schedule = () => { if (!frame) frame = requestAnimationFrame(render); };
+  function schedule() { if (!frame) frame = requestAnimationFrame(render); }
   addEventListener("scroll", schedule, { passive: true });
-  addEventListener("resize", schedule);
+  addEventListener("resize", () => { settledFar = false; schedule(); });
   addEventListener("pageshow", schedule);
   motion.addEventListener("change", schedule);
   if ("ResizeObserver" in window) {

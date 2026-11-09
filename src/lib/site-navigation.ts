@@ -16,16 +16,25 @@ if (navigation && menu) {
   let closing = false;
   let openingFrame = 0;
   let destination: HTMLElement | null = null;
+  // The footer can only reach the header (top < 65) once it is on screen, so
+  // read its position only while it is near the viewport.
+  let footerNear = true;
+  if (footer && "IntersectionObserver" in window) {
+    new IntersectionObserver(entries => {
+      footerNear = entries[entries.length - 1].isIntersecting;
+      schedule();
+    }, { rootMargin: "300px 0px" }).observe(footer);
+  }
   const render = () => {
     scheduled = false;
     const condensed = scrollY > 180;
     navigation.classList.toggle("is-condensed", condensed);
-    navigation.classList.toggle("is-dark", !!footer && footer.getBoundingClientRect().top < 65);
+    navigation.classList.toggle("is-dark", !!footer && footerNear && footer.getBoundingClientRect().top < 65);
     links.inert = condensed || mobile.matches;
     toggle.inert = !condensed && !mobile.matches;
     identity.inert = condensed && !home;
   };
-  const schedule = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(render); } };
+  function schedule() { if (!scheduled) { scheduled = true; requestAnimationFrame(render); } }
   addEventListener("scroll", schedule, { passive: true });
   addEventListener("resize", schedule);
   addEventListener("pageshow", schedule);
