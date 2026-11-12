@@ -80,6 +80,62 @@ export const externalWriting: ExternalArticle[] = [
     }
   },
   {
+    title: "重塑个人网站：AI 时代，个人网站是一个人的赛博形象",
+    description: "A short post with a screen recording of the rebuilt ansyn.me, asking for feedback. I used to call a personal website the best résumé in the age of AI; now it feels closer to a person's online self.",
+    platform: "X",
+    publishDate: "2026-09-10",
+    category: "Website",
+    tags: ["个人网站", "ansyn.me", "Building in public"],
+    externalUrl: "https://x.com/Ansyn_07/status/2098049943638540740"
+  },
+  {
+    title: "从零拥有个人网站①｜网页做好了，怎么让别人打开？",
+    description: "A plain-language guide to putting a website online: what GitHub, Vercel, domains and DNS each do, a first launch with GitHub + Vercel, connecting your own domain, and what updates and running costs look like afterwards.",
+    platform: "X",
+    publishDate: "2026-09-13",
+    category: "Website Guide",
+    tags: ["个人网站", "部署", "域名", "教程"],
+    externalUrl: "https://x.com/Ansyn_07/status/2099121286249316533"
+  },
+  {
+    title: "作为 KOSX 实习生，我心目中的 KOSX",
+    description: "Why I joined KOSX with a few hundred followers, what its youth internship programme meant to someone without prior experience, and a community poster I made with Codex to describe it.",
+    platform: "X",
+    publishDate: "2026-09-20",
+    category: "Field Notes",
+    tags: ["KOSX", "实习", "Codex", "海报"],
+    externalUrl: "https://x.com/Ansyn_07/status/2101623802056904760",
+    media: {
+      src: "/media/writing/kosx-poster.webp",
+      alt: "KOSX poster made with Codex: BEYOND THE SURFACE. Three small figures stand inside a curling sheet of paper lit in orange",
+      width: 900, height: 1200
+    }
+  },
+  {
+    title: "我的建站 Skill 开源了",
+    description: "Six working methods and over a dozen lessons from building websites with AI, packaged as a Codex skill for personal sites, portfolios and redesigns. Feedback is welcome.",
+    platform: "X",
+    publishDate: "2026-09-30",
+    category: "Open Source",
+    tags: ["建站", "Skill", "Codex", "开源"],
+    externalUrl: "https://x.com/Ansyn_07/status/2105123519294300496",
+    media: {
+      src: "/media/writing/website-skill.webp",
+      alt: "The six steps in the website skill: clarify requirements, find references, read source code, protect finished work, test the real experience, plan for maintenance",
+      width: 1000, height: 382
+    }
+  },
+  {
+    title: "从零拥有个人网站②｜从想法到成品，用 AI 做出自己的风格",
+    description: "Half a month in the making: how a website splits into information architecture and visual expression, how to find and read references, how to turn taste into design decisions, then building and deploying with AI.",
+    platform: "X",
+    publishDate: "2026-10-09",
+    category: "Website Guide",
+    tags: ["个人网站", "设计", "信息架构", "教程"],
+    externalUrl: "https://x.com/Ansyn_07/status/2108493932766368240",
+    featured: true
+  },
+  {
     title: "复刻 newmix 首页：改了十几遍才做成的粒子交互实验",
     description:
       "While building a personal website for Liu, I tried to recreate the particle effect on the newmix homepage. It took more than a dozen revisions. The resulting demo and code are public.",

@@ -26,6 +26,29 @@ export const featuredProjects: Project[] = [
     ]
   },
   {
+    org: "INDEPENDENT / OPEN SOURCE",
+    title: "Website Playbook",
+    description: "People kept asking how this website was made. I turned the methods and mistakes from building it with AI into a reusable Codex skill.",
+    role: "Method design · Writing · Open-source maintainer",
+    deliverable: "A Codex skill with six core methods, 16 lessons from building websites, brief and handover templates, plus two long-form website guides on X.",
+    next: "Open-sourced. Improving it from readers' feedback and new website projects.",
+    status: "OPEN SOURCE",
+    fit: "contain",
+    mediaBg: "#ffffff",
+    gallery: [
+      {
+        src: "/media/writing/website-skill.webp",
+        alt: "The six steps in the website skill: clarify requirements, find references, read source code, protect finished work, test the real experience, plan for maintenance",
+        width: 1000,
+        height: 382
+      }
+    ],
+    links: [
+      { href: "https://github.com/7-an/website-playbook", label: "GitHub ↗" },
+      { href: "https://x.com/Ansyn_07/status/2108493932766368240", label: "Website guide ↗" }
+    ]
+  },
+  {
     org: "INDEPENDENT / PERSONAL PROJECT",
     title: "Video Subtitle Extractor",
     description: "Many educational YouTube videos have no extractable subtitles, making their content harder to use with AI for notes and study.",
@@ -109,8 +132,19 @@ export const communityProjects: Project[] = [
     gallery: [], links: []
   },
   {
+    title: "KOSX.ai Website",
+    cover: {lines: ["kosx.ai", "website."], number: "02"},
+    description: "KOSX needed an official website that explains the community, its members, activities and projects in one place.",
+    role: "Page building · Content structure · Development with AI · Launch support",
+    deliverable: "The new kosx.ai, now live, with a content backend the team can update.",
+    next: "Keep content and pages up to date as the community's projects and activities grow.",
+    status: "LIVE",
+    org: "KOSX / COMMUNITY COLLABORATION",
+    gallery: [], links: [{ href: "https://kosx.ai/", label: "Visit kosx.ai ↗" }]
+  },
+  {
     title: "Personal Websites",
-    cover: {lines: ["Personal", "websites."], number: "02"},
+    cover: {lines: ["Personal", "websites."], number: "03"},
     description: "Community members need personal websites, but the path from requirements to launch needs a clearer process.",
     role: "Requirements · Information architecture · Development with AI · Revisions",
     deliverable: "Personal websites for community members, currently in progress.",
@@ -121,7 +155,7 @@ export const communityProjects: Project[] = [
   },
   {
     title: "Community Daily Notes",
-    cover: {lines: ["Daily", "notes."], number: "03"},
+    cover: {lines: ["Daily", "notes."], number: "04"},
     description: "Useful ideas in community digests are easily lost when they stay inside the chat.",
     role: "Synthesis · Content adaptation · Distribution experiments",
     deliverable: "Adapted content from community digests, with work ongoing.",

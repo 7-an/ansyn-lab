@@ -22,13 +22,13 @@ const practices = [
     </div>
     <section class="about-photo-section about-wide" aria-label="About Ansyn">
       <div class="about-intro-copy">
-        <div data-about-drift="0.04"><p>I’m Ansyn, born in 2007. I’m exploring how AI, the internet and personal systems can help me find my way beyond school and into the real world.</p><p>I don’t have a finished answer. I’m making things, meeting people and learning from what happens next.</p><p class="about-exploring">Always exploring<span class="about-dots">...</span></p></div>
+        <div data-about-drift="0.04"><p>I’m Ansyn, born in 2007, now in my first year at college. I’m exploring how AI, the internet and personal systems can help me find my way beyond school and into the real world.</p><p>I don’t have a finished answer. I’m making things, meeting people and learning from what happens next.</p><p class="about-exploring">Always exploring<span class="about-dots">...</span></p></div>
       </div>
       <figure class="about-main-photo"><div class="about-image-window"><img src="/images/kosx-introduction-original.jpg" alt="Ansyn, wearing a cap, introducing himself at KOSX with his website on the screen." width="3235" height="1819" fetchpriority="high" /></div><figcaption>Introducing myself at KOSX</figcaption></figure>
     </section>
   <section class="about-chapter about-medium" id="kosx-chapter" aria-labelledby="about-chapter-title">
     <figure><div class="about-image-window"><img src="/images/kosx-field-note.jpg" alt="Sharing our profiles at KOSX, with Hong Kong harbour outside the window" width="1200" height="1594" loading="lazy" /></div><figcaption>Hong Kong · A moment at KOSX</figcaption></figure>
-    <div class="about-chapter-copy"><h2 id="about-chapter-title">Into the world.<br />With KOSX.</h2><p>I’m currently interning at KOSX.ai, working on community project systems, content, AI automation and website delivery.</p><p>It’s my first experience of a real collaboration network — working alongside other builders, with deadlines, feedback and results beyond my own screen.</p><a class="about-inline-link" href="/work/#kosx">What I’m working on</a></div>
+    <div class="about-chapter-copy"><h2 id="about-chapter-title">Into the world.<br />With KOSX.</h2><p>I’m currently interning at KOSX.ai, working on community project systems, content, AI automation and website delivery.</p><ul class="about-chapter-list"><li>Helping run a community of nearly 500 members</li><li>Planned and hosted a talk and workshop in Hangzhou, October 2026. Twelve signed up, seven came, and two with no coding background left with the first draft of a website</li><li>Helped build and launch the new kosx.ai</li></ul><p>It’s my first experience of a real collaboration network — working alongside other builders, with deadlines, feedback and results beyond my own screen.</p><a class="about-inline-link" href="/work/#kosx">What I’m working on</a></div>
   </section>
     <section class="about-practices about-wide" id="capabilities" aria-labelledby="about-practices-title">
       <h2 id="about-practices-title">I can help you with<span class="about-dots">...</span></h2>
@@ -98,6 +98,8 @@ const practices = [
   .about-chapter .about-image-window { aspect-ratio: 4 / 5; }
   .about-chapter .about-image-window img { height: 100%; top: 0; object-position: 50% 60%; will-change: auto; }
   .about-chapter h2 { margin-bottom: .7em; }
+  .about-chapter-list { list-style: none; margin: 0 0 1.4em; padding: 0; border-top: 1px solid #ddd; font-size: .9em; }
+  .about-chapter-list li { padding: .7em 0; border-bottom: 1px solid #ddd; }
   @keyframes about-enter { from { transform: translateY(45px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   @keyframes about-dots { 50% { opacity: .35; } }
   @media (max-width: 1100px) {
