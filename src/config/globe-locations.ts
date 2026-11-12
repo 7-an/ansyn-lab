@@ -7,5 +7,8 @@ export const globeLocations: {id: string; name: string; english: string; lat: nu
     {src: "/media/places/hong-kong-table.webp", alt: "Sharing social profiles over a meal in Hong Kong", width: 1200, height: 900}
   ]},
   {id: "shenzhen", name: "Shenzhen", english: "Shenzhen", lat: 22.5431, lon: 114.0579, timeZone: "Asia/Shanghai", photos: [{src: "/media/places/shenzhen-meetup.webp", alt: "A meetup photo in Shenzhen, with the original illustrated faces", width: 1200, height: 844}]},
-  {id: "hangzhou", name: "Hangzhou", english: "Hangzhou", lat: 30.2741, lon: 120.1551, timeZone: "Asia/Shanghai", photos: []}
+  {id: "hangzhou", name: "Hangzhou", english: "Hangzhou", lat: 30.2741, lon: 120.1551, timeZone: "Asia/Shanghai", photos: [
+    {src: "/media/places/hangzhou-talk.webp", alt: "Giving a talk in Hangzhou in October 2026, with my website's globe on the screen", width: 1600, height: 900},
+    {src: "/media/places/hangzhou-workshop.webp", alt: "Participants building their own personal websites at the Hangzhou workshop", width: 1200, height: 900}
+  ]}
 ];
